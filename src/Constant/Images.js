@@ -7,5 +7,6 @@ export const Images={
     WELCOME_3:require('../Assets/Images/Welcome3/welcome3.png'),
     SALOON_TYPES:require('../Assets/Images/Saloontype/saloontype.png'),
     SALOON_TYPE:require('../Assets/Images/Seasor/seasor.png'),
-    USER_TYPE:require('../Assets/Images/TypeUser/user.png')
+    USER_TYPE:require('../Assets/Images/TypeUser/user.png'),
+    SIGN_IN_LOCATION:require("../Assets/Images/SignupLocation/Group33300.png")
 }
