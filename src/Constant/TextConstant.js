@@ -24,10 +24,12 @@ export const TextConstant={
     SignUp_placeholder_two:"e.g., DiZi Salon",
     signUp_label_three:"Phone Number*",
     signUp_label_five:"E-Mail Address*",
-    //Create Mpin
     create_pin_heading:"Create MPIN",
     create_pin_subheading:"Greeting From DiZi Salon!",
     create_pin_label_one:"New MPIN",
-    create_pin_label_two:"Confirm MPIN"
+    create_pin_label_two:"Confirm MPIN",
+    Phone_number:'Phone Number*',
+    OTP_NUMBER:'OTP',
+
 
 }

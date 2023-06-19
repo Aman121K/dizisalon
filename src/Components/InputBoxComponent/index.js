@@ -1,29 +1,31 @@
-import { StyleSheet, Text, View,TextInput } from 'react-native'
+import { StyleSheet, Text, View, TextInput } from 'react-native'
 import React from 'react'
 import { StylesContants } from '../../Constant/StylesContants'
+import { normalize, scaleHeight, scaleWidth } from '../../Constant/DynamicSize'
 
 const styles = StyleSheet.create({
-  inputContainer:{
-    marginVertical:12
+  inputContainer: {
+    marginVertical: scaleHeight(10),
+    // size:scaleWidth(248)
   },
-    inputField:{
-        height: 50,
-        borderWidth: 2,
-        padding: 10,
-        borderColor:"#CECECE",
-        borderRadius:12 ,
-        color:"#6C6C6C",
-        fontSize:16,
-        paddingLeft:22
-
-    }
+  inputField: {
+    height: scaleHeight(50),
+    borderWidth: scaleHeight(2),
+    padding: scaleHeight(10),
+    borderColor: "#CECECE",
+    borderRadius: scaleHeight(12),
+    color: "#6C6C6C",
+    fontSize: normalize(16),
+    paddingLeft: scaleWidth(22),
+    // width:scaleHeight(248)
+  }
 })
 
-const InputBoxComponent = ({label, keyboardType,placeholder,secure}) => {
+const InputBoxComponent = ({ label, keyboardType, placeholder, secure, value, onChnageText, size }) => {
   return (
-    <View style={styles.inputContainer}> 
+    <View style={styles.inputContainer}>
       <Text style={StylesContants.auth_screen_label}>{label}</Text>
-      <TextInput style={styles.inputField} placeholder={placeholder} keyboardType={keyboardType} secureTextEntry={secure}/>
+      <TextInput style={[styles.inputField, { width: size ? size : scaleWidth(330) }]} placeholder={placeholder} value={value} onChangeText={onChnageText} keyboardType={keyboardType} secureTextEntry={secure} />
     </View>
 
   )

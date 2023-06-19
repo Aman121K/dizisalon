@@ -1,12 +1,29 @@
+import { normalize, scaleHeight, scaleWidth } from "./DynamicSize";
+import { FONTS } from "./fonts";
+
 export const StylesContants = {
-    auth_screen_heading:{
-        fontSize:40,fontWeight:600,color:"#000000",lineHeight:49,marginBottom:8
+    auth_screen_heading: {
+        fontSize: normalize(35),
+        color: "#000000",
+        lineHeight: scaleHeight(49),
+        marginBottom: scaleHeight(8),
+        fontFamily: FONTS.MontserratSemiBold,
+
     },
-    auth_screen_subHeading:{
-        fontSize:16,fontWeight:400,color:"#676767",lineHeight:20, marginBottom:40
+    auth_screen_subHeading: {
+        fontSize: normalize(16),
+        color: "#676767",
+        lineHeight: scaleHeight(18),
+        marginBottom: scaleHeight(40),
+        fontFamily: FONTS.MontserratRegular,
+
     },
-    auth_screen_label:{
-        fontSize:16,fontWeight:600,lineHeight:20,marginBottom:8,color:"#3A3A3A"
+    auth_screen_label: {
+        fontSize: normalize(15),
+        lineHeight: scaleHeight(20),
+        marginBottom: scaleHeight(8),
+        color: "#3A3A3A",
+        fontFamily: FONTS.MontserratRegular,
     },
-    
+
 }
