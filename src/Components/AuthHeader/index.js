@@ -15,11 +15,11 @@ const styles = StyleSheet.create({
     backButtonStyle: {
     }
 })
-const AuthHeader = ({ backbutton }) => {
+const AuthHeader = ({ backbutton,navigation }) => {
     return (
         <View style={styles.mainConatiner}>
             <View>
-                {backbutton && <TouchableOpacity onPress={() => goBack()}><Image style={styles.backButtonStyle} source={Images.BackBuuton} /></TouchableOpacity>}
+                {backbutton && <TouchableOpacity onPress={() => navigation.goBack()}><Image style={styles.backButtonStyle} source={Images.BackBuuton} /></TouchableOpacity>}
             </View>
             <View>
                 <Image style={styles.ImageStyle} source={Images.LOGO_Image} />

@@ -24,10 +24,10 @@ const ChooseType = ({ navigation }) => {
     const onClick = (text) => {
         switch (text) {
             case TextConstant.FOR_SALOON:
-                navigation.navigate(Routes.Barber)
+                navigation.navigate(Routes.Signin)
                 break;
             case TextConstant.FOR_USER:
-                navigation.navigate(Routes.User)
+                navigation.navigate(Routes.Signin)
                 break;
             default:
                 break;
@@ -35,7 +35,7 @@ const ChooseType = ({ navigation }) => {
     }
     return (
         <SafeAreaView>
-            <AuthHeader backbutton={true} />
+            <AuthHeader backbutton={true} navigation={navigation} />
             <Image source={Images.SALOON_TYPES} style={Styles.sallonTypeImage} />
             <View style={Styles.saloonTypes}>
                 <SaloonType level={TextConstant.FOR_SALOON} image={Images.SALOON_TYPE} onClick={onClick} />
