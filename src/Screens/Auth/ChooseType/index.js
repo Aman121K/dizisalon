@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, SafeAreaView, StyleSheet, View } from 'react-native';
 import AuthHeader from '../../../Components/AuthHeader';
 import { Images } from '../../../Constant/Images';
 import { scaleHeight, scaleWidth } from '../../../Constant/DynamicSize';
@@ -11,7 +11,8 @@ const Styles = StyleSheet.create({
 
     },
     sallonTypeImage: {
-        marginHorizontal: scaleWidth(60.5)
+        marginHorizontal: scaleWidth(60.5),
+        marginTop: scaleHeight(20)
     },
     saloonTypes: {
         justifyContent: 'center',
@@ -33,14 +34,14 @@ const ChooseType = ({ navigation }) => {
         }
     }
     return (
-        <View>
+        <SafeAreaView>
             <AuthHeader backbutton={true} />
             <Image source={Images.SALOON_TYPES} style={Styles.sallonTypeImage} />
             <View style={Styles.saloonTypes}>
                 <SaloonType level={TextConstant.FOR_SALOON} image={Images.SALOON_TYPE} onClick={onClick} />
                 <SaloonType level={TextConstant.FOR_USER} image={Images.USER_TYPE} onClick={onClick} />
             </View>
-        </View>
+        </SafeAreaView>
     )
 
 }

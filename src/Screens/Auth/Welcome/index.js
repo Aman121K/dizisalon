@@ -1,10 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import AppIntroSlider from "react-native-app-intro-slider";
 import { Images } from "../../../Constant/Images";
 import AuthHeader from "../../../Components/AuthHeader";
 import { Routes } from "../../../Constant/Routes";
+import { scaleWidth } from "../../../Constant/DynamicSize";
 
 const slides = [
     {
@@ -71,31 +72,35 @@ export default class App extends React.Component {
         this.props.navigation.navigate(Routes.ChooseType)
     }
     render() {
-        if (this.state.showHomePage) {
-            return <App />
-        } else
-            return (
-                <>
-                    {/* <AuthHeader /> */}
-                    <AppIntroSlider
-                        renderItem={this._renderItem}
-                        data={slides}
-                        activeDotStyle={{
-                            backgroundColor: "#21465b",
-                            // width: 30
-                        }}
-                        onDone={this.onDone}
-                    />
-                </>
-            );
+        return (
+            <>
+                <SafeAreaView />
+                <View>
+                    <AuthHeader />
+                </View>
+                {/* <AuthHeader/> */}
+                <AppIntroSlider
+                    style={{ marginTop: 200, marginHorizontal: scaleWidth(50) }}
+                    doneLabel="Done"
+                    
+                    renderItem={this._renderItem}
+                    data={slides}
+                    activeDotStyle={{
+                        backgroundColor: "#21465b",
+                        // width: 30
+                    }}
+                    onDone={this.onDone}
+                />
+            </>
+        );
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#fff",
-        alignItems: "center",
-        justifyContent: "center",
-    },
+    // container: {
+    //     flex: 1,
+    //     backgroundColor: "#fff",
+    //     alignItems: "center",
+    //     justifyContent: "center",
+    // },
 });

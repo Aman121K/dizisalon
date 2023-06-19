@@ -7,14 +7,12 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginHorizontal: 10,
+        marginHorizontal: 15,
         marginTop: scaleHeight(10)
     },
     ImageStyle: {
-        // flex: .6
     },
     backButtonStyle: {
-        // flex: .1
     }
 })
 const AuthHeader = ({ backbutton }) => {

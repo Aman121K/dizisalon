@@ -7,5 +7,12 @@ export const Images={
     WELCOME_3:require('../Assets/Images/Welcome3/welcome3.png'),
     SALOON_TYPES:require('../Assets/Images/Saloontype/saloontype.png'),
     SALOON_TYPE:require('../Assets/Images/Seasor/seasor.png'),
-    USER_TYPE:require('../Assets/Images/TypeUser/user.png')
+    USER_TYPE:require('../Assets/Images/TypeUser/user.png'),
+    BottomHome:require('../Assets/Images/bottomHome/bottomHome.pmg'),
+    BottomScissor:require('../Assets/Images/bottomseasor/bottomseasor.png'),
+    BottomUsers:require('../Assets/Images/bottomUsers/bottomUsers.png'),
+    BottomUserIcon:require('../Assets/Images/bottomUserIcon/bottomUserIcon.png'),
+    kycForm:require('../Assets/Images/kycform/kycform.png'),
+    Notification:require('../Assets/Images/notification/notification.png'),
+    NotificationUser:require('../Assets/Images/notificationUser/notificationUser.png'),
 }

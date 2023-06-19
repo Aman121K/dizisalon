@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, SafeAreaView } from 'react-native';
 import AuthHeader from "../../../Components/AuthHeader";
 import { Images } from "../../../Constant/Images";
 import { TextConstant } from "../../../Constant/TextConstant";
@@ -25,11 +25,11 @@ const Splash = ({ navigation }) => {
     }, [])
 
     return (
-        <View>
+        <SafeAreaView>
             <AuthHeader />
             <Image source={Images.Splash_logo} style={styles.splashLogo} />
             <Text style={styles.splashText}>{TextConstant.SplashText}</Text>
-        </View>
+        </SafeAreaView>
     )
 }
 export default Splash;
