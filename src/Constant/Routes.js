@@ -7,4 +7,12 @@ export const Routes={
     ChooseType:'ChooseType',
     Barber:'Barber',
     User:'user',
+    BarberHome:'Home',
+    BarberOrders:'Orders',
+    BarberSaloon:'My Salons',
+    BarberProfile:'Profile',
+    TrendingList:'TrendingList',
+    TrendingDetails:'TrendingDetails'
+
+    
 }

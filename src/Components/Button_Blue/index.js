@@ -20,10 +20,10 @@ const styles = StyleSheet.create({
   }
 })
 
-const ButtonBlue = ({ buttonText }) => {
+const ButtonBlue = ({ buttonText, onClick }) => {
   return (
     <View>
-      <TouchableOpacity style={styles.btnStyle}>
+      <TouchableOpacity style={styles.btnStyle} onPress={onClick}>
         <Text style={styles.btnText}>{buttonText}</Text>
       </TouchableOpacity>
     </View>

@@ -15,5 +15,8 @@ export const Images = {
     kycForm: require('../Assets/Images/kycform/kycform.png'),
     Notification: require('../Assets/Images/notification/notification.png'),
     NotificationUser: require('../Assets/Images/notificationUser/notificationUser.png'),
-    SIGN_IN_LOCATION: require("../Assets/Images/SignupLocation/Group33300.png")
+    SIGN_IN_LOCATION: require("../Assets/Images/SignupLocation/Group33300.png"),
+    HOME_BANNER:require("../Assets/Images/bannerImage/bannerImage.png"),
+    SEARCH_ICON:require("../Assets/Images/searchIcon/searchIcon.png"),
+    CHOTI_DESIGN:require('../Assets/Images/chotiDesign/chotiDesign.png'),
 }

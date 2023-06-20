@@ -30,6 +30,13 @@ export const TextConstant={
     create_pin_label_two:"Confirm MPIN",
     Phone_number:'Phone Number*',
     OTP_NUMBER:'OTP',
+    KYC_MAIN_TEXT:'Let’s do KYC and List your Salon',
+    KNOW_MORE:'Know More',
+    LIST_NOW:'List Now',
+    TRENDING_STYLE:'Trending Style’s',
+    SHOW_MORE:'Show More',
+    SEARCH_TEXT:'Search for Styles',
+    CHOTI_Title:'Chotli Braid',
 
 
 }
