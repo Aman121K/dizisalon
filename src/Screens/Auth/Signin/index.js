@@ -60,6 +60,10 @@ const Signin = ({ navigation }) => {
     const onChnageText=(Items)=>{
         console.log("Items>>",Items)
     }
+    const onSigninClick=()=>{
+        console.log("vika")
+        navigation.navigate('BarberBottoNavigation')
+    }
     return (
         <SafeAreaView>
             <ScrollView>
@@ -74,7 +78,7 @@ const Signin = ({ navigation }) => {
                         <InputBoxComponent value={mobile}  onChnageText={onChnageText} label={TextConstant.SignIn_label_one} placeholder={TextConstant.SignIn_placeholder_one} keyboardType="numeric" />
                         <InputBoxComponent value={mpin}  onChnageText={onChnageText} label={TextConstant.SignIn_label_two} placeholder={TextConstant.SignIn_placeholder_two} />
                     </View>
-                    <ButtonBlue buttonText="Sign In" />
+                    <ButtonBlue buttonText="Sign In" onClick={onSigninClick} />
                     <View style={styles.bottom_info_text}>
                         <View style={styles.left_side}>
                             <Text style={styles.new_user_txt}>
