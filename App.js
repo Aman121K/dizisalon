@@ -2,13 +2,14 @@ import React from "react";
 import { NavigationContainer } from '@react-navigation/native';
 import StackNavigation from "./src/Navigation/StcakNavigation";
 import { SafeAreaView } from "react-native";
+import { TabProvide } from "./src/Context/TabProvider";
 const App = () => {
   return (
-    // <SafeAreaView>
     <NavigationContainer>
-      <StackNavigation />
+      <TabProvide>
+        <StackNavigation />
+      </TabProvide>
     </NavigationContainer>
-    // </SafeAreaView>
   )
 }
 export default App;

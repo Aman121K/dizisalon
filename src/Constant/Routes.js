@@ -12,7 +12,13 @@ export const Routes={
     BarberSaloon:'My Salons',
     BarberProfile:'Profile',
     TrendingList:'TrendingList',
-    TrendingDetails:'TrendingDetails'
+    TrendingDetails:'TrendingDetails',
+    UserHome:'Home',
+    UserSearch:'Search',
+    UserBooking:'Booking',
+    UserCart:'Cart',
+    UserProfile:'Profile'
+    
 
     
 }

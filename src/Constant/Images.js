@@ -8,7 +8,7 @@ export const Images = {
     SALOON_TYPES: require('../Assets/Images/Saloontype/saloontype.png'),
     SALOON_TYPE: require('../Assets/Images/Seasor/seasor.png'),
     USER_TYPE: require('../Assets/Images/TypeUser/user.png'),
-    BottomHome: require('../Assets/Images/bottomHome/bottomHome.png'),
+    BottomHome: require('../Assets/Images/home/home.png'),
     BottomScissor: require('../Assets/Images/bottomseasor/bottomseasor.png'),
     BottomUsers: require('../Assets/Images/bottomUsers/bottomUsers.png'),
     BottomUserIcon: require('../Assets/Images/bottomUserIcon/bottomUserIcon.png'),
@@ -19,4 +19,8 @@ export const Images = {
     HOME_BANNER:require("../Assets/Images/bannerImage/bannerImage.png"),
     SEARCH_ICON:require("../Assets/Images/searchIcon/searchIcon.png"),
     CHOTI_DESIGN:require('../Assets/Images/chotiDesign/chotiDesign.png'),
+    BOTTOM_CART:require('../Assets/Images/BottomCart/BottomCart.png'),
+    BOTTOM_BOOKING:require('../Assets/Images/BottomBooking/BottomBooking.png'),
+    LOCATION:require('../Assets/Images/Location/Location.png'),
+    HAIRCUTTINGS:require('../Assets/Images/haircutting/haircutting.png'),
 }
