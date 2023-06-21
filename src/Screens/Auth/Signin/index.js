@@ -8,6 +8,7 @@ import { Images } from "../../../Constant/Images";
 import ButtonBlue from "../../../Components/Button_Blue";
 import { Routes } from "../../../Constant/Routes";
 import { FONTS } from "../../../Constant/fonts";
+import { TabContext } from "../../../Context/TabProvider";
 import { normalize, scaleHeight, scaleWidth } from "../../../Constant/DynamicSize";
 
 const styles = StyleSheet.create({
@@ -48,21 +49,31 @@ const styles = StyleSheet.create({
         color: "#022A6D",
     }
 })
-const Signin = ({ navigation }) => {
-    const [mobile,setMobile]=React.useState();
-    const [mpin,setMpin]=React.useState();
+const Signin = ({ navigation, route }) => {
+    const { type } = route?.params;
+    console.log("Type>>", type)
+    const [mobile, setMobile] = React.useState();
+    const [mpin, setMpin] = React.useState();
     const goToSignup = () => {
         navigation.navigate(Routes.Signup)
     }
     const goToforgotScreen = () => {
         navigation.navigate(Routes.CreatePin)
     }
-    const onChnageText=(Items)=>{
-        console.log("Items>>",Items)
+    const onChnageText = (Items) => {
+        console.log("Items>>", Items)
     }
-    const onSigninClick=()=>{
-        console.log("vika")
-        navigation.navigate('BarberBottoNavigation')
+const TabTypesValues = React.useContext(TabContext);
+
+    const onSigninClick = () => {
+        console.log("vika", type)
+        if (type === 'For Salon') {
+            TabTypesValues.setBottomType(type)
+            navigation.navigate('BarberBottoNavigation', { type: type })
+        } else {
+            TabTypesValues.setBottomType(type)
+            navigation.navigate('UserBottomNavigtion', { type: type })
+        }
     }
     return (
         <SafeAreaView>
@@ -75,8 +86,8 @@ const Signin = ({ navigation }) => {
                         <Text style={StylesContants.auth_screen_subHeading}>{TextConstant.SignIn_subHeading}</Text>
                     </View>
                     <View>
-                        <InputBoxComponent value={mobile}  onChnageText={onChnageText} label={TextConstant.SignIn_label_one} placeholder={TextConstant.SignIn_placeholder_one} keyboardType="numeric" />
-                        <InputBoxComponent value={mpin}  onChnageText={onChnageText} label={TextConstant.SignIn_label_two} placeholder={TextConstant.SignIn_placeholder_two} />
+                        <InputBoxComponent value={mobile} onChnageText={onChnageText} label={TextConstant.SignIn_label_one} placeholder={TextConstant.SignIn_placeholder_one} keyboardType="numeric" />
+                        <InputBoxComponent value={mpin} onChnageText={onChnageText} label={TextConstant.SignIn_label_two} placeholder={TextConstant.SignIn_placeholder_two} />
                     </View>
                     <ButtonBlue buttonText="Sign In" onClick={onSigninClick} />
                     <View style={styles.bottom_info_text}>

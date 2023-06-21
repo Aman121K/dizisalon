@@ -37,6 +37,8 @@ export const TextConstant={
     SHOW_MORE:'Show More',
     SEARCH_TEXT:'Search for Styles',
     CHOTI_Title:'Chotli Braid',
+    LOCATION:'Location',
+    CATEGORIES:'Categories'
 
 
 }

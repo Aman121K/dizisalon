@@ -14,6 +14,7 @@ import BarberBottoNavigation from "./BarberBottomNavigation";
 import { StylesContants } from "../Constant/StylesContants";
 import TrendingDetails from "../Screens/TrendingStyle/TrendingDetails";
 import TrendingList from "../Screens/TrendingStyle/TrendingList";
+import UserBottoNavigation from "./UserBottomNavigation";
 const Stack = createNativeStackNavigator();
 const StackNavigation = () => {
     return (
@@ -26,9 +27,10 @@ const StackNavigation = () => {
             <Stack.Screen name={Routes.CreatePin} component={CreatePin} options={{ headerShown: false }} />
             <Stack.Screen name={Routes.Barber} component={Barber} options={{ headerShown: false }} />
             <Stack.Screen name={Routes.User} component={User} options={{ headerShown: false }} />
+            <Stack.Screen name="UserBottomNavigtion" component={UserBottoNavigation} options={{ headerShown: false }} />
             <Stack.Screen name="BarberBottoNavigation" component={BarberBottoNavigation} options={{ headerShown: false }} />
             <Stack.Screen name={Routes.TrendingDetails} component={TrendingDetails} options={{ headerShown: false }} />
-            <Stack.Screen name={Routes.TrendingList} component={TrendingList} options={{headerShown:false}}/>
+            <Stack.Screen name={Routes.TrendingList} component={TrendingList} options={{ headerShown: false }} />
         </Stack.Navigator>
 
     )

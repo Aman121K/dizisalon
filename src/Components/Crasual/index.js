@@ -1,20 +1,50 @@
 import React from "react";
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
-import { normalize } from "../../Constant/DynamicSize";
+import { normalize, scaleHeight, scaleWidth } from "../../Constant/DynamicSize";
+import { Images } from "../../Constant/Images";
+import { FONTS } from "../../Constant/fonts";
 const styles = StyleSheet.create({
     slide: {
-        backgroundColor: 'red'
+        backgroundColor: '#3BCF74',
+        // flexDirection:'row',
+        justifyContent: 'space-between',
+        padding: 5,
+        borderRadius: scaleWidth(10)
     },
     title: {
-        fontSize: normalize(20)
+        fontSize: normalize(20),
+        width: scaleWidth(180),
+        fontFamily: FONTS.MontserratMedium
+    },
+    butonKyc: {
+        backgroundColor: '#33AC5E',
+        padding: scaleHeight(5),
+        alignSelf: 'center',
+        borderRadius: scaleHeight(10),
+        margin: scaleHeight(10),
+
     }
 })
 const Crasual = ({ entries }) => {
     const _renderItem = ({ item, index }) => {
         return (
             <View style={styles.slide} key={index}>
-                <Text style={styles.title}>{item.title}</Text>
+                <View style={{ flexDirection: "row", alignItems: 'center' }}>
+                    <View>
+                        <Text style={styles.title}>You are not getting customers on time </Text>
+                        <Text>Let’s list your salon in DiZi Salon</Text>
+                        <View style={styles.butonKyc}>
+                            <Text style={{ color: 'white', fontFamily: FONTS.MontserratMedium }}>Let’s do KYC</Text>
+                        </View>
+                    </View>
+                    <View>
+                        <Image source={Images.HOME_BANNER} />
+                    </View>
+                </View>
+                {/* <View>
+                  
+                </View> */}
             </View>
         );
     }

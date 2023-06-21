@@ -24,10 +24,10 @@ const ChooseType = ({ navigation }) => {
     const onClick = (text) => {
         switch (text) {
             case TextConstant.FOR_SALOON:
-                navigation.navigate(Routes.Signin)
+                navigation.navigate(Routes.Signin,{type:text})
                 break;
             case TextConstant.FOR_USER:
-                navigation.navigate(Routes.Signin)
+                navigation.navigate(Routes.Signin,{type:text})
                 break;
             default:
                 break;
