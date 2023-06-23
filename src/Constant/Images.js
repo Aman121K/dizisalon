@@ -23,4 +23,12 @@ export const Images = {
     BOTTOM_BOOKING:require('../Assets/Images/BottomBooking/BottomBooking.png'),
     LOCATION:require('../Assets/Images/Location/Location.png'),
     HAIRCUTTINGS:require('../Assets/Images/haircutting/haircutting.png'),
+    LOCATION_DETECT:require('../Assets/Images/locationDetect/locationDetect.png'),
+    CROSS_ICONS:require('../Assets/Images/crossIcon/crossIcon.png'),
+    USERS_ADS:require('../Assets/Images/userAds/userAds.png'),
+    SALLON_BG_IMAGE:require('../Assets/Images/sallonbgImage/sallonbgImage.png'),
+    UNLIKE:require('../Assets/Images/unlike/unlike.png'),
+    STAR:require('../Assets/Images/star/star.png'),
+    EDIT:require('../Assets/Images/edit/edit.png'),
+    LOGIN_USER_IMAGE:require('../Assets/Images/personImage/personImage.png'),
 }
