@@ -4,6 +4,7 @@ import { TextConstant } from '../../Constant/TextConstant';
 import { Images } from '../../Constant/Images';
 import { normalize, scaleHeight, scaleWidth } from '../../Constant/DynamicSize';
 import { FONTS } from '../../Constant/fonts';
+import { Routes } from '../../Constant/Routes';
 const style = StyleSheet.create({
     mainConatiner: { flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: scaleWidth(16) },
     detectImageStyle: {
@@ -34,13 +35,13 @@ const style = StyleSheet.create({
     },
     locationButt: {
         backgroundColor: '#022A6D',
-        padding: Platform.OS === 'ios' ? scaleHeight(10) : scaleHeight(2),
+        padding: Platform.OS === 'ios' ? scaleHeight(10) : scaleHeight(10),
         marginTop: scaleHeight(30),
         borderRadius: scaleHeight(10)
     },
     locationWhiteButt: {
         backgroundColor: 'white',
-        padding: Platform.OS === 'ios' ? scaleHeight(10) : scaleHeight(2),
+        padding: Platform.OS === 'ios' ? scaleHeight(10) : scaleHeight(10),
         marginTop: scaleHeight(10),
         borderWidth: 1,
         borderRadius: scaleHeight(10),
@@ -50,7 +51,7 @@ const style = StyleSheet.create({
     }
 
 })
-const LocationBottomSheet = ({ cancelButtonClick }) => {
+const LocationBottomSheet = ({ cancelButtonClick,navigation }) => {
     return (
         <ScrollView >
             <View style={style.mainSubConatiner}>
@@ -69,7 +70,7 @@ const LocationBottomSheet = ({ cancelButtonClick }) => {
                 <TouchableOpacity style={style.locationButt}>
                     <Text style={style.detectext}>{TextConstant.DETECT_LOCATION}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={style.locationWhiteButt}>
+                <TouchableOpacity style={style.locationWhiteButt} onPress={()=>navigation.navigate(Routes.UserLocationMap)}>
                     <Text style={style.maualText}>{TextConstant.LOCATION_MANUALLY}</Text>
                 </TouchableOpacity>
             </View>

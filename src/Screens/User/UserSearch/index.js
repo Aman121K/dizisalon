@@ -6,6 +6,7 @@ import SearchNearSaloon from "../../../Components/SearchNearSaloon";
 import { normalize, scaleHeight, scaleWidth } from "../../../Constant/DynamicSize";
 import { Images } from "../../../Constant/Images";
 import { FONTS } from "../../../Constant/fonts";
+import { Routes } from "../../../Constant/Routes";
 const style = StyleSheet.create({
     mainConatiner: {
         flex: 1
@@ -14,7 +15,7 @@ const style = StyleSheet.create({
         marginTop: scaleHeight(10)
     },
     dataContainer: {
-        height: scaleHeight(181),
+        height: scaleHeight(211),
         width: scaleWidth(165),
         // borderWidth: 1,
         margin: scaleHeight(5),
@@ -28,7 +29,10 @@ const style = StyleSheet.create({
         marginBottom: scaleHeight(100)
     },
     dataImage: {
-        alignSelf: 'center'
+        // alignSelf: 'center'he
+    height:scaleHeight(100),
+    width:scaleWidth(160),
+    borderRadius:scaleHeight(10)
     },
     unlikeButon: {
         position: 'absolute',
@@ -76,7 +80,7 @@ const style = StyleSheet.create({
         color: '#6C6C6C'
     }
 })
-const UserSearch = () => {
+const UserSearch = ({navigation}) => {
     const [sallonListData, setSallonListData] = React.useState([
         { title: 'Hair Cutting', Image: Images.SALLON_BG_IMAGE },
         { title: 'Hair Cutting', Image: Images.SALLON_BG_IMAGE },
@@ -86,9 +90,12 @@ const UserSearch = () => {
         { title: 'Hair Cutting', Image: Images.SALLON_BG_IMAGE },
         { title: 'Hair Cutting', Image: Images.SALLON_BG_IMAGE },
     ])
+    const goToNextPage=()=>{
+        navigation.navigate(Routes.UserSaloonDetails)
+    }
     const renderData = (item) => {
         return (
-            <View style={style.dataContainer}>
+            <TouchableOpacity onPress={()=>goToNextPage()} style={style.dataContainer}>
                 <Image source={item?.item?.Image} style={style.dataImage} />
                 <TouchableOpacity style={style.unlikeButon}>
                     <Image source={Images.UNLIKE} />
@@ -116,7 +123,7 @@ const UserSearch = () => {
                     <Text style={style.locationText}>10Km. Near Jagatpura Phatak</Text>
                 </View>
                 {/* <Text>{item?.item?.title}</Text> */}
-            </View>
+            </TouchableOpacity>
         )
     }
     return (

@@ -31,20 +31,20 @@ const style = StyleSheet.create({
         marginLeft: scaleWidth(17)
     }
 })
-const UserCartHeader = ({title,addButton}) => {
+const UserCartHeader = ({ title, addButton, navigation }) => {
     return (
         <View style={style.mainConatiner}>
             <View style={style.backButtonConatiner}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
                     <Image source={Images.BackBuuton} />
                 </TouchableOpacity>
                 <Text style={style.cartTextStyle}>{title}</Text>
             </View>
             {addButton &&
-            <TouchableOpacity style={style.AddServiceConatiner}>
-                <Text style={style.addServiceText}>{TextConstant.ADD_SERVICES}</Text>
-            </TouchableOpacity>
-}
+                <TouchableOpacity style={style.AddServiceConatiner}>
+                    <Text style={style.addServiceText}>{TextConstant.ADD_SERVICES}</Text>
+                </TouchableOpacity>
+            }
         </View>
     )
 }

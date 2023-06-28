@@ -46,11 +46,11 @@ const style = StyleSheet.create({
     searchConatiner: {
         marginTop: scaleHeight(20)
     },
-    userContainer:{
-        marginTop:scaleHeight(20)
+    userContainer: {
+        marginTop: scaleHeight(20)
     }
 })
-const UserHome = () => {
+const UserHome = ({ navigation }) => {
     const refRBSheet = React.useRef();
     const openCategory = () => {
     }
@@ -90,11 +90,14 @@ const UserHome = () => {
     const cancelButtonClick = () => {
         refRBSheet.current.close()
     }
+    const clikOnLocation = () => {
+        refRBSheet.current.open()
+    }
     return (
         <SafeAreaView>
             <UserHeader />
             <View style={style.locationConainer}>
-                <LocationConatiner />
+                <LocationConatiner locationClick={clikOnLocation} />
             </View>
             <View style={style.categoriesConatiner}>
                 <Text style={style.categoryText}>{TextConstant.CATEGORIES}</Text>
@@ -125,7 +128,7 @@ const UserHome = () => {
                         // backgroundColor: ""
                     },
                     container: {
-                        height: Platform.OS === 'ios' ? scaleHeight(400) : scaleHeight(400),
+                        height: Platform.OS === 'ios' ? scaleHeight(450) : scaleHeight(450),
                         borderTopRightRadius: scaleHeight(10),
                         borderTopLeftRadius: scaleHeight(10)
                         // borderTopEndRadius:scaleHeight(10)
@@ -136,7 +139,7 @@ const UserHome = () => {
 
                 }}
             >
-                <LocationBottomSheet cancelButtonClick={cancelButtonClick} />
+                <LocationBottomSheet navigation={navigation} cancelButtonClick={cancelButtonClick} />
             </RBSheet>
 
 
