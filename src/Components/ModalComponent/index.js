@@ -48,9 +48,25 @@ const styles = StyleSheet.create({
     },
     crossIcon: {
         alignSelf: 'flex-end'
+    },
+    CancelConatiner: {
+        margin: scaleHeight(10)
+        // borderWidth:.5,
+        // borderColor:''
+    },
+    CancelStyle: {
+        fontSize: normalize(12),
+        fontFamily: FONTS.MontserratMedium
+    },
+    SubTitleStyle: {
+        fontSize: normalize(12),
+        fontFamily: FONTS.MontserratRegular,
+        color: '#868686;',
+        textAlign: 'center',
+        marginTop: scaleHeight(10)
     }
 });
-const ModalConatiner = ({ modalVisible, closeModal }) => {
+const ModalConatiner = ({ modalVisible, closeModal, title, subTitle, buttonText, onSubmitClick, onCancelClick }) => {
     return (
         <Pressable style={styles.container} onPress={closeModal}>
             <Modal
@@ -65,12 +81,14 @@ const ModalConatiner = ({ modalVisible, closeModal }) => {
                             <Image source={Images.CROSS_ICONS} />
                         </TouchableOpacity>
                         <Image source={Images.Mobile_phone} />
-                        <Text style={styles.mainTextStyle}>{TextConstant.MESSAGESUCCESSFULLY}</Text>
-                        <TouchableOpacity style={styles.buttonConatiner} onPress={closeModal}>
-                            <Text style={styles.continueStyle}>{TextConstant.Continue}</Text>
-                            {/* <ButtonBlue buttonText={TextConstant.Continue} /> */}
+                        <Text style={styles.mainTextStyle}>{title}</Text>
+                        <Text style={styles.SubTitleStyle}>{subTitle}</Text>
+                        <TouchableOpacity style={styles.buttonConatiner} onPress={onSubmitClick}>
+                            <Text style={styles.continueStyle}>{buttonText}</Text>
                         </TouchableOpacity>
-
+                        <TouchableOpacity style={styles.CancelConatiner} onPress={onCancelClick}>
+                            <Text style={styles.CancelStyle}>Cancel</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </Modal>

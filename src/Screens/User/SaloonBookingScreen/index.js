@@ -10,6 +10,7 @@ import { Calendar, LocaleConfig } from 'react-native-calendars';
 import ButtonBlue from '../../../Components/Button_Blue';
 import ModalConatiner from '../../../Components/ModalComponent';
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { Routes } from '../../../Constant/Routes';
 const style = StyleSheet.create({
     mainContainer: {
         marginLeft: scaleWidth(16)
@@ -97,8 +98,12 @@ const SaloonBookingScreen = ({ navigation }) => {
     }
     const onTimeChange = (date) => {
         setSHow(false)
-        console.log("date>>>",date)
+        console.log("date>>>", date)
         // setTimeValue(date)
+    }
+    const onSubmitClick = () => {
+        navigation.navigate(Routes.UserBookingComplete);
+        setModalVisible(false);
     }
     return (
         <SafeAreaView >
@@ -138,7 +143,15 @@ const SaloonBookingScreen = ({ navigation }) => {
                     <View style={style.bookConatiner}>
                         <ButtonBlue buttonText="Book Appointment" onClick={onclick} />
                     </View>
-                    <ModalConatiner modalVisible={modalVisible} closeModal={closeModal} />
+                    <ModalConatiner
+                        title={TextConstant.Confirm_Book}
+                        subTitle={TextConstant.Confirm_subBook}
+                        modalVisible={modalVisible}
+                        closeModal={closeModal}
+                        onCancelClick={closeModal}
+                        onSubmitClick={onSubmitClick}
+                        buttonText={TextConstant.Confirm}
+                    />
                     {show &&
                         <DateTimePicker
                             testID="date-picker"

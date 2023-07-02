@@ -40,7 +40,7 @@ const ContactUs = ({ navigation }) => {
                     <ButtonBlue buttonText={TextConstant.Submit} onClick={onclick} />
                 </View>
             </ScrollView>
-            <ModalConatiner modalVisible={modalVisible} closeModal={closeModal} />
+            <ModalConatiner title={TextConstant.MESSAGESUCCESSFULLY} modalVisible={modalVisible} closeModal={closeModal} />
         </SafeAreaView>
     )
 }

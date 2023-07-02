@@ -54,7 +54,7 @@ const style = StyleSheet.create({
         marginTop:scaleHeight(7)
     }
 })
-const UserProfileHeader = () => {
+const UserProfileHeader = ({onEditButtonClick}) => {
     return (
         <View style={style.mainConatiner}>
             <View style={style.subMainContainer}>
@@ -62,7 +62,7 @@ const UserProfileHeader = () => {
                     <Image source={Images.BackBuuton} />
                     <Text style={style.profileText}>Profile</Text>
                 </View>
-                <TouchableOpacity style={style.editConatiner}>
+                <TouchableOpacity onPress={onEditButtonClick} style={style.editConatiner}>
                     <Image source={Images.EDIT} />
                     <Text style={style.editText}>{TextConstant.EDIT}</Text>
                 </TouchableOpacity>

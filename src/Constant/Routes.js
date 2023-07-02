@@ -21,7 +21,7 @@ export const Routes = {
     ContactUs: 'contactus',
     AppVersion: 'appversion',
     FeedBack: 'feedback',
-    Review: 'review',
+    Reviews: 'Reviews',
     PrivacyPolicy: 'privacypolicy',
     UserBooking: 'userBooking',
     UserFavouriteSaloon: 'userfavouritesaloon',
@@ -33,6 +33,12 @@ export const Routes = {
     SaloonBookingScreen: 'SaloonBookingScreen',
     UserServices: 'UserServices',
     SaloonGallery: 'SaloonGallery',
-    UserLocationMap: "UserLocationMap"
+    UserLocationMap: "UserLocationMap",
+    UserBookingComplete:'UserBookingComplete',
+    UserQrScanner:'UserQrScanner',
+    EditUserScreen:"EditUserScreen",
+    ProfileDetials:'ProfileDetials',
+    UserNotification:'UserNotification',
+    ForgotMpin:'ForgotMpin'
 
 }

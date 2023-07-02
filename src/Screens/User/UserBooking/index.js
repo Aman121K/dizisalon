@@ -32,7 +32,7 @@ const style = StyleSheet.create({
     dataSubContainer: {
         flexDirection: 'row',
         marginHorizontal: scaleWidth(5),
-        justifyContent:'space-evenly'
+        justifyContent: 'space-evenly'
     },
     locationConatiner: {
         flexDirection: 'row'
@@ -45,14 +45,14 @@ const style = StyleSheet.create({
         padding: scaleHeight(10),
         borderRadius: scaleHeight(10)
     },
-    customerName:{
-        fontSize:normalize(14),
-        fontFamily:FONTS.MontserratSemiBold
+    customerName: {
+        fontSize: normalize(14),
+        fontFamily: FONTS.MontserratSemiBold
     },
-    customerMobile:{
-        fontFamily:FONTS.MontserratRegular,
-        fontSize:normalize(13),
-        color:'#818181'
+    customerMobile: {
+        fontFamily: FONTS.MontserratRegular,
+        fontSize: normalize(13),
+        color: '#818181'
     }
 
 })
@@ -127,7 +127,7 @@ const UserBooking = ({ navigation }) => {
                             </View>
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                 <View style={style.statusConatiner}>
-                                    <Text style={{color:'white'}}>{item?.status}</Text>
+                                    <Text style={{ color: 'white' }}>{item?.status}</Text>
                                 </View>
                                 {item?.status === 'incomplete' &&
                                     <TouchableOpacity>
@@ -145,11 +145,11 @@ const UserBooking = ({ navigation }) => {
     return (
         <SafeAreaView style={style.mainConatiner}>
             <UserSubComponent titel={TextConstant.MY_BOOKING} navigation={navigation} />
-            <View style={{marginTop:scaleHeight(20)}}>
-            <FlatList
-                data={bookingData}
-                renderItem={renderItem}
-            />
+            <View style={{ marginTop: scaleHeight(20) }}>
+                <FlatList
+                    data={bookingData}
+                    renderItem={renderItem}
+                />
             </View>
         </SafeAreaView>
     )

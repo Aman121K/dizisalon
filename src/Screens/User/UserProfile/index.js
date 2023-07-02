@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, Image, Platform, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, FlatList, Image, Platform, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import UserProfileHeader from "../../../Components/UserProfileHeader";
 import { Images } from "../../../Constant/Images";
 import { normalize, scaleHeight, scaleWidth } from "../../../Constant/DynamicSize";
@@ -19,7 +19,7 @@ const style = StyleSheet.create({
     },
     listConatinet: {
         marginTop: scaleHeight(13),
-        marginBottom:Platform.OS==='ios'?scaleHeight(260):scaleHeight(310)
+        marginBottom: Platform.OS === 'ios' ? scaleHeight(260) : scaleHeight(310)
     },
     profileConatiner: {
         flex: 1
@@ -44,9 +44,10 @@ const UserProfile = ({ navigation }) => {
 
     ])
     const gotoPage = (item) => {
+    console.log(item)
         switch (item) {
             case 'My Booking':
-                navigation.navigate(Routes.UserBookingSaloon)
+                navigation.navigate('UserBottomNavigtion')
                 break;
             case 'My Favourite Salon':
                 navigation.navigate(Routes.UserFavouriteSaloon)
@@ -66,6 +67,11 @@ const UserProfile = ({ navigation }) => {
             case 'Privacy Policy':
                 navigation.navigate(Routes.PrivacyPolicy)
                 break;
+            case 'Reviews':
+                // Alert.alert('review')
+                navigation.navigate(Routes.Reviews)
+
+                break;
             case 'Logout':
 
                 break;
@@ -84,9 +90,12 @@ const UserProfile = ({ navigation }) => {
             </TouchableOpacity>
         )
     }
+    const onEditClick = () => {
+        navigation.navigate(Routes.ProfileDetials)
+    }
     return (
         <SafeAreaView style={style.profileConatiner}>
-            <UserProfileHeader />
+            <UserProfileHeader naigation={navigation} onEditButtonClick={onEditClick} />
             <View style={style.listConatinet}>
                 <FlatList
                     data={loginData}

@@ -73,4 +73,9 @@ export const TextConstant = {
    AfterLunch:'After <Lunch Time>',
    NO_Connection :'No Connection',
    NO_Connection_Desc:'Please Check Your internet connection.',
+   Confirm_Book:"Confirm Book",
+   Confirm_subBook:'Confirm Booking to allocate the slot at salon!',
+   Confirm:'Confirm',
+   Completed:'Completed',
+   SCAN_AGAIN:'Scan Again'
 }

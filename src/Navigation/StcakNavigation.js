@@ -21,7 +21,7 @@ import FeedBack from "../Screens/User/Feedback";
 import ReferEarn from "../Screens/User/ReferEarn";
 import PrivacyPolicy from "../Screens/User/PrivacyPolicy";
 import UserBookingSaloon from "../Screens/User/UserBookingSaloon";
-import Review from "../Screens/User/Review";
+import Reviews from "../Screens/User/Reviews";
 import UserFavouriteSaloon from "../Screens/User/UserFavouriteSaloon";
 import UserSaloonDetails from "../Screens/User/UserSaloonDetails";
 import UserReviewList from "../Screens/User/UserReviewList";
@@ -30,6 +30,12 @@ import SaloonBookingScreen from "../Screens/User/SaloonBookingScreen";
 import UserServices from "../Screens/User/UserServices";
 import SaloonGallery from "../Screens/User/SaloonGallery";
 import UserLocationMap from "../Screens/User/UserLocationMap";
+import UserBookingComplete from "../Screens/User/UserBookingComplete";
+import UserQrScanner from "../Screens/User/UserQrScanner";
+import EditUserScreen from "../Screens/User/EditUserScreen";
+import ProfileDetials from "../Screens/User/ProfileDetails";
+import UserNotification from "../Screens/User/UserNotification";
+import ForgotMpin from "../Screens/Auth/ForgotMpin";
 const Stack = createNativeStackNavigator();
 const StackNavigation = () => {
     return (
@@ -47,7 +53,7 @@ const StackNavigation = () => {
             <Stack.Screen name={Routes.TrendingDetails} component={TrendingDetails} options={{ headerShown: false }} />
             <Stack.Screen name={Routes.TrendingList} component={TrendingList} options={{ headerShown: false }} />
             <Stack.Screen name={Routes.ContactUs} component={ContactUs} options={{ headerShown: false }} />
-            <Stack.Screen name={Routes.Review} component={Review} options={{ headerShown: false }} />
+            {/* <Stack.Screen name={Routes.Review} component={Review} options={{ headerShown: false }} /> */}
             <Stack.Screen name={Routes.PrivacyPolicy} component={PrivacyPolicy} options={{ headerShown: false }} />
             <Stack.Screen name={Routes.ReferEarn} component={ReferEarn} options={{ headerShown: false }} />
             <Stack.Screen name={Routes.UserBookingSaloon} component={UserBookingSaloon} options={{ headerShown: false }} />
@@ -61,6 +67,13 @@ const StackNavigation = () => {
             <Stack.Screen name={Routes.UserServices} component={UserServices} options={{ headerShown: false }} />
             <Stack.Screen name={Routes.SaloonGallery} component={SaloonGallery} options={{ headerShown: false }} />
             <Stack.Screen name={Routes.UserLocationMap} component={UserLocationMap} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.UserBookingComplete} component={UserBookingComplete} options={{headerShown:false}}/>
+            <Stack.Screen name={Routes.UserQrScanner} component={UserQrScanner} options={{headerShown:false}}/>
+            <Stack.Screen name={Routes.EditUserScreen} component={EditUserScreen} options={{headerShown:false}}/>
+            <Stack.Screen name={Routes.ProfileDetials} component={ProfileDetials} options={{headerShown:false}}/>
+            <Stack.Screen name={Routes.UserNotification} component={UserNotification} options={{headerShown:false}}/>
+            <Stack.Screen name={Routes.ForgotMpin} component={ForgotMpin} options={{headerShown:false}}/>
+            <Stack.Screen name={Routes.Reviews} component={Reviews} options={{headerShown:false}}/>
         </Stack.Navigator>
     )
 }
