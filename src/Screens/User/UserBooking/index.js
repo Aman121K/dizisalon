@@ -59,41 +59,41 @@ const style = StyleSheet.create({
 const UserBooking = ({ navigation }) => {
     const [bookingData, setBookingData] = React.useState([
         {
-            customerName: 'Vikas',
+            customerName: 'abc',
             barberName: 'Abc',
-            customerMobile: '+917973070600',
+            customerMobile: '+91+910000000',
             action: 'Shaving',
             status: 'complete',
             duration: '26 Min.'
         },
         {
-            customerName: 'Vikas',
+            customerName: 'def',
             barberName: 'Abc',
-            customerMobile: '+917973070600',
+            customerMobile: '+91+910000000',
             action: 'Shaving',
             status: 'complete',
             duration: '26 Min.'
         },
         {
-            customerName: 'Vikas',
+            customerName: 'xyz',
             barberName: 'Abc',
-            customerMobile: '+917973070600',
+            customerMobile: '+91+910000000',
             action: 'Shaving',
             status: 'complete',
             duration: '26 Min.'
         },
         {
-            customerName: 'Vikas',
+            customerName: 'def',
             barberName: 'Abc',
-            customerMobile: '+917973070600',
+            customerMobile: '+91+910000000',
             action: 'Shaving',
             status: 'complete',
             duration: '26 Min.'
         },
         {
-            customerName: 'Vikas',
+            customerName: 'ggf',
             barberName: 'Abc',
-            customerMobile: '+917973070600',
+            customerMobile: '+91+910000000',
             action: 'Shaving',
             status: 'complete',
             duration: '26 Min.'

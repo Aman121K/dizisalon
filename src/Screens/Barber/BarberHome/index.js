@@ -8,6 +8,7 @@ import { TextConstant } from "../../../Constant/TextConstant";
 import { FONTS } from "../../../Constant/fonts";
 import KycDetailsHome from "../../../Components/KycDetailsHome";
 import { Routes } from "../../../Constant/Routes";
+import SaloonDetailsHome from "../../../Components/SaloonDetailsHome";
 const styles = StyleSheet.create({
     homeConatiner: {
         // flex: 1
@@ -62,6 +63,7 @@ const BarberHome = ({ navigation }) => {
             title: 'third'
         }
     ])
+    const [showDashboard, setShowDashboard] = React.useState(true);
 
     const gotoListPage = () => {
         navigation.navigate(Routes.TrendingList)
@@ -79,21 +81,26 @@ const BarberHome = ({ navigation }) => {
                 <BarberHeader />
                 <View style={styles.homDesign}>
                     <Text>Hi
-                        <Text> Vikas</Text>
+                        <Text>Abc</Text>
                     </Text>
                     <View style={styles.crausalConatiner}>
                         <Crasual entries={crausalData} />
                     </View>
-                    <View style={{ marginTop: scaleHeight(16) }}>
-                        <Text style={styles.kycMainstyle}>{TextConstant.KYC_MAIN_TEXT}</Text>
-                        <View style={{ marginTop: 10 }}>
-                            <KycDetailsHome />
-                        </View>
-                    </View>
-                    <View style={styles.tredingContainer}>
-                        <Text style={styles.trendingText}>{TextConstant.TRENDING_STYLE}</Text>
-                        <Text onPress={() => gotoListPage()}>{TextConstant.SHOW_MORE} </Text>
-                    </View>
+                    {showDashboard ?
+                        <SaloonDetailsHome navigation={navigation} /> :
+                        <View>
+                            <View style={{ marginTop: scaleHeight(16) }}>
+                                <Text style={styles.kycMainstyle}>{TextConstant.KYC_MAIN_TEXT}</Text>
+                                <View style={{ marginTop: 10 }}>
+                                    <KycDetailsHome />
+                                </View>
+                            </View>
+                           
+                        </View>}
+                        <View style={styles.tredingContainer}>
+                                <Text style={styles.trendingText}>{TextConstant.TRENDING_STYLE}</Text>
+                                <Text onPress={() => gotoListPage()}>{TextConstant.SHOW_MORE} </Text>
+                            </View>
                     <FlatList
                         data={crausalData}
                         renderItem={renderItem}

@@ -11,7 +11,7 @@ const style = StyleSheet.create({
         marginTop: scaleHeight(10)
     },
     InputStyle: {
-        width: 100
+        // width: 
     }
 })
 const InnerTexttInput = ({ placeholderText, value, onChange }) => {

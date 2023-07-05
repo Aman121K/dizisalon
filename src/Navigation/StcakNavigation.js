@@ -36,6 +36,23 @@ import EditUserScreen from "../Screens/User/EditUserScreen";
 import ProfileDetials from "../Screens/User/ProfileDetails";
 import UserNotification from "../Screens/User/UserNotification";
 import ForgotMpin from "../Screens/Auth/ForgotMpin";
+import SaloonAddCustomer from "../Screens/Barber/SaloonAddCustomer";
+import SaloonCustomerDetailPage from "../Screens/Barber/SaloonCustomerDetailPage";
+import SaloonCustomerList from "../Screens/Barber/SaloonCustomerList";
+import SaloonDetailsPage from "../Screens/Barber/SaloonDetailsPage";
+import SaloonQrCode from "../Screens/Barber/SaloonQrCode";
+import BarberPrivacyPolicy from "../Screens/Barber/BarberPrivacyPolicy";
+import SaloonBarberReferAndEarn from "../Screens/Barber/BarberreferAndEarn";
+import SaloonAddBarber from "../Screens/Barber/SaloonAddBarber";
+import SaloonAddServices from "../Screens/Barber/SaloonAddServices";
+import SaloonBarberDetialPage from "../Screens/Barber/SaloonBarberDetialPage";
+import SaloonBarberList from "../Screens/Barber/SaloonBarberList";
+import SaloonEditProfile from "../Screens/Barber/SaloonEditProfile";
+import SaloonFeedback from "../Screens/Barber/SaloonFeedback";
+import SaloonNotification from "../Screens/Barber/SaloonNotification";
+import SaloonNotificationLists from "../Screens/Barber/SaloonNotificationLists";
+import SaloonServices from "../Screens/Barber/SaloonServices";
+import SaloonContactUs from "../Screens/Barber/SaloonContactUs";
 const Stack = createNativeStackNavigator();
 const StackNavigation = () => {
     return (
@@ -67,13 +84,30 @@ const StackNavigation = () => {
             <Stack.Screen name={Routes.UserServices} component={UserServices} options={{ headerShown: false }} />
             <Stack.Screen name={Routes.SaloonGallery} component={SaloonGallery} options={{ headerShown: false }} />
             <Stack.Screen name={Routes.UserLocationMap} component={UserLocationMap} options={{ headerShown: false }} />
-            <Stack.Screen name={Routes.UserBookingComplete} component={UserBookingComplete} options={{headerShown:false}}/>
-            <Stack.Screen name={Routes.UserQrScanner} component={UserQrScanner} options={{headerShown:false}}/>
-            <Stack.Screen name={Routes.EditUserScreen} component={EditUserScreen} options={{headerShown:false}}/>
-            <Stack.Screen name={Routes.ProfileDetials} component={ProfileDetials} options={{headerShown:false}}/>
-            <Stack.Screen name={Routes.UserNotification} component={UserNotification} options={{headerShown:false}}/>
-            <Stack.Screen name={Routes.ForgotMpin} component={ForgotMpin} options={{headerShown:false}}/>
-            <Stack.Screen name={Routes.Reviews} component={Reviews} options={{headerShown:false}}/>
+            <Stack.Screen name={Routes.UserBookingComplete} component={UserBookingComplete} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.UserQrScanner} component={UserQrScanner} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.EditUserScreen} component={EditUserScreen} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.ProfileDetials} component={ProfileDetials} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.UserNotification} component={UserNotification} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.ForgotMpin} component={ForgotMpin} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.Reviews} component={Reviews} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.SaloonAddCustomer} component={SaloonAddCustomer} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.SaloonCustomerDetailPage} component={SaloonCustomerDetailPage} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.SaloonCustomerList} component={SaloonCustomerList} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.SaloonDetailsPage} component={SaloonDetailsPage} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.SaloonQrCode} component={SaloonQrCode} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.BarberPrivacyPolicy} component={BarberPrivacyPolicy} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.SaloonBarberReferAndEarn} component={SaloonBarberReferAndEarn} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.SaloonAddBarber} component={SaloonAddBarber} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.SaloonAddServices} component={SaloonAddServices} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.SaloonBarberDetialPage} component={SaloonBarberDetialPage} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.SaloonBarberList} component={SaloonBarberList} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.SaloonEditProfile} component={SaloonEditProfile} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.SaloonFeedback} component={SaloonFeedback} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.SaloonNotification} component={SaloonNotification} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.SaloonNotificationLists} component={SaloonNotificationLists} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.SaloonServices} component={SaloonServices} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.SaloonContactUs} component={SaloonContactUs} options={{ headerShown: false }} />
         </Stack.Navigator>
     )
 }

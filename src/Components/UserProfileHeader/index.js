@@ -70,7 +70,7 @@ const UserProfileHeader = ({onEditButtonClick}) => {
             <View style={style.userDetailsConatiner}>
                 <Image style={style.loginImage} source={Images.LOGIN_USER_IMAGE} />
                 <Text style={style.nameStyle}>Name</Text>
-                <Text style={style.nameStyle}>tvikas6523@gmail.com</Text>
+                <Text style={style.nameStyle}>abcd6523@gmail.com</Text>
                 <Text style={style.nameStyle}>Noida</Text>
             </View>
         </View>

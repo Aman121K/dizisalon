@@ -77,7 +77,7 @@ const style = StyleSheet.create({
 const SaloonBookingScreen = ({ navigation }) => {
     const [selectedBarber, setSelectedBarber] = React.useState([{
         barberName: 'Manish Rawat',
-        barberContactNo: '+917973070600',
+        barberContactNo: '+91+910000000',
         barberImage: Images.SALLON_BG_IMAGE,
         barberRate: '500',
         duration: '30 min',

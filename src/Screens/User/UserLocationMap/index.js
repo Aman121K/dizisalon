@@ -60,7 +60,7 @@ const UserLocationMap = ({ navigation }) => {
                 <Marker
                     //   key={index}
                     coordinate={userLocation}
-                    title="vikas"
+                    title="abc"
                     description="sallon"
                 />
 
