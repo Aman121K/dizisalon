@@ -4,6 +4,7 @@ import { Images } from '../../Constant/Images';
 import { TextConstant } from '../../Constant/TextConstant';
 import { normalize, scaleHeight, scaleWidth } from '../../Constant/DynamicSize';
 import { FONTS } from '../../Constant/fonts';
+import { Routes } from '../../Constant/Routes';
 const style = StyleSheet.create({
     mainConatiner: {
         flexDirection: 'row',
@@ -31,7 +32,7 @@ const style = StyleSheet.create({
         marginLeft: scaleWidth(17)
     }
 })
-const UserCartHeader = ({ title, addButton, navigation }) => {
+const UserCartHeader = ({ title, addButton, navigation, addSetting }) => {
     return (
         <View style={style.mainConatiner}>
             <View style={style.backButtonConatiner}>
@@ -43,6 +44,12 @@ const UserCartHeader = ({ title, addButton, navigation }) => {
             {addButton &&
                 <TouchableOpacity style={style.AddServiceConatiner}>
                     <Text style={style.addServiceText}>{TextConstant.ADD_SERVICES}</Text>
+                </TouchableOpacity>
+            }
+            {
+                addSetting &&
+                <TouchableOpacity onPress={()=>navigation.navigate(Routes.SaloonNotification)}>
+                    <Image source={Images.SEARCH_ICON}/>
                 </TouchableOpacity>
             }
         </View>

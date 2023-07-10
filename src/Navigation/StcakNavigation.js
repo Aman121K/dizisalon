@@ -53,6 +53,8 @@ import SaloonNotificationLists from "../Screens/Barber/SaloonNotificationLists";
 import SaloonServices from "../Screens/Barber/SaloonServices";
 import SaloonContactUs from "../Screens/Barber/SaloonContactUs";
 import BarberProfileDetails from "../Screens/Barber/BarberProfileDetails";
+import SaloonChangePassword from "../Screens/Barber/SaloonChangePassword";
+import EditSaloonDetails from "../Screens/Barber/EditSaloonDetails";
 const Stack = createNativeStackNavigator();
 const StackNavigation = () => {
     return (
@@ -109,6 +111,8 @@ const StackNavigation = () => {
             <Stack.Screen name={Routes.SaloonServices} component={SaloonServices} options={{ headerShown: false }} />
             <Stack.Screen name={Routes.SaloonContactUs} component={SaloonContactUs} options={{ headerShown: false }} />
             <Stack.Screen name={Routes.BarberProfileDetails} component={BarberProfileDetails} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.SaloonChangePassword} component={SaloonChangePassword} options={{headerShown:false}}/>
+            <Stack.Screen name={Routes.EditSaloonDetails} component={EditSaloonDetails} options={{headerShown:false}}/>
         </Stack.Navigator>
     )
 }

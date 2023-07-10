@@ -6,6 +6,8 @@ import { normalize, scaleHeight, scaleWidth } from '../../../Constant/DynamicSiz
 import { FONTS } from '../../../Constant/fonts';
 import ButtonBlue from '../../../Components/Button_Blue';
 import { Routes } from '../../../Constant/Routes';
+import ModalConatiner from '../../../Components/ModalComponent';
+import ConfirmModal from '../../../Components/ModalComponent/ConfirmModal';
 const style = StyleSheet.create({
     mainConatiner: {
         backgroundColor: '#022A6D',
@@ -111,7 +113,7 @@ const style = StyleSheet.create({
 })
 const data = [
     {
-        title: 'MPIN',
+        title: 'Password',
         Icon: Images.Key,
     },
     {
@@ -126,19 +128,21 @@ const data = [
     }
 ]
 const BarberProfileDetails = ({ navigation }) => {
+    const [showModalVisible, setShowModalVisisble] = React.useState(false)
     const onClick = () => {
         navigation.navigate(Routes.Signin)
     }
+
     const buttonClick = (value) => {
         switch (value) {
-            case 'MPIN':
-                navigation.navigate(Routes.ForgotMpin)
+            case 'Password':
+                navigation.navigate(Routes.SaloonChangePassword)
                 break;
             case 'Notification':
                 navigation.navigate(Routes.SaloonNotificationLists)
                 break;
             case 'Delete My Account':
-
+                setShowModalVisisble(true)
                 break;
             default:
                 break;
@@ -146,7 +150,13 @@ const BarberProfileDetails = ({ navigation }) => {
     }
     const onEditButtonClick = () => {
         console.log("vikas")
-        navigation.navigate(Routes.SaloonNotificationLists)
+        navigation.navigate(Routes.SaloonEditProfile)
+    }
+    const onCancelClick = () => {
+        setShowModalVisisble(false)
+    }
+    const onSubmitClick = () => {
+        setShowModalVisisble(false)
     }
     return (
         <SafeAreaView>
@@ -202,6 +212,18 @@ const BarberProfileDetails = ({ navigation }) => {
                 <View style={style.LogoutConatiner}>
                     <ButtonBlue onClick={onClick} buttonText="Logout" />
                 </View>
+                <ConfirmModal
+                    modalVisible={showModalVisible}
+                    onCancelClick={onCancelClick}
+                    Icon={Images.ConfirmUser}
+                    title="Are you sure?"
+                    subTitle="Do you want to Logout “your account”?"
+                    buttonText="Yes"
+                    onCancelClick={onCancelClick}
+                    onSubmitClick={onSubmitClick}
+                    closeModal={onCancelClick}
+                />
+                {/* <ModalConatiner modalVisible={showModalVisible} onCancelClick={onCancelClick}/> */}
             </ScrollView>
 
         </SafeAreaView>

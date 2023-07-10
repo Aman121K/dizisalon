@@ -57,7 +57,9 @@ export const Routes = {
     SaloonNotificationLists:'SaloonNotificationLists',
     SaloonServices:'SaloonServices',
     SaloonContactUs:'SaloonContactUs',
-    BarberProfileDetails:'BarberProfileDetails'
+    BarberProfileDetails:'BarberProfileDetails',
+    SaloonChangePassword:'SaloonChangePassword',
+    EditSaloonDetails:'EditSaloonDetails'
 
 
 }

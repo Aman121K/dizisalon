@@ -77,4 +77,7 @@ export const Images = {
     FeedBackBg:require('../Assets/Images/feedbackBg/feedbackBg.png'),
     Saloonrefer:require('../Assets/Images/saloonrefer/saloonrefer.png'),
     AddPlus:require('../Assets/Images/addPlus/addPlus.png'),
+    ConfirmNotification:require('../Assets/Images/confirmNotification/confirmNotification.png'),
+    ConfirmLogout:require('../Assets/Images/confirmlogout/confirmlogout.png'),
+    ConfirmUser:require('../Assets/Images/user/user.png'),
 }
