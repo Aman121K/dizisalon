@@ -13,6 +13,7 @@ export const FONTS = {
     MontserratMediumItalic: 'Montserrat-MediumItalic',
     MontserratRegular: 'Montserrat-Regular',
     MontserratSemiBold: 'Montserrat-SemiBold',
-    MontserratSemiBoldItalic:'Montserrat-SemiBoldItalic'
+    MontserratSemiBoldItalic:'Montserrat-SemiBoldItalic',
+    PoppinsRegular:'Poppins-Regular'
   };
   

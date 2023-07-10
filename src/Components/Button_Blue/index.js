@@ -8,8 +8,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     textAlign: "center",
     fontSize: normalize(16),
-    lineHeight: scaleHeight(20),
-    paddingVertical: scaleHeight(16),
+
     fontFamily: FONTS.MontserratSemiBold
   },
   btnStyle: {
@@ -17,15 +16,16 @@ const styles = StyleSheet.create({
     height: scaleHeight(48),
     borderRadius: scaleHeight(12),
     alignItems: "center",
-    width:scaleWidth(330)
+    justifyContent: 'center',
+    width: scaleWidth(330)
   }
 })
 
 const ButtonBlue = ({ buttonText, onClick }) => {
   return (
-      <TouchableOpacity style={styles.btnStyle} onPress={onClick}>
-        <Text style={styles.btnText}>{buttonText}</Text>
-      </TouchableOpacity>
+    <TouchableOpacity style={styles.btnStyle} onPress={onClick}>
+      <Text style={styles.btnText}>{buttonText}</Text>
+    </TouchableOpacity>
   )
 }
 

@@ -6,9 +6,7 @@ import { normalize, scaleHeight, scaleWidth } from '../../Constant/DynamicSize';
 import { FONTS } from '../../Constant/fonts';
 const styles = StyleSheet.create({
     mainContainer: {
-        // flex:1
         flexDirection: 'row',
-        // marginTop: scaleHeight(50),
         borderWidth: .5,
         padding: scaleHeight(16),
         marginHorizontal: scaleWidth(12),

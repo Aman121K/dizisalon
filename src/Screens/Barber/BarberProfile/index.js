@@ -90,7 +90,7 @@ const BarberProfile = ({ navigation }) => {
         )
     }
     const onEditClick = () => {
-        navigation.navigate(Routes.ProfileDetials)
+        navigation.navigate(Routes.BarberProfileDetails)
     }
     return (
         <SafeAreaView style={style.profileConatiner}>
