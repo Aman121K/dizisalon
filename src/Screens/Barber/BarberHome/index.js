@@ -63,7 +63,7 @@ const BarberHome = ({ navigation }) => {
             title: 'third'
         }
     ])
-    const [showDashboard, setShowDashboard] = React.useState(true);
+    const [showDashboard, setShowDashboard] = React.useState(false);
 
     const gotoListPage = () => {
         navigation.navigate(Routes.TrendingList)
@@ -92,15 +92,15 @@ const BarberHome = ({ navigation }) => {
                             <View style={{ marginTop: scaleHeight(16) }}>
                                 <Text style={styles.kycMainstyle}>{TextConstant.KYC_MAIN_TEXT}</Text>
                                 <View style={{ marginTop: 10 }}>
-                                    <KycDetailsHome />
+                                    <KycDetailsHome navigation={navigation} />
                                 </View>
                             </View>
-                           
+
                         </View>}
-                        <View style={styles.tredingContainer}>
-                                <Text style={styles.trendingText}>{TextConstant.TRENDING_STYLE}</Text>
-                                <Text onPress={() => gotoListPage()}>{TextConstant.SHOW_MORE} </Text>
-                            </View>
+                    <View style={styles.tredingContainer}>
+                        <Text style={styles.trendingText}>{TextConstant.TRENDING_STYLE}</Text>
+                        <Text onPress={() => gotoListPage()}>{TextConstant.SHOW_MORE} </Text>
+                    </View>
                     <FlatList
                         data={crausalData}
                         renderItem={renderItem}

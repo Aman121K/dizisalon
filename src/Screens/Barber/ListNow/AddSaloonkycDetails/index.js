@@ -1,14 +1,12 @@
 import React from 'react'
 import { Image, Linking, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import UserCartHeader from '../../../Components/UserCartHeader';
-import { normalize, scaleHeight, scaleWidth } from '../../../Constant/DynamicSize';
-import InnerTexttInput from '../../../Components/InnerTextInput';
-import ButtonBlue from '../../../Components/Button_Blue';
-import { FONTS } from '../../../Constant/fonts';
-import { Images } from '../../../Constant/Images';
-import UserSubComponent from '../../../Components/UserSubComponent';
-// import ImagePicker from 'react-native-image-crop-picker';
-// import {Picker} from '@react-native-picker/picker';
+import { normalize, scaleHeight, scaleWidth } from '../../../../Constant/DynamicSize';
+import InnerTexttInput from '../../../../Components/InnerTextInput';
+import ButtonBlue from '../../../../Components/Button_Blue';
+import { FONTS } from '../../../../Constant/fonts';
+import { Images } from '../../../../Constant/Images';
+import CheckBox from '@react-native-community/checkbox';
+import UserSubComponent from '../../../../Components/UserSubComponent';
 const style = StyleSheet.create({
     mainConatiner: {
 
@@ -86,8 +84,10 @@ const style = StyleSheet.create({
         color: '#000'
     }
 })
-const EditSaloonDetails = ({ navigation }) => {
+const AddSaloonkycDetails = ({ navigation }) => {
     const [selectedOption, setSelectedOption] = React.useState('');
+    const [toggleCheckBox, setToggleCheckBox] = React.useState(false)
+
     const handleOptionChange = (option) => {
         setSelectedOption(option);
     };
@@ -108,10 +108,10 @@ const EditSaloonDetails = ({ navigation }) => {
     }
     return (
         <SafeAreaView>
-         <UserSubComponent  navigation={navigation} />
+            <UserSubComponent navigation={navigation} />
             {/* <UserCartHeader navigation={navigation} /> */}
             <ScrollView style={style.container} showsVerticalScrollIndicator={false}>
-                <Text style={style.editStyle}>Edit Salon Details and Submit</Text>
+                <Text style={style.editStyle}>Please Provide your Salon Info for KYC</Text>
                 <InnerTexttInput placeholderText="Name*" />
                 <InnerTexttInput placeholderText="Salon Name*" />
                 <InnerTexttInput placeholderText="Salon Address*" />
@@ -119,6 +119,13 @@ const EditSaloonDetails = ({ navigation }) => {
                 <View style={{ flexDirection: 'row' }}>
                     <InnerTexttInput placeholderText="City*" />
                     <InnerTexttInput placeholderText="Zip Code*" />
+                </View>
+                <View>
+                    <CheckBox
+                        disabled={false}
+                        value={toggleCheckBox}
+                        onValueChange={(newValue) => setToggleCheckBox(newValue)}
+                    />
                 </View>
                 <View style={style.logoConatiner}>
                     <Text>Salon Logo</Text>
@@ -228,4 +235,4 @@ const EditSaloonDetails = ({ navigation }) => {
         </SafeAreaView>
     )
 }
-export default EditSaloonDetails
+export default AddSaloonkycDetails;

@@ -6,11 +6,12 @@ import { normalize, scaleHeight, scaleWidth } from "../../Constant/DynamicSize";
 import { FONTS } from "../../Constant/fonts";
 import ButtonBlue from "../Button_Blue";
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
+import { Routes } from "../../Constant/Routes";
 const styles = StyleSheet.create({
     mainConatiner: {
         backgroundColor: '#FFFFFF',
-        padding:10,
-        borderRadius:scaleHeight(10)
+        padding: 10,
+        borderRadius: scaleHeight(10)
     },
     formSubConatiner: {
         flexDirection: 'row',
@@ -34,14 +35,17 @@ const styles = StyleSheet.create({
     }
 }
 )
-const KycDetailsHome = () => {
+const KycDetailsHome = ({ navigation }) => {
+    const onClick = () => {
+        navigation.navigate(Routes.AddSaloonkycDetails)
+    }
     return (
         <View style={styles.mainConatiner}>
             <View style={styles.formSubConatiner}>
                 <View>
                     <Image source={Images.kycForm} />
                 </View>
-                <TouchableOpacity style={styles.knowConatiner}>
+                <TouchableOpacity style={styles.knowConatiner} onPress={() => navigation.navigate(Routes.SaloonKycDetails)}>
                     <Text style={styles.knowText}>{TextConstant.KNOW_MORE}</Text>
                 </TouchableOpacity>
             </View>
@@ -80,7 +84,7 @@ const KycDetailsHome = () => {
                     </View>
                 </ProgressStep>
                 </ProgressSteps> */}
-            <ButtonBlue buttonText={TextConstant.LIST_NOW} />
+            <ButtonBlue buttonText={TextConstant.LIST_NOW} onClick={onClick} />
 
         </View>
     )
