@@ -80,4 +80,6 @@ export const Images = {
     ConfirmNotification:require('../Assets/Images/confirmNotification/confirmNotification.png'),
     ConfirmLogout:require('../Assets/Images/confirmlogout/confirmlogout.png'),
     ConfirmUser:require('../Assets/Images/user/user.png'),
+    Check:require('../Assets/Images/check/check.png'),
+    UnCheck:require('../Assets/Images/uncheck/uncheck.png'),
 }

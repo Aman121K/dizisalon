@@ -48,8 +48,8 @@ const UserCartHeader = ({ title, addButton, navigation, addSetting }) => {
             }
             {
                 addSetting &&
-                <TouchableOpacity onPress={()=>navigation.navigate(Routes.SaloonNotification)}>
-                    <Image source={Images.SEARCH_ICON}/>
+                <TouchableOpacity onPress={() => navigation.navigate(Routes.SaloonNotification)}>
+                    <Image source={Images.NotificatioIcon} />
                 </TouchableOpacity>
             }
         </View>

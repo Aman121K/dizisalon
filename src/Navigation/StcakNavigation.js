@@ -118,9 +118,9 @@ const StackNavigation = () => {
             <Stack.Screen name={Routes.SaloonChangePassword} component={SaloonChangePassword} options={{ headerShown: false }} />
             <Stack.Screen name={Routes.EditSaloonDetails} component={EditSaloonDetails} options={{ headerShown: false }} />
             <Stack.Screen name={Routes.SaloonKycDetails} component={SaloonKycDetails} options={{ headerShown: false }} />
-            <Stack.Screen name={Routes.AddSaloonkycDetails} component={AddSaloonkycDetails} options={{headerShown:false}}/>
-            <Stack.Screen name={Routes.AddUnisexServices} component={AddUnisexServices} options={{headerShown:false}}/>
-            <Stack.Screen name={Routes.AddBarberList} component={AddBarberList} options={{headerShown:false}}/>
+            <Stack.Screen name={Routes.AddSaloonkycDetails} component={AddSaloonkycDetails} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.AddUnisexServices} component={AddUnisexServices} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.AddBarberList} component={AddBarberList} options={{ headerShown: false }} />
         </Stack.Navigator>
     )
 }

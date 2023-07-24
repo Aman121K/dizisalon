@@ -5,8 +5,9 @@ import InnerTexttInput from '../../../../Components/InnerTextInput';
 import ButtonBlue from '../../../../Components/Button_Blue';
 import { FONTS } from '../../../../Constant/fonts';
 import { Images } from '../../../../Constant/Images';
-import CheckBox from '@react-native-community/checkbox';
+// import CheckBox from '@react-native-community/checkbox';
 import UserSubComponent from '../../../../Components/UserSubComponent';
+import { Routes } from '../../../../Constant/Routes';
 const style = StyleSheet.create({
     mainConatiner: {
 
@@ -106,6 +107,9 @@ const AddSaloonkycDetails = ({ navigation }) => {
         //     console.log(image);
         // });
     }
+    const onClick = () => {
+        navigation.navigate(Routes.AddUnisexServices);
+    }
     return (
         <SafeAreaView>
             <UserSubComponent navigation={navigation} />
@@ -121,11 +125,11 @@ const AddSaloonkycDetails = ({ navigation }) => {
                     <InnerTexttInput placeholderText="Zip Code*" />
                 </View>
                 <View>
-                    <CheckBox
+                    {/* <CheckBox
                         disabled={false}
                         value={toggleCheckBox}
                         onValueChange={(newValue) => setToggleCheckBox(newValue)}
-                    />
+                    /> */}
                 </View>
                 <View style={style.logoConatiner}>
                     <Text>Salon Logo</Text>
@@ -229,7 +233,7 @@ const AddSaloonkycDetails = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
                 <View style={style.buttonContainer}>
-                    <ButtonBlue buttonText="Edit & Update" />
+                    <ButtonBlue buttonText="Submit" onClick={onClick} />
                 </View>
             </ScrollView>
         </SafeAreaView>
