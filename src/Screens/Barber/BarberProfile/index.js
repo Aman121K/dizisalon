@@ -48,7 +48,7 @@ const BarberProfile = ({ navigation }) => {
         console.log(item)
         switch (item) {
             case 'My Salon':
-                navigation.navigate('UserBottomNavigtion')
+                navigation.navigate(Routes.SaloonMySaloonPage)
                 break;
             case 'Customer Lists':
                 navigation.navigate(Routes.SaloonCustomerList)

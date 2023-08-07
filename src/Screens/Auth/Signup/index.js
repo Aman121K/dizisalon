@@ -5,10 +5,11 @@ import InputBoxComponent from "../../../Components/InputBoxComponent";
 import { TextConstant } from "../../../Constant/TextConstant";
 import { StylesContants } from "../../../Constant/StylesContants";
 import { Images } from "../../../Constant/Images";
-import OTPInputView from '@twotalltotems/react-native-otp-input'
+// import OTPInputView from '@twotalltotems/react-native-otp-input'
 import ButtonBlue from "../../../Components/Button_Blue";
 import { normalize, scaleHeight, scaleWidth } from "../../../Constant/DynamicSize";
 import { FONTS } from "../../../Constant/fonts";
+import { Routes } from "../../../Constant/Routes";
 const styles = StyleSheet.create({
     mainContainer: {
         width: '95%',
@@ -67,6 +68,9 @@ const styles = StyleSheet.create({
 })
 
 const Signup = ({ navigation }) => {
+    const onSignupClick = () => {
+        navigation.navigate(Routes.CreatePin)
+    }
     return (
         <SafeAreaView>
             <ScrollView showsVerticalScrollIndicator={false} style={{ marginHorizontal: scaleWidth(10) }}>
@@ -85,7 +89,7 @@ const Signup = ({ navigation }) => {
                     </View>
                     <View>
                         <Text>{TextConstant.OTP_NUMBER}</Text>
-                        <OTPInputView
+                        {/* <OTPInputView
                             style={{ width: '70%', height: 100 }}
                             pinCount={4}
                             autoFocusOnLoad
@@ -94,10 +98,10 @@ const Signup = ({ navigation }) => {
                             onCodeFilled={(code => {
                                 console.log(`Code is ${code}, you are good to go!`)
                             })}
-                        />
+                        /> */}
                     </View>
                     <InputBoxComponent label={TextConstant.signUp_label_five} placeholder={TextConstant.signUp_label_five} />
-                    <ButtonBlue buttonText="Sign Up" btnStyle={{ backgroundColor: "#022A6D", height: 48, borderRadius: 12, alignItems: "center" }} />
+                    <ButtonBlue onClick={onSignupClick} buttonText="Sign Up" btnStyle={{ backgroundColor: "#022A6D", height: 48, borderRadius: 12, alignItems: "center" }} />
                 </View>
                 <View>
                 </View>

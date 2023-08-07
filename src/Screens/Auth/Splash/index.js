@@ -9,7 +9,8 @@ const styles = StyleSheet.create({
     },
     splashLogo: {
         marginHorizontal: scaleWidth(106),
-        marginTop: scaleHeight(127)
+        marginTop: scaleHeight(127),
+        alignSelf:'center'
     },
     splashText: {
         marginHorizontal: scaleWidth(75),

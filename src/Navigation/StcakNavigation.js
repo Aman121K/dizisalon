@@ -59,6 +59,9 @@ import SaloonKycDetails from "../Screens/Barber/SaloonKycDetails";
 import AddSaloonkycDetails from "../Screens/Barber/ListNow/AddSaloonkycDetails";
 import AddBarberList from "../Screens/Barber/ListNow/AddBarberList";
 import AddUnisexServices from "../Screens/Barber/ListNow/AddUnisexServices";
+import BarberEditPage from "../Screens/Barber/BarberEditPage";
+import SaloonMySaloonPage from "../Screens/Barber/SaloonMySaloonPage";
+import SaloonSales from "../Screens/Barber/SaloonSales";
 const Stack = createNativeStackNavigator();
 const StackNavigation = () => {
     return (
@@ -121,6 +124,9 @@ const StackNavigation = () => {
             <Stack.Screen name={Routes.AddSaloonkycDetails} component={AddSaloonkycDetails} options={{ headerShown: false }} />
             <Stack.Screen name={Routes.AddUnisexServices} component={AddUnisexServices} options={{ headerShown: false }} />
             <Stack.Screen name={Routes.AddBarberList} component={AddBarberList} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.BarberEditPage} component={BarberEditPage} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.SaloonMySaloonPage} component={SaloonMySaloonPage} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.SaloonSales} component={SaloonSales} options={{ headerShown: false }} />
         </Stack.Navigator>
     )
 }

@@ -32,9 +32,9 @@ const SaloonEditProfile = ({ navigation }) => {
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <Text style={styles.notificationOptionText}>Salon Details</Text>
                     </View>
-                   <TouchableOpacity onPress={()=>navigation.navigate(Routes.EditSaloonDetails)}>
-                    <Text style={styles.editText}>Edit</Text>
-                   </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate(Routes.EditSaloonDetails)}>
+                        <Text style={styles.editText}>Edit</Text>
+                    </TouchableOpacity>
                 </View>
 
                 <View style={styles.notificationOption}>
@@ -42,18 +42,18 @@ const SaloonEditProfile = ({ navigation }) => {
                         <Text style={styles.notificationOptionText}>Services</Text>
                     </View>
 
-                    <TouchableOpacity onPress={()=>navigation.navigate(Routes.EditSaloonDetails)} >
-                    <Text style={styles.editText}>Edit</Text>
-                   </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate(Routes.EditSaloonDetails)} >
+                        <Text style={styles.editText}>Edit</Text>
+                    </TouchableOpacity>
                 </View>
 
                 <View style={styles.notificationOption}>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <Text style={styles.notificationOptionText}>Barber Details</Text>
                     </View>
-                    <TouchableOpacity onPress={()=>navigation.navigate(Routes.EditSaloonDetails)}>
-                    <Text style={styles.editText}>Edit</Text>
-                   </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate(Routes.EditSaloonDetails)}>
+                        <Text style={styles.editText}>Edit</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </SafeAreaView>
@@ -86,10 +86,10 @@ const styles = StyleSheet.create({
         marginTop: scaleHeight(20),
         paddingVertical: scaleHeight(5)
     },
-    editText:{
-        fontFamily:FONTS.PoppinsRegular,
-        fontSize:normalize(14),
-        color:'#022A6D'
+    editText: {
+        fontFamily: FONTS.PoppinsRegular,
+        fontSize: normalize(14),
+        color: '#022A6D'
     }
 });
 export default SaloonEditProfile

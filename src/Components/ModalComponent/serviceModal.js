@@ -10,8 +10,9 @@ import InputBoxComponent from '../InputBoxComponent';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        
+        // justifyContent: 'center',
+        // alignItems: 'center',
     },
     modalContainer: {
         flex: 1,

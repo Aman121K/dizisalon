@@ -127,7 +127,9 @@ const SaloonBookingScreen = ({ navigation }) => {
                             [selected]: { selected: true, disableTouchEvent: true, selectedDotColor: 'orange' }
                         }}
                     />
-                    <Text style={style.timeStyles}>Select Time Interval</Text>
+                    <View style={{ marginTop: scaleHeight(20) }}>
+                        <Text style={style.timeStyles}>Select Time Interval</Text>
+                    </View>
                     <View style={style.buttonstyle}>
                         <TouchableOpacity style={selectedDuration === 'before' ? style.selectedButtonStyle : style.selectedButtonStyle1} onPress={() => setSelectedDuration('before')}>
                             <Text style={selectedDuration === 'before' ? style.timedesign : style.timedesign1}>{TextConstant.BeforeLunch}</Text>

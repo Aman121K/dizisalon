@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     },
     trendingText: {
         fontSize: normalize(15),
-        fontFamily: FONTS.MontserratMedium,
+        fontFamily: FONTS.MontserratBold,
         // marginTop:scaleHeight
     },
     ImageConatiner: {
@@ -43,7 +43,16 @@ const styles = StyleSheet.create({
     imageStyle: {
         height: 100,
         width: 100
+    },
+    adsText: {
+        fontSize: normalize(16),
+        fontFamily: FONTS.MontserratBold
+    },
+    showMoreText: {
+        fontFamily: FONTS.MontserratMedium,
+        color: '#022A6D'
     }
+
 })
 const BarberHome = ({ navigation }) => {
     const [crausalData, setCrasualData] = React.useState([
@@ -80,8 +89,8 @@ const BarberHome = ({ navigation }) => {
             <ScrollView>
                 <BarberHeader />
                 <View style={styles.homDesign}>
-                    <Text>Hi
-                        <Text>Abc</Text>
+                    <Text style={{ fontSize: normalize(20), fontFamily: FONTS.MontserratBold }}>Hi,
+                        <Text> Abc</Text>
                     </Text>
                     <View style={styles.crausalConatiner}>
                         <Crasual entries={crausalData} />
@@ -99,7 +108,7 @@ const BarberHome = ({ navigation }) => {
                         </View>}
                     <View style={styles.tredingContainer}>
                         <Text style={styles.trendingText}>{TextConstant.TRENDING_STYLE}</Text>
-                        <Text onPress={() => gotoListPage()}>{TextConstant.SHOW_MORE} </Text>
+                        <Text style={styles.showMoreText} onPress={() => gotoListPage()}>{TextConstant.SHOW_MORE} </Text>
                     </View>
                     <FlatList
                         data={crausalData}
@@ -107,6 +116,22 @@ const BarberHome = ({ navigation }) => {
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                     />
+                </View>
+                <View style={{ marginLeft: scaleWidth(20) }}>
+                    <View style={styles.tredingContainer}>
+                        <Text style={styles.trendingText}>Latest article's</Text>
+                        <Text style={styles.showMoreText} onPress={() => gotoListPage()}>{TextConstant.SHOW_MORE} </Text>
+                    </View>
+                    <FlatList
+                        data={crausalData}
+                        renderItem={renderItem}
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                    />
+                </View>
+                <View style={{ marginLeft: scaleWidth(20), marginTop: scaleHeight(10) }}>
+                    <Text style={styles.adsText}>Ads</Text>
+                    <Image style={{ alignSelf: 'center' }} source={Images.Booking_Ads} />
                 </View>
             </ScrollView>
         </SafeAreaView>

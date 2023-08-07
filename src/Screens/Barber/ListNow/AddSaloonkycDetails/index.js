@@ -14,10 +14,13 @@ const style = StyleSheet.create({
     },
     container: {
         height: '100%',
-        marginHorizontal: scaleWidth(16)
+        marginHorizontal: scaleWidth(16),
+        marginBottom: scaleHeight(50)
     },
     buttonContainer: {
-        marginTop: scaleHeight(20)
+        marginTop: scaleHeight(20),
+        marginBottom: scaleHeight(50),
+        alignSelf: 'center'
     },
     selectConatiner: {
         backgroundColor: '#022A6D',
@@ -121,8 +124,8 @@ const AddSaloonkycDetails = ({ navigation }) => {
                 <InnerTexttInput placeholderText="Salon Address*" />
                 <InnerTexttInput placeholderText="State*" />
                 <View style={{ flexDirection: 'row' }}>
-                    <InnerTexttInput placeholderText="City*" />
-                    <InnerTexttInput placeholderText="Zip Code*" />
+                    <InnerTexttInput width={90} placeholderText="City*" />
+                    <InnerTexttInput width={120} placeholderText="Zip Code*" />
                 </View>
                 <View>
                     {/* <CheckBox

@@ -82,4 +82,13 @@ export const Images = {
     ConfirmUser:require('../Assets/Images/user/user.png'),
     Check:require('../Assets/Images/check/check.png'),
     UnCheck:require('../Assets/Images/uncheck/uncheck.png'),
+    SORT:require('../Assets/Images/sort/sort.png'),
+    clock:require('../Assets/Images/clock/clock.png'),
+    SloonOrder:require('../Assets/Images/saloonOrder/saloonOrder.png'),
+    SaloonComplete:require('../Assets/Images/saloonComplete/saloonComplete.png'),
+    SaloonCancel:require('../Assets/Images/saloonCancel/saloonCancel.png'),
+    saloonPending:require('../Assets/Images/saloonPending/saloonPending.png'),
+    TodaySales:require('../Assets/Images/todaySales/todaySales.png'),
+    SalesIcons:require('../Assets/Images/salesIcons/salesIcons.png'),
+
 }

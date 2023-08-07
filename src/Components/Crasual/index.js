@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import { normalize, scaleHeight, scaleWidth } from "../../Constant/DynamicSize";
 import { Images } from "../../Constant/Images";
@@ -8,14 +8,18 @@ const styles = StyleSheet.create({
     slide: {
         backgroundColor: '#3BCF74',
         // flexDirection:'row',
-        justifyContent: 'space-between',
-        padding: 5,
+        // justifyContent: 'space-between',
+        padding: 10,
         borderRadius: scaleWidth(10)
     },
     title: {
-        fontSize: normalize(20),
+        fontSize: normalize(17),
         width: scaleWidth(180),
-        fontFamily: FONTS.MontserratMedium
+        fontFamily: FONTS.MontserratSemiBold
+    },
+    innerText: {
+        fontSize: normalize(12),
+        fontFamily: FONTS.MontserratRegular
     },
     butonKyc: {
         backgroundColor: '#33AC5E',
@@ -33,33 +37,30 @@ const Crasual = ({ entries }) => {
                 <View style={{ flexDirection: "row", alignItems: 'center' }}>
                     <View>
                         <Text style={styles.title}>You are not getting customers on time </Text>
-                        <Text>Let’s list your salon in DiZi Salon</Text>
-                        <View style={styles.butonKyc}>
+                        <Text style={styles.innerText}>Let’s list your salon in DiZi Salon</Text>
+                        <TouchableOpacity style={styles.butonKyc}>
                             <Text style={{ color: 'white', fontFamily: FONTS.MontserratMedium }}>Let’s do KYC</Text>
-                        </View>
+                        </TouchableOpacity>
                     </View>
                     <View>
                         <Image source={Images.HOME_BANNER} />
                     </View>
                 </View>
-                {/* <View>
-                  
-                </View> */}
             </View>
         );
     }
     return (
-        <Carousel
-
-            ref={(c) => { this._carousel = c; }}
-            autoplay={true}
-            loop={true}
-            data={entries}
-            renderItem={_renderItem}
-            sliderWidth={430}
-            itemWidth={400}
-
-        />
+        <View>
+            <Carousel
+                ref={(c) => { this._carousel = c; }}
+                autoplay={true}
+                loop={true}
+                data={entries}
+                renderItem={_renderItem}
+                sliderWidth={330}
+                itemWidth={330}
+            />
+        </View>
     )
 }
 export default Crasual;

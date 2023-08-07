@@ -4,7 +4,7 @@ import UserSubComponent from "../../../../Components/UserSubComponent";
 import InnerTexttInput from "../../../../Components/InnerTextInput";
 import { normalize, scaleHeight, scaleWidth } from "../../../../Constant/DynamicSize";
 import { FONTS } from "../../../../Constant/fonts";
-import OTPInputView from "@twotalltotems/react-native-otp-input";
+// import OTPInputView from "@twotalltotems/react-native-otp-input";
 import ServiceModal from "../../../../Components/ModalComponent/serviceModal";
 import ButtonBlue from "../../../../Components/Button_Blue";
 const style = StyleSheet.create({
@@ -53,11 +53,12 @@ const style = StyleSheet.create({
     },
     serviceProvideConatiner: {
         marginLeft: scaleWidth(16),
-        marginTop: scaleHeight(10)
+        marginTop: scaleHeight(10),
     },
     buttonStyle: {
         alignSelf: 'center',
-        marginTop: scaleHeight(20)
+        marginTop: scaleHeight(20),
+        marginBottom: scaleHeight(50)
     },
     itemConatiner: {
         flexDirection: 'row',
@@ -145,7 +146,7 @@ const AddBarberList = ({ navigation }) => {
                 </View>
                 <View style={{ marginLeft: scaleWidth(16), marginTop: scaleHeight(20) }}>
                     <Text>OTP</Text>
-                    <OTPInputView
+                    {/* <OTPInputView
                         style={{ width: '70%', height: 100 }}
                         pinCount={4}
                         autoFocusOnLoad
@@ -154,7 +155,7 @@ const AddBarberList = ({ navigation }) => {
                         onCodeFilled={(code => {
                             console.log(`Code is ${code}, you are good to go!`)
                         })}
-                    />
+                    /> */}
                     <TouchableOpacity>
                         <Text>Resend</Text>
                         <Text>00:30</Text>
@@ -163,8 +164,8 @@ const AddBarberList = ({ navigation }) => {
                 <InnerTexttInput placeholderText="Barber Address" />
                 <InnerTexttInput placeholderText="State*" />
                 <View style={{ flexDirection: 'row' }}>
-                    <InnerTexttInput placeholderText="City*" />
-                    <InnerTexttInput placeholderText="Zip Code*" />
+                    <InnerTexttInput width={100} placeholderText="City*" />
+                    <InnerTexttInput width={100} placeholderText="Zip Code*" />
                 </View>
                 <View style={style.logoConatiner}>
                     <Text>Salon Logo</Text>
@@ -202,7 +203,7 @@ const AddBarberList = ({ navigation }) => {
                     </View>
                     <View style={{ marginLeft: scaleWidth(16), marginTop: scaleHeight(20) }}>
                         <Text>OTP</Text>
-                        <OTPInputView
+                        {/* <OTPInputView
                             style={{ width: '70%', height: 100 }}
                             pinCount={4}
                             autoFocusOnLoad
@@ -211,7 +212,7 @@ const AddBarberList = ({ navigation }) => {
                             onCodeFilled={(code => {
                                 console.log(`Code is ${code}, you are good to go!`)
                             })}
-                        />
+                        /> */}
                         <TouchableOpacity>
                             <Text>Resend</Text>
                             <Text>00:30</Text>

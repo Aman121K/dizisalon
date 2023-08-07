@@ -8,9 +8,10 @@ import { Images } from "../../../Constant/Images";
 import ButtonBlue from "../../../Components/Button_Blue";
 import { Routes } from "../../../Constant/Routes";
 import { FONTS } from "../../../Constant/fonts";
+import { useDispatch, useSelector } from "react-redux";
 import { TabContext } from "../../../Context/TabProvider";
 import { normalize, scaleHeight, scaleWidth } from "../../../Constant/DynamicSize";
-
+import { loginApi } from "../../../redux/action";
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
@@ -50,8 +51,11 @@ const styles = StyleSheet.create({
     }
 })
 const Signin = ({ navigation, route }) => {
-    const { type } = route?.params;
-    console.log("Type>>", type)
+    const dispatch = useDispatch();
+    const data = useSelector((state) => state.reducer)
+    console.log("on sgnin redux>>", data)
+    const type = route?.params?.type;
+
     const [mobile, setMobile] = React.useState();
     const [mpin, setMpin] = React.useState();
     const goToSignup = () => {
@@ -63,10 +67,11 @@ const Signin = ({ navigation, route }) => {
     const onChnageText = (Items) => {
         console.log("Items>>", Items)
     }
-const TabTypesValues = React.useContext(TabContext);
+    const TabTypesValues = React.useContext(TabContext);
 
     const onSigninClick = () => {
         console.log("vika", type)
+        dispatch(loginApi())
         if (type === 'For Salon') {
             TabTypesValues.setBottomType(type)
             navigation.navigate('BarberBottoNavigation', { type: type })

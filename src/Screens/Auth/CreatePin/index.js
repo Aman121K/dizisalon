@@ -7,6 +7,7 @@ import { StylesContants } from "../../../Constant/StylesContants";
 import { Images } from "../../../Constant/Images";
 import ButtonBlue from "../../../Components/Button_Blue";
 import { scaleHeight, scaleWidth } from "../../../Constant/DynamicSize";
+import { Routes } from "../../../Constant/Routes";
 
 const styles = StyleSheet.create({
     mainContainer: {
@@ -16,6 +17,9 @@ const styles = StyleSheet.create({
 })
 
 const CreatePin = ({ navigation }) => {
+    const onButtonClick = () => {
+        navigation.navigate('UserBottomNavigtion')
+    }
     return (
         <SafeAreaView>
             <AuthHeader backbutton={true} navigation={navigation} />
@@ -28,7 +32,7 @@ const CreatePin = ({ navigation }) => {
                     <InputBoxComponent label={TextConstant.create_pin_label_one} placeholder={TextConstant.create_pin_label_one} secure={true} />
                     <InputBoxComponent label={TextConstant.create_pin_label_two} placeholder={TextConstant.create_pin_label_one} secure={true} />
                 </View>
-                <ButtonBlue buttonText="Continue" btnStyle={{ backgroundColor: "#022A6D", height: 48, borderRadius: 12, alignItems: "center" }} />
+                <ButtonBlue onClick={onButtonClick} buttonText="Continue" btnStyle={{ backgroundColor: "#022A6D", height: 48, borderRadius: 12, alignItems: "center" }} />
             </View>
             <View>
             </View>

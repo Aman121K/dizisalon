@@ -18,6 +18,9 @@ const styles = StyleSheet.create({
         fontSize: normalize(25),
         fontFamily: FONTS.MontserratMedium,
         lineHeight: scaleHeight(31)
+    },
+    serachConatiner: {
+        marginVertical: scaleHeight(30)
     }
 })
 const TrendingList = ({ navigation }) => {
@@ -27,8 +30,10 @@ const TrendingList = ({ navigation }) => {
     return (
         <SafeAreaView>
             <AuthHeader navigation={navigation} backbutton={true} />
-            <SearchConatiner />
             <View style={styles.trendingConatiner}>
+                <View style={styles.serachConatiner}>
+                    <SearchConatiner />
+                </View>
                 <Text style={styles.trendingText}>{TextConstant.TRENDING_STYLE}</Text>
                 <TrendingLists onClick={onClick} />
                 <TrendingLists onClick={onClick} />

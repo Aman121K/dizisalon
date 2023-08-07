@@ -61,9 +61,12 @@ export const Routes = {
     SaloonChangePassword: 'SaloonChangePassword',
     EditSaloonDetails: 'EditSaloonDetails',
     SaloonKycDetails: 'SaloonKycDetails',
-    AddSaloonkycDetails:'AddSaloonkycDetails',
-    AddBarberList:'AddBarberList',
-    AddUnisexServices:'AddUnisexServices'
+    AddSaloonkycDetails: 'AddSaloonkycDetails',
+    AddBarberList: 'AddBarberList',
+    AddUnisexServices: 'AddUnisexServices',
+    BarberEditPage: 'BarberEditPage',
+    SaloonMySaloonPage:'SaloonMySaloonPage',
+    SaloonSales:'SaloonSales'
 
 
 }

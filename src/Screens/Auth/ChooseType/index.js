@@ -6,6 +6,8 @@ import { scaleHeight, scaleWidth } from '../../../Constant/DynamicSize';
 import SaloonType from '../../../Components/SallonTypeButton';
 import { TextConstant } from '../../../Constant/TextConstant';
 import { Routes } from '../../../Constant/Routes';
+import { useDispatch } from 'react-redux';
+import { userType } from '../../../redux/action';
 const Styles = StyleSheet.create({
     mainConainer: {
 
@@ -21,13 +23,16 @@ const Styles = StyleSheet.create({
     }
 })
 const ChooseType = ({ navigation }) => {
+    const dispatch = useDispatch();
     const onClick = (text) => {
         switch (text) {
             case TextConstant.FOR_SALOON:
-                navigation.navigate(Routes.Signin,{type:text})
+                dispatch(userType('saloon'))
+                navigation.navigate(Routes.Signin, { type: text })
                 break;
             case TextConstant.FOR_USER:
-                navigation.navigate(Routes.Signin,{type:text})
+                dispatch(userType('user'))
+                navigation.navigate(Routes.Signin, { type: text })
                 break;
             default:
                 break;
@@ -39,7 +44,7 @@ const ChooseType = ({ navigation }) => {
             <Image source={Images.SALOON_TYPES} style={Styles.sallonTypeImage} />
             <View style={Styles.saloonTypes}>
                 <SaloonType color="white" level={TextConstant.FOR_SALOON} image={Images.SALOON_TYPE} onClick={onClick} />
-                <SaloonType  color="white"level={TextConstant.FOR_USER} image={Images.USER_TYPE} onClick={onClick} />
+                <SaloonType color="white" level={TextConstant.FOR_USER} image={Images.USER_TYPE} onClick={onClick} />
             </View>
         </SafeAreaView>
     )
