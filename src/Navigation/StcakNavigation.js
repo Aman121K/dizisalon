@@ -62,6 +62,8 @@ import AddUnisexServices from "../Screens/Barber/ListNow/AddUnisexServices";
 import BarberEditPage from "../Screens/Barber/BarberEditPage";
 import SaloonMySaloonPage from "../Screens/Barber/SaloonMySaloonPage";
 import SaloonSales from "../Screens/Barber/SaloonSales";
+import AtricalDetails from "../Screens/Barber/ArticalDetails";
+import UserSignup from "../Screens/Auth/UserSignup";
 const Stack = createNativeStackNavigator();
 const StackNavigation = () => {
     return (
@@ -127,6 +129,8 @@ const StackNavigation = () => {
             <Stack.Screen name={Routes.BarberEditPage} component={BarberEditPage} options={{ headerShown: false }} />
             <Stack.Screen name={Routes.SaloonMySaloonPage} component={SaloonMySaloonPage} options={{ headerShown: false }} />
             <Stack.Screen name={Routes.SaloonSales} component={SaloonSales} options={{ headerShown: false }} />
+            <Stack.Screen name={Routes.AtricalDetails} component={AtricalDetails} options={{headerShown:false}}/>
+            <Stack.Screen name={Routes.UserSignup} component={UserSignup} options={{headerShown:false}}/>
         </Stack.Navigator>
     )
 }

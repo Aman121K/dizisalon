@@ -1,5 +1,5 @@
 export const TextConstant = {
-    SplashText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    SplashText: 'At Dizi Salon, we believe that beauty is an art form, and each individual is a masterpiece waiting to be unveiled. Our passion for creativity and innovation drives us to deliver personalized services that accentuate your unique features and let your inner beauty shine.',
     WELCOME_1_DESC: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     WELCOME_2_DESC: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     WELCOME_3_DESC: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
@@ -24,6 +24,7 @@ export const TextConstant = {
     SignUp_placeholder_two: "e.g., DiZi Salon",
     signUp_label_three: "Phone Number*",
     signUp_label_five: "E-Mail Address*",
+    Signup_address:'Address',
     create_pin_heading: "Create MPIN",
     create_pin_subheading: "Greeting From DiZi Salon!",
     create_pin_label_one: "New MPIN",

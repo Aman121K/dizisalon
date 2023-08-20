@@ -10,6 +10,7 @@ import SearchNearSaloon from "../../../Components/SearchNearSaloon";
 import UserAdsContainer from "../../../Components/UserAdsContainer";
 import LocationBottomSheet from "../../../Components/LocationBottomSheet";
 import RBSheet from "react-native-raw-bottom-sheet";
+import Geolocation from '@react-native-community/geolocation';
 const { width } = Dimensions.get('window');
 const itemWidth = 50;
 const style = StyleSheet.create({
@@ -93,6 +94,9 @@ const UserHome = ({ navigation }) => {
     const clikOnLocation = () => {
         refRBSheet.current.open()
     }
+    const getOnlineLocationData=()=>{
+
+    }
     return (
         <SafeAreaView>
             <UserHeader />
@@ -139,7 +143,7 @@ const UserHome = ({ navigation }) => {
 
                 }}
             >
-                <LocationBottomSheet navigation={navigation} cancelButtonClick={cancelButtonClick} />
+                <LocationBottomSheet navigation={navigation} getOnlineLocationData={getOnlineLocationData} cancelButtonClick={cancelButtonClick} />
             </RBSheet>
 
 

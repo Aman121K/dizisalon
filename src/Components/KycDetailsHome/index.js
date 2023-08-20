@@ -7,6 +7,7 @@ import { FONTS } from "../../Constant/fonts";
 import ButtonBlue from "../Button_Blue";
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 import { Routes } from "../../Constant/Routes";
+import KycStepper from "../KycStepper.js";
 const styles = StyleSheet.create({
     mainConatiner: {
         backgroundColor: '#FFFFFF',
@@ -49,7 +50,10 @@ const KycDetailsHome = ({ navigation }) => {
                     <Text style={styles.knowText}>{TextConstant.KNOW_MORE}</Text>
                 </TouchableOpacity>
             </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: scaleHeight(15) }}>
+            <View style={{marginVertical:20}}>
+                <KycStepper />
+            </View>
+            {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: scaleHeight(15) }}>
                 <View>
                     <Text style={styles.kyctest}>Fill KYC</Text>
                     <View style={{ backgroundColor: '#022A6D', borderWidth: 5, borderRadius: 99, width: 10, margin: 10 }}></View>
@@ -66,7 +70,7 @@ const KycDetailsHome = ({ navigation }) => {
                     <Text style={styles.kyctest}>Take Orders</Text>
                     <View style={{ backgroundColor: '#022A6D', borderWidth: 5, borderRadius: 99, width: 10, margin: 15 }}></View>
                 </View>
-            </View>
+            </View> */}
             {/* <ProgressSteps>
                 <ProgressStep label="First Step">
                     <View style={{ alignItems: 'center' }}>

@@ -12,6 +12,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { TabContext } from "../../../Context/TabProvider";
 import { normalize, scaleHeight, scaleWidth } from "../../../Constant/DynamicSize";
 import { loginApi } from "../../../redux/action";
+import { Apis, BASE_URL } from "../../../Constant/APisUrl";
+import { LOGIN_API } from "../../../redux/Constant";
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
@@ -55,30 +57,69 @@ const Signin = ({ navigation, route }) => {
     const data = useSelector((state) => state.reducer)
     console.log("on sgnin redux>>", data)
     const type = route?.params?.type;
-
+    const [loginData, setlogindata] = React.useState({})
     const [mobile, setMobile] = React.useState();
-    const [mpin, setMpin] = React.useState();
+    const [pin, setPin] = React.useState();
     const goToSignup = () => {
-        navigation.navigate(Routes.Signup)
+        console.log("Signup page ", route)
+        switch (route?.type) {
+            case 'saloon':
+                navigation.navigate(Routes.Signup)
+                break;
+            case 'For User':
+                navigation.navigate(Routes.UserSignup)
+                break;
+            default:
+                navigation.navigate(Routes.UserSignup)
+                break;
+        }
     }
     const goToforgotScreen = () => {
         navigation.navigate(Routes.CreatePin)
     }
-    const onChnageText = (Items) => {
-        console.log("Items>>", Items)
+    const onChnageText = (name, e) => {
+        console.log("vika", name, e)
+        switch (name) {
+            case 'phone':
+                setMobile(e);
+                console.log('phone')
+                break;
+            case 'pin':
+                setPin(e);
+                console.log('pin')
+                break;
+            default:
+                break;
+        }
     }
     const TabTypesValues = React.useContext(TabContext);
-
-    const onSigninClick = () => {
-        console.log("vika", type)
-        dispatch(loginApi())
-        if (type === 'For Salon') {
-            TabTypesValues.setBottomType(type)
-            navigation.navigate('BarberBottoNavigation', { type: type })
-        } else {
-            TabTypesValues.setBottomType(type)
-            navigation.navigate('UserBottomNavigtion', { type: type })
+    const onSigninClick = async () => {
+        let body = {
+            mobile: mobile,
+            pin: pin
         }
+        console.log("body is>", body)
+        try {
+            const response = await fetch(BASE_URL + Apis.LOGIN_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(body), // Replace with your data
+            });
+
+            const data = await response.json();
+            console.log("response is>>", data)
+        } catch (error) {
+            console.error('Error:', error);
+        }
+        // if (type === 'For Salon') {
+        //     TabTypesValues.setBottomType(type)
+        //     navigation.navigate('BarberBottoNavigation', { type: type })
+        // } else {
+        //     TabTypesValues.setBottomType(type)
+        //     navigation.navigate('UserBottomNavigtion', { type: type })
+        // }
     }
     return (
         <SafeAreaView>
@@ -91,8 +132,20 @@ const Signin = ({ navigation, route }) => {
                         <Text style={StylesContants.auth_screen_subHeading}>{TextConstant.SignIn_subHeading}</Text>
                     </View>
                     <View>
-                        <InputBoxComponent value={mobile} onChnageText={onChnageText} label={TextConstant.SignIn_label_one} placeholder={TextConstant.SignIn_placeholder_one} keyboardType="numeric" />
-                        <InputBoxComponent value={mpin} onChnageText={onChnageText} label={TextConstant.SignIn_label_two} placeholder={TextConstant.SignIn_placeholder_two} />
+                        <InputBoxComponent limit={10}
+                            name="phone"
+                            onChnageText={onChnageText}
+                            value={loginData?.mobile} label={TextConstant.SignIn_label_one}
+                            placeholder={TextConstant.SignIn_placeholder_one}
+                            keyboardType="numeric" />
+                        <InputBoxComponent
+                            limit={4}
+                            name="pin"
+                            onChnageText={onChnageText}
+                            value={loginData?.mpin}
+                            label={TextConstant.SignIn_label_two}
+                            placeholder={TextConstant.SignIn_placeholder_two}
+                            keyboardType="numeric" />
                     </View>
                     <ButtonBlue buttonText="Sign In" onClick={onSigninClick} />
                     <View style={styles.bottom_info_text}>

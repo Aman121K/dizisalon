@@ -51,7 +51,7 @@ const style = StyleSheet.create({
     }
 
 })
-const LocationBottomSheet = ({ cancelButtonClick,navigation }) => {
+const LocationBottomSheet = ({ cancelButtonClick,navigation,getOnlineLocationData }) => {
     return (
         <ScrollView >
             <View style={style.mainSubConatiner}>
@@ -67,7 +67,7 @@ const LocationBottomSheet = ({ cancelButtonClick,navigation }) => {
                     <Text style={style.title}>{TextConstant.LOCATION_TITLE}</Text>
                     <Text style={style.subTitle}>{TextConstant.LOCATION_SUB_TITLE}</Text>
                 </View>
-                <TouchableOpacity style={style.locationButt}>
+                <TouchableOpacity style={style.locationButt} onPress={getOnlineLocationData}>
                     <Text style={style.detectext}>{TextConstant.DETECT_LOCATION}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={style.locationWhiteButt} onPress={()=>navigation.navigate(Routes.UserLocationMap)}>

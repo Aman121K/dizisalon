@@ -8,7 +8,8 @@ const style = StyleSheet.create({
         marginHorizontal: scaleWidth(12),
         padding: scaleHeight(Platform.OS === 'android' ? 3 : 10),
         borderRadius: scaleHeight(10),
-        marginTop: scaleHeight(15)
+        marginTop: scaleHeight(15),
+        height:45
     },
     InputStyle1: {
         width: scaleWidth(120)

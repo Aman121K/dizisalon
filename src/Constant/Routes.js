@@ -66,7 +66,9 @@ export const Routes = {
     AddUnisexServices: 'AddUnisexServices',
     BarberEditPage: 'BarberEditPage',
     SaloonMySaloonPage:'SaloonMySaloonPage',
-    SaloonSales:'SaloonSales'
+    SaloonSales:'SaloonSales',
+    AtricalDetails:'AtricalDetails',
+    UserSignup:'UserSignup'
 
 
 }

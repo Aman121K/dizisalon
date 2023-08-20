@@ -36,7 +36,7 @@ const SaloonEditProfile = ({ navigation }) => {
                         <Text style={styles.editText}>Edit</Text>
                     </TouchableOpacity>
                 </View>
-
+{/* 
                 <View style={styles.notificationOption}>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <Text style={styles.notificationOptionText}>Services</Text>
@@ -54,7 +54,7 @@ const SaloonEditProfile = ({ navigation }) => {
                     <TouchableOpacity onPress={() => navigation.navigate(Routes.EditSaloonDetails)}>
                         <Text style={styles.editText}>Edit</Text>
                     </TouchableOpacity>
-                </View>
+                </View> */}
             </View>
         </SafeAreaView>
     );

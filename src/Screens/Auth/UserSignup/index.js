@@ -1,3 +1,12 @@
+// import React from "react";
+// import {} from 'react-native';
+// const UserSignup=()=>{
+//     return(
+
+//     )
+// }
+// export default UserSignup;
+
 import React, { memo } from "react";
 import {
     View,
@@ -20,6 +29,8 @@ import { normalize, scaleHeight, scaleWidth } from "../../../Constant/DynamicSiz
 import { FONTS } from "../../../Constant/fonts";
 import { Routes } from "../../../Constant/Routes";
 import { Apis, BASE_URL } from "../../../Constant/APisUrl";
+import InnerTexttInput from "../../../Components/InnerTextInput";
+import DropDownPicker from "react-native-dropdown-picker";
 const styles = StyleSheet.create({
     mainContainer: {
         width: '95%',
@@ -74,7 +85,13 @@ const styles = StyleSheet.create({
         // borderBottomWidth: 1,
     },
 })
-const Signup = ({ navigation }) => {
+const UserSignup = ({ navigation }) => {
+    const [selectedItem, setSelectedItem] = React.useState(null);
+    const items = [
+        { label: 'Male', value: 'Male' },
+        { label: 'Female', value: 'Female' },
+        { label: 'Transgender', value: 'Transgender' },
+    ];
     const [userdata, setUserdata] = React.useState({
         signupFor: "user", // user and salon
         fullname: "amit", // for user
@@ -98,6 +115,12 @@ const Signup = ({ navigation }) => {
     const [mobile, setMobile] = React.useState();
     const [otp, setOtp] = React.useState();
     const [email, setEmail] = React.useState();
+    const [Address, setAddress] = React.useState();
+    const [state, setState] = React.useState();
+    const [city, setCity] = React.useState();
+    const [zipcode, setZipCode] = React.useState();
+    const [sex, setSex] = React.useState();
+    const [dob, setDob] = React.useState();
     const onSignupClick = async () => {
         let body = {
             signupFor: "saloon", // user and salon
@@ -192,16 +215,69 @@ const Signup = ({ navigation }) => {
                         label={TextConstant.signUp_label_five}
                         placeholder={TextConstant.signUp_label_five}
                     />
-                    <ButtonBlue
-                        onClick={onSignupClick}
-                        buttonText="Sign Up"
-                        btnStyle={{ backgroundColor: "#022A6D", height: 48, borderRadius: 12, alignItems: "center" }}
+                    <InputBoxComponent
+                        name="Address"
+                        onChnageText={onChangeText}
+                        label={TextConstant.Signup_address}
+                        placeholder={TextConstant.Signup_address}
                     />
+                    <InnerTexttInput
+                        placeholderText="State *"
+                        value={state}
+                        onChange={onChangeText}
+
+                    />
+                    <View style={{ flexDirection: 'row' }}>
+                        <InnerTexttInput
+                            placeholderText="city *"
+                            value={state}
+                            onChange={onChangeText}
+                            width={20}
+
+                        />
+                        <InnerTexttInput
+                            placeholderText="zipcode *"
+                            value={state}
+                            onChange={onChangeText}
+                            width={20}
+                        />
+                    </View>
+
                 </View>
                 <View>
+                </View>
+                <View style={{ flexDirection: 'row', alignItems: 'center',marginLeft:scaleWidth(10) }}>
+                    <View>
+                        <Text>Gender</Text>
+                        <DropDownPicker
+                            items={items}
+                            defaultValue={null}
+                            containerStyle={{ height: 10, marginTop: 10, width: 180 }}
+                            itemStyle={{
+                                justifyContent: 'flex-start'
+                            }}
+                            dropDownStyle={{ backgroundColor: '#fafafa' }}
+                            onChangeItem={(item) => setSelectedItem(item.value)}
+                        />
+                    </View>
+                    <View style={{top:scaleHeight(30)}}>
+                        <InnerTexttInput
+                            placeholderText="DD/MM/YYYY *"
+                            value={state}
+                            onChange={onChangeText}
+                            width={20}
+                        />
+                    </View>
+                </View>
+                <View style={{marginTop:scaleHeight(40),alignSelf:'center'}}>
+                <ButtonBlue
+                    onClick={onSignupClick}
+                    buttonText="Next"
+                    btnStyle={{ backgroundColor: "#022A6D", height: 48, borderRadius: 12, alignItems: "center" }}
+                />
                 </View>
             </ScrollView>
         </SafeAreaView>
     )
 }
-export default Signup;
+export default UserSignup;
