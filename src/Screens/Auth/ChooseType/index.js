@@ -44,7 +44,7 @@ const ChooseType = ({ navigation }) => {
             <Image source={Images.SALOON_TYPES} style={Styles.sallonTypeImage} />
             <View style={Styles.saloonTypes}>
                 <SaloonType color="white" level={TextConstant.FOR_SALOON} image={Images.SALOON_TYPE} onClick={onClick} />
-                <SaloonType color="white" level={TextConstant.FOR_USER} image={Images.USER_TYPE} onClick={onClick} />
+                {/* <SaloonType color="white" level={TextConstant.FOR_USER} image={Images.USER_TYPE} onClick={onClick} /> */}
             </View>
         </SafeAreaView>
     )

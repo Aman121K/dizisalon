@@ -24,12 +24,47 @@ const style = StyleSheet.create({
     }
 })
 const SaloonChangePassword = ({ navigation }) => {
-    const [userDetails, setUserDetails] = React.useState({
-        password: '',
-        confirmPassword: ''
-    })
-    const onChnageText = () => {
-
+    const [password, setPassword] = React.useState();
+    const [confirmPassword, setConfirmpassword] = React.useState();
+    const onChnageText = (e, name) => {
+        console.log("e>>", e, name);
+        switch (name) {
+            case 'password':
+                setPassword(e)
+                break;
+            case 'confirmPassword':
+                setConfirmpassword(e)
+                break;
+            default:
+                break;
+        }
+    }
+    const onClick = async() => {
+        let body = {
+            pin: confirmPin
+        }
+        console.log("body is>", body)
+        try {
+            const response = await fetch(BASE_URL + Apis.CREATE_MPIN, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': token
+                },
+                body: JSON.stringify(body), 
+            });
+            const data = await response.json();
+            console.log("Create pin data>>", data)
+            if (data?.message) {
+                navigation.navigate(Routes.Signin)
+                Toast.show(data?.message);
+            } else {
+                clearAllState()
+                Toast.show(data?.error)
+            }
+        } catch (error) {
+            Toast.show(error);
+        }
     }
     return (
         <SafeAreaView>
@@ -37,11 +72,21 @@ const SaloonChangePassword = ({ navigation }) => {
             <View style={style.container}>
                 <Text style={[style.BothText, { textAlign: 'center', marginHorizontal: scaleWidth(30) }]}>Your new password must be different
                     from previous used passwords.</Text>
-                <InputBoxComponent label="Password" placeholder="*********" value={userDetails.password} onChnageText={onChnageText} />
-                <InputBoxComponent label="Confirm Password" placeholder="************" value={userDetails.confirmPassword} onChnageText={onChnageText} />
+                <InputBoxComponent
+                    label="Password"
+                    name="password"
+                    placeholder="*********"
+                    value={userDetails.password}
+                    onChnageText={onChnageText} />
+                <InputBoxComponent
+                    label="Confirm Password"
+                    name="confirmPassword"
+                    placeholder="************"
+                    value={userDetails.confirmPassword}
+                    onChnageText={onChnageText} />
                 <Text style={style.BothText}>Both password must match.</Text>
                 <View style={style.buttonConatiner}>
-                    <ButtonBlue buttonText="Reset Password" />
+                    <ButtonBlue buttonText="Reset Password" onClick={onClick} />
                 </View>
             </View>
         </SafeAreaView>

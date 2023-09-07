@@ -9,21 +9,33 @@ const style = StyleSheet.create({
         padding: scaleHeight(Platform.OS === 'android' ? 3 : 10),
         borderRadius: scaleHeight(10),
         marginTop: scaleHeight(15),
-        height:45
+        height: 45
     },
     InputStyle1: {
         width: scaleWidth(120)
     },
-    InputStyle:{
+    InputStyle: {
 
     }
 })
-const InnerTexttInput = ({ placeholderText, value, onChange, width }) => {
+const InnerTexttInput = ({ placeholderText, value, onChange, width, keyboardType,limit,name }) => {
     return (
         <View style={style.mainConatiner}>
             {width ?
-                <TextInput style={style.InputStyle1} placeholder={placeholderText} onChangeText={onChange} value={value} /> :
-                <TextInput style={style.InputStyle} placeholder={placeholderText} onChangeText={onChange} value={value} />}
+                <TextInput
+                    style={style.InputStyle1}
+                    placeholder={placeholderText}
+                    onChangeText={(e)=>onChange(e,name)}
+                    value={value}
+                    keyboardType={keyboardType ? keyboardType : 'default'}
+                /> :
+                <TextInput
+                    style={style.InputStyle}
+                    placeholder={placeholderText}
+                    onChangeText={(e)=>onChange(e,name)}
+                    value={value}
+                    keyboardType={keyboardType ? keyboardType : 'default'}
+                />}
         </View>
     )
 }

@@ -30,7 +30,7 @@ export const TextConstant = {
     create_pin_label_one: "New MPIN",
     create_pin_label_two: "Confirm MPIN",
     Phone_number: 'Phone Number*',
-    OTP_NUMBER: 'OTP',
+    OTP_NUMBER: 'Fill OTP that come in your phone',
     KYC_MAIN_TEXT: 'Let’s do KYC and List your Salon',
     KNOW_MORE: 'Know More',
     LIST_NOW: 'List Now',

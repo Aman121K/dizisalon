@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Dimensions, FlatList, Image, Platform, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import UserHeader from "../../../Components/UserHeader";
 import LocationConatiner from "../../../Components/LocationConatiner";
@@ -11,6 +11,7 @@ import UserAdsContainer from "../../../Components/UserAdsContainer";
 import LocationBottomSheet from "../../../Components/LocationBottomSheet";
 import RBSheet from "react-native-raw-bottom-sheet";
 import Geolocation from '@react-native-community/geolocation';
+import { check, PERMISSIONS, RESULTS, request } from 'react-native-permissions';
 const { width } = Dimensions.get('window');
 const itemWidth = 50;
 const style = StyleSheet.create({
@@ -53,6 +54,46 @@ const style = StyleSheet.create({
 })
 const UserHome = ({ navigation }) => {
     const refRBSheet = React.useRef();
+    const [location, setLocation] = React.useState(null);
+    const [permissionStatus, setPermissionStatus] = useState(null);
+
+  useEffect(() => {
+    checkPermission();
+  }, []);
+
+  const checkPermission = async () => {
+    const status = await check(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE);
+
+    if (status === RESULTS.GRANTED) {
+      setPermissionStatus('granted');
+    } else {
+      requestPermission();
+    }
+  };
+
+  const requestPermission = async () => {
+    const status = await request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE);
+    setPermissionStatus(status);
+  };
+
+    React.useEffect(() => {
+      getCurrentLocation();
+    }, []);
+  
+    const getCurrentLocation = () => {
+      Geolocation.getCurrentPosition(
+        position => {
+            
+          const { latitude, longitude } = position.coords;
+          console.log("lat>>", latitude, longitude)
+          setLocation({ latitude, longitude });
+        },
+        error => {
+          console.error(error);
+        },
+        { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+      );
+    };
     const openCategory = () => {
     }
     const [categoryList, setCategoryList] = React.useState([
@@ -101,7 +142,7 @@ const UserHome = ({ navigation }) => {
         <SafeAreaView>
             <UserHeader />
             <View style={style.locationConainer}>
-                <LocationConatiner locationClick={clikOnLocation} />
+                <LocationConatiner loationDetails={location} locationClick={clikOnLocation} />
             </View>
             <View style={style.categoriesConatiner}>
                 <Text style={style.categoryText}>{TextConstant.CATEGORIES}</Text>

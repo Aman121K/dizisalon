@@ -8,6 +8,7 @@ import ButtonBlue from '../../../Components/Button_Blue';
 import { Routes } from '../../../Constant/Routes';
 import ModalConatiner from '../../../Components/ModalComponent';
 import ConfirmModal from '../../../Components/ModalComponent/ConfirmModal';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const style = StyleSheet.create({
     mainConatiner: {
         backgroundColor: '#022A6D',
@@ -128,6 +129,17 @@ const data = [
     }
 ]
 const BarberProfileDetails = ({ navigation }) => {
+    const [loginData, setLoginData] = React.useState();
+    React.useLayoutEffect(() => {
+        getLoginData()
+    }, [])
+    const getLoginData = async () => {
+        let data = await AsyncStorage.getItem('loginData');
+        console.log("data>>",data)
+        if (data) {
+            setLoginData(JSON.parse(data))
+        }
+    }
     const [showModalVisible, setShowModalVisisble] = React.useState(false)
     const onClick = () => {
         navigation.navigate(Routes.Signin)
@@ -176,23 +188,23 @@ const BarberProfileDetails = ({ navigation }) => {
             <ScrollView style={style.scrollConatiner}>
                 <View style={style.nameConatiner}>
                     <Text style={style.titleStyle}>Name</Text>
-                    <Text style={style.valueStyle}>Abc Tiwari</Text>
+                    <Text style={style.valueStyle}>{loginData?.salonOwnerName}</Text>
                 </View>
                 <View style={style.nameConatiner}>
                     <Text style={style.titleStyle}>Salon Name</Text>
-                    <Text style={style.valueStyle}>Anny Jhonson</Text>
+                    <Text style={style.valueStyle}>{loginData?.salonName}</Text>
                 </View>
                 <View style={style.nameConatiner}>
                     <Text style={style.titleStyle}>Contact Email</Text>
-                    <Text style={style.valueStyle}>abc@gmail.cpm</Text>
+                    <Text style={style.valueStyle}>{loginData?.email}</Text>
                 </View>
                 <View style={style.nameConatiner}>
                     <Text style={style.titleStyle}>Contact Phone</Text>
-                    <Text style={style.valueStyle}>9090909090</Text>
+                    <Text style={style.valueStyle}>{loginData?.phone}</Text>
                 </View>
                 <View style={style.nameConatiner}>
                     <Text style={style.titleStyle}>Your Addresss</Text>
-                    <Text style={style.valueStyle}>768 gold city, kokandw kwa</Text>
+                    <Text style={style.valueStyle}>{loginData?.address} {loginData?.country}, {loginData?.state}</Text>
                 </View>
                 <View style={style.nameConatiner}>
                     <Text style={style.titleStyle}>Profile</Text>

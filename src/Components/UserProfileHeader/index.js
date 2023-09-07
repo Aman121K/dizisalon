@@ -54,7 +54,7 @@ const style = StyleSheet.create({
         marginTop:scaleHeight(7)
     }
 })
-const UserProfileHeader = ({onEditButtonClick}) => {
+const UserProfileHeader = ({onEditButtonClick,data}) => {
     return (
         <View style={style.mainConatiner}>
             <View style={style.subMainContainer}>
@@ -69,9 +69,9 @@ const UserProfileHeader = ({onEditButtonClick}) => {
             </View>
             <View style={style.userDetailsConatiner}>
                 <Image style={style.loginImage} source={Images.LOGIN_USER_IMAGE} />
-                <Text style={style.nameStyle}>Name</Text>
-                <Text style={style.nameStyle}>abcd6523@gmail.com</Text>
-                <Text style={style.nameStyle}>Noida</Text>
+                <Text style={style.nameStyle}>{data?.salonOwnerName}</Text>
+                <Text style={style.nameStyle}>{data?.email}</Text>
+                <Text style={style.nameStyle}>{data?.address ||'Noida'}</Text>
             </View>
         </View>
     )

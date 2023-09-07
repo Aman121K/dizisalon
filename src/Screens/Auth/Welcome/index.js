@@ -69,7 +69,7 @@ export default class App extends React.Component {
         );
     };
     onDone = () => {
-        this.props.navigation.navigate(Routes.ChooseType)
+        this.props.navigation.navigate(Routes.Signin)
     }
     render() {
         return (

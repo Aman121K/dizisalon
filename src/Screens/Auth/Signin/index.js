@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text, Image, SafeAreaView, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, Image, SafeAreaView, ScrollView, Alert } from 'react-native';
 import InputBoxComponent from "../../../Components/InputBoxComponent";
 import AuthHeader from "../../../Components/AuthHeader";
 import { TextConstant } from "../../../Constant/TextConstant";
@@ -14,6 +14,8 @@ import { normalize, scaleHeight, scaleWidth } from "../../../Constant/DynamicSiz
 import { loginApi } from "../../../redux/action";
 import { Apis, BASE_URL } from "../../../Constant/APisUrl";
 import { LOGIN_API } from "../../../redux/Constant";
+import Toast from 'react-native-simple-toast';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
@@ -26,7 +28,7 @@ const styles = StyleSheet.create({
     bottom_info_text: {
         flexDirection: "row",
         justifyContent: "space-between",
-        marginTop: 8
+        marginTop: scaleHeight(20)
     },
     left_side: {
         flexDirection: "row",
@@ -61,31 +63,19 @@ const Signin = ({ navigation, route }) => {
     const [mobile, setMobile] = React.useState();
     const [pin, setPin] = React.useState();
     const goToSignup = () => {
-        console.log("Signup page ", route)
-        switch (route?.type) {
-            case 'saloon':
-                navigation.navigate(Routes.Signup)
-                break;
-            case 'For User':
-                navigation.navigate(Routes.UserSignup)
-                break;
-            default:
-                navigation.navigate(Routes.UserSignup)
-                break;
-        }
+        navigation.navigate(Routes.Signup)
     }
     const goToforgotScreen = () => {
         navigation.navigate(Routes.CreatePin)
     }
     const onChnageText = (name, e) => {
-        console.log("vika", name, e)
-        switch (name) {
+        switch (e) {
             case 'phone':
-                setMobile(e);
+                setMobile(name);
                 console.log('phone')
                 break;
             case 'pin':
-                setPin(e);
+                setPin(name);
                 console.log('pin')
                 break;
             default:
@@ -94,32 +84,42 @@ const Signin = ({ navigation, route }) => {
     }
     const TabTypesValues = React.useContext(TabContext);
     const onSigninClick = async () => {
-        let body = {
-            mobile: mobile,
-            pin: pin
+        if (!mobile && !pin) {
+            Alert.alert('Please Fill all the column')
         }
-        console.log("body is>", body)
-        try {
-            const response = await fetch(BASE_URL + Apis.LOGIN_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(body), // Replace with your data
-            });
-
-            const data = await response.json();
-            console.log("response is>>", data)
-        } catch (error) {
-            console.error('Error:', error);
+        else {
+            let body = {
+                phone: mobile,
+                pin: pin
+            }
+            console.log("body>>", body)
+            try {
+                const response = await fetch(BASE_URL + Apis.LOGIN_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(body),
+                });
+                const data = await response.json();
+                console.log("login data>>", data)
+                if (data?.message) {
+                    await AsyncStorage.setItem('token', data?.token);
+                    await AsyncStorage.setItem('loginData', JSON.stringify(data?.data));
+                    Toast.show(data?.message);
+                    if (data?.data?.role === 2) {
+                        navigation.navigate('BarberBottoNavigation')
+                    } else {
+                        navigation.navigate('UserBottomNavigtion')
+                    }
+                } else {
+                    Toast.show(data?.error)
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                Toast.show(error);
+            }
         }
-        // if (type === 'For Salon') {
-        //     TabTypesValues.setBottomType(type)
-        //     navigation.navigate('BarberBottoNavigation', { type: type })
-        // } else {
-        //     TabTypesValues.setBottomType(type)
-        //     navigation.navigate('UserBottomNavigtion', { type: type })
-        // }
     }
     return (
         <SafeAreaView>

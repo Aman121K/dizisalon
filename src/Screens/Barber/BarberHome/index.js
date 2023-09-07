@@ -9,6 +9,7 @@ import { FONTS } from "../../../Constant/fonts";
 import KycDetailsHome from "../../../Components/KycDetailsHome";
 import { Routes } from "../../../Constant/Routes";
 import SaloonDetailsHome from "../../../Components/SaloonDetailsHome";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const styles = StyleSheet.create({
     homeConatiner: {
         // flex: 1
@@ -55,6 +56,9 @@ const styles = StyleSheet.create({
 
 })
 const BarberHome = ({ navigation }) => {
+    const [loginData, setLoginData] = React.useState();
+    const [stylesLits,setStylesList]=React.useState([]);
+    const [articalsList,setArticals]=React.useState([])
     const [crausalData, setCrasualData] = React.useState([
         {
             title: 'First'
@@ -73,7 +77,26 @@ const BarberHome = ({ navigation }) => {
         }
     ])
     const [showDashboard, setShowDashboard] = React.useState(false);
+    React.useLayoutEffect(() => {
+        // getLoginData()
+    }, [])
+    React.useEffect(()=>{
+        getLoginData();
+        getStylesList();
+        getArticlesList();
+    },[])
+    const getStylesList=()=>{
 
+    }
+    const getArticlesList=()=>{
+        
+    }
+    const getLoginData = async () => {
+        let data = await AsyncStorage.getItem('loginData');
+        if (data) {
+           setLoginData(JSON.parse(data))
+        }
+    }
     const gotoListPage = () => {
         navigation.navigate(Routes.TrendingList)
     }
@@ -90,7 +113,7 @@ const BarberHome = ({ navigation }) => {
                 <BarberHeader />
                 <View style={styles.homDesign}>
                     <Text style={{ fontSize: normalize(20), fontFamily: FONTS.MontserratBold }}>Hi,
-                        <Text> Abc</Text>
+                        <Text>{loginData?.salonOwnerName}</Text>
                     </Text>
                     <View style={styles.crausalConatiner}>
                         <Crasual entries={crausalData} />

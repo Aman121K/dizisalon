@@ -5,6 +5,7 @@ import { Images } from "../../../Constant/Images";
 import { normalize, scaleHeight, scaleWidth } from "../../../Constant/DynamicSize";
 import { FONTS } from "../../../Constant/fonts";
 import { Routes } from "../../../Constant/Routes";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const style = StyleSheet.create({
     dataContainer: {
         backgroundColor: 'white',
@@ -31,6 +32,7 @@ const style = StyleSheet.create({
     }
 })
 const BarberProfile = ({ navigation }) => {
+    const [loginUserData,setLoginUserData]=React.useState();
     const [loginData, setLoginData] = React.useState([
         { title: 'My Salon', Image: Images.BOTTOM_BOOKING },
         { title: 'Customer Lists', Image: Images.BOTTOM_BOOKING },
@@ -44,6 +46,15 @@ const BarberProfile = ({ navigation }) => {
         { title: 'Log out', Image: Images.BOTTOM_BOOKING },
 
     ])
+    React.useLayoutEffect(()=>{
+        getLoginData()
+    },[])
+    const getLoginData=async()=>{
+        let data=await AsyncStorage.getItem('loginData');
+        if(data){
+            setLoginUserData(JSON.parse(data));
+        }
+    }
     const gotoPage = (item) => {
         console.log(item)
         switch (item) {
@@ -94,7 +105,7 @@ const BarberProfile = ({ navigation }) => {
     }
     return (
         <SafeAreaView style={style.profileConatiner}>
-            <UserProfileHeader naigation={navigation} onEditButtonClick={onEditClick} />
+            <UserProfileHeader data={loginUserData} naigation={navigation} onEditButtonClick={onEditClick} />
             <View style={style.listConatinet}>
                 <FlatList
                     data={loginData}

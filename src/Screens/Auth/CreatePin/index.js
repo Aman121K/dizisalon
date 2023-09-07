@@ -9,6 +9,8 @@ import ButtonBlue from "../../../Components/Button_Blue";
 import { scaleHeight, scaleWidth } from "../../../Constant/DynamicSize";
 import { Routes } from "../../../Constant/Routes";
 import { Apis, BASE_URL } from "../../../Constant/APisUrl";
+import Toast from 'react-native-simple-toast';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const styles = StyleSheet.create({
     mainContainer: {
         marginHorizontal: scaleWidth(10),
@@ -16,32 +18,57 @@ const styles = StyleSheet.create({
     },
 })
 const CreatePin = ({ navigation }) => {
-    const [createPin,setCreatePin]=React.useState();
-    const [confirmPin,setConfirmPin]=React.useState();
-    const onButtonClick = async() => {
-        if(createPin===confirmPin){
+    const [createPin, setCreatePin] = React.useState();
+    const [confirmPin, setConfirmPin] = React.useState();
+    const [token, setToken] = React.useState();
+    React.useLayoutEffect(() => {
+        getToken()
+    }, [])
+    const getToken = async () => {
+        let token = await AsyncStorage.getItem('token');
+        console.log("Token is>>", token)
+        if (token) {
+            setToken(token)
+        }
+    }
+    const clearAllState = () => {
+        setCreatePin('')
+        setConfirmPin('');
+    }
+    const onButtonClick = async () => {
         let body = {
             pin: confirmPin
         }
         console.log("body is>", body)
         try {
             const response = await fetch(BASE_URL + Apis.CREATE_MPIN, {
-                method: 'POST',
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': token
                 },
-                body: JSON.stringify(body), // Replace with your data
+                body: JSON.stringify(body), 
             });
-
             const data = await response.json();
-            console.log("response create pin is>>", data)
+            console.log("Create pin data>>", data)
+            if (data?.message) {
+                navigation.navigate(Routes.Signin)
+                Toast.show(data?.message);
+            } else {
+                clearAllState()
+                Toast.show(data?.error)
+            }
         } catch (error) {
-            console.error('Error:', error);
+            Toast.show(error);
         }
-        navigation.navigate('UserBottomNavigtion')
-    }else{
-        Alert.alert("Both Pin is not same")
     }
+    const onChnageText = (e, name) => {
+        console.log("name,e>", name)
+        if (name === 'createPin') {
+            setCreatePin(e)
+        } else {
+            setConfirmPin(e)
+        }
     }
     return (
         <SafeAreaView>
@@ -54,17 +81,31 @@ const CreatePin = ({ navigation }) => {
                 <View>
                     <InputBoxComponent
                         label={TextConstant.create_pin_label_one}
-                        placeholder={TextConstant.create_pin_label_one} secure={true}
+                        name="createPin"
+                        value={createPin}
+                        keyboardType="numeric"
+                        onChnageText={onChnageText}
+                        placeholder={TextConstant.create_pin_label_one}
+                        secure={true}
                     />
                     <InputBoxComponent
+                        name="confirmPin"
+                        value={confirmPin}
+                        keyboardType="numeric"
+                        onChnageText={onChnageText}
                         label={TextConstant.create_pin_label_two}
                         placeholder={TextConstant.create_pin_label_one}
-                        secure={true} />
+                        secure={true}
+                    />
                 </View>
                 <ButtonBlue
                     onClick={onButtonClick}
                     buttonText="Continue"
-                    btnStyle={{ backgroundColor: "#022A6D", height: 48, borderRadius: 12, alignItems: "center" }}
+                    btnStyle={{ 
+                    backgroundColor: "#022A6D", 
+                    height: 48, 
+                    borderRadius: 12, 
+                    alignItems: "center" }}
                 />
             </View>
             <View>

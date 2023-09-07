@@ -8,6 +8,7 @@ import {
     SafeAreaView,
     ScrollView,
     TouchableOpacity,
+    Alert,
 } from 'react-native';
 import AuthHeader from "../../../Components/AuthHeader";
 import InputBoxComponent from "../../../Components/InputBoxComponent";
@@ -20,6 +21,9 @@ import { normalize, scaleHeight, scaleWidth } from "../../../Constant/DynamicSiz
 import { FONTS } from "../../../Constant/fonts";
 import { Routes } from "../../../Constant/Routes";
 import { Apis, BASE_URL } from "../../../Constant/APisUrl";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+// import { Toast } from "react-native-toast-message/lib/src/Toast";
+import Toast from 'react-native-simple-toast';
 const styles = StyleSheet.create({
     mainContainer: {
         width: '95%',
@@ -98,23 +102,29 @@ const Signup = ({ navigation }) => {
     const [mobile, setMobile] = React.useState();
     const [otp, setOtp] = React.useState();
     const [email, setEmail] = React.useState();
+    const clearAllState=()=>{
+        setSaloonName('');
+        setMobile('');
+        setOtp('');
+        setEmail('')
+        setOwnerName('')
+    }
     const onSignupClick = async () => {
+        if(!ownerName && !saloonName && !mobile && !otp && !email){
+            Toast.show('Please fill all the filed')
+            navigation.navigate(Routes.CreatePin)
+        }else{
         let body = {
-            signupFor: "saloon", // user and salon
-            fullname: ownerName, // for user
+            signupFor: "salon", // user and salon
             salonName: saloonName, // for salon
             salonOwnerName: ownerName, // for salon
             countryCode: "+91", // for salon
             phone: mobile, // for salon
             email: email, // for both
-            dob: "", // for user
-            gender: "1", // for user
-            address: "", // for user
-            state: "hp", // for user
-            country: "", // for user
-            zipcode: "", // for user
             fcmToken: "", // for both
-            otp: "1234" // for both
+            otp: otp, // for both
+            longitude: "31.1048",
+            latitude: "77.1734"
         }
         const response = await fetch(BASE_URL + Apis.SINUP_URL, {
             method: 'POST',
@@ -124,22 +134,41 @@ const Signup = ({ navigation }) => {
             body: JSON.stringify(body), // Replace with your data
         });
         const data = await response.json();
-        navigation.navigate(Routes.CreatePin)
+        if (data?.message) {
+            await AsyncStorage.setItem('token', data?.token);
+            clearAllState()
+            navigation.navigate(Routes.CreatePin)
+            Toast.show(data?.message);
+        } else {
+            // clearAllState()
+            Toast.show(data?.error)
+        }
+    }
     }
     const onChangeText = (e, name) => {
+        console.log("e, name", e, name)
         switch (name) {
-            case 'value':
-
+            case 'salonOwnerName':
+                setOwnerName(e)
                 break;
-
+            case 'saloonName':
+                setSaloonName(e)
+                break;
+            case 'Mobile':
+                setMobile(e)
+                break;
+            case 'OTP':
+                setOtp(e)
+                break;
+            case 'Email':
+                setEmail(e)
+                break;
             default:
                 break;
         }
-        // setUserdata(prevData => ({
-        //     ...prevData,
-        //     [name]: e,
-        // }));
-
+    }
+    const sendOtps=()=>{
+        Toast.show("OTP is send to your Number")
     }
     return (
         <SafeAreaView>
@@ -151,12 +180,14 @@ const Signup = ({ navigation }) => {
                     <Text style={StylesContants.auth_screen_subHeading}>{TextConstant.SignUp_subHeading}</Text>
                     <InputBoxComponent
                         name="salonOwnerName"
+                        value={ownerName}
                         onChnageText={onChangeText}
                         label={TextConstant.SignUp_label_one}
                         placeholder={TextConstant.SignUp_placeholder_one}
                     />
                     <InputBoxComponent
                         name="saloonName"
+                        value={saloonName}
                         onChnageText={onChangeText}
                         label={TextConstant.SignUp_label_two}
                         placeholder={TextConstant.SignUp_placeholder_two}
@@ -164,17 +195,31 @@ const Signup = ({ navigation }) => {
                     <View style={styles.phoneConatiner}>
                         <InputBoxComponent
                             name="Mobile"
+                            limit={10}
+                            value={mobile}
+                            keyboardType="numeric"
                             onChnageText={onChangeText}
                             label={TextConstant.Phone_number}
                             size={248} placeholder=
                             {TextConstant.Phone_number}
                         />
-                        <TouchableOpacity style={styles.sendConatiner}>
+                        <TouchableOpacity onPress={()=>sendOtps()} style={styles.sendConatiner}>
                             <Text style={styles.sendText}>Send</Text>
                         </TouchableOpacity>
                     </View>
                     <View>
-                        <Text>{TextConstant.OTP_NUMBER}</Text>
+                        <InputBoxComponent
+                            name="OTP"
+                            limit={4}
+                            value={otp}
+                            keyboardType="numeric"
+                            onChnageText={onChangeText}
+                            label={TextConstant.OTP_NUMBER}
+                            size={248}
+                            placeholder=
+                            {TextConstant.OTP_NUMBER}
+                        />
+                        {/* <Text>{TextConstant.OTP_NUMBER}</Text> */}
                         {/* <OTPInputView
                             style={{ width: '70%', height: 100 }}
                             pinCount={4}
@@ -188,6 +233,7 @@ const Signup = ({ navigation }) => {
                     </View>
                     <InputBoxComponent
                         name="Email"
+                        value={email}
                         onChnageText={onChangeText}
                         label={TextConstant.signUp_label_five}
                         placeholder={TextConstant.signUp_label_five}

@@ -8,6 +8,7 @@ export const Apis = {
     CREATE_BARBER: `barber`,
     UPDATE_BARBER: ``,
     GET_BARBER_DETAILS: `barber`,
+    SALOON_UPDATE:'salon'
 
 }
 export const BASE_URL = `http://43.204.144.93:5001/api/v1/`

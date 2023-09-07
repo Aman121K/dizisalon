@@ -189,64 +189,6 @@ const AddBarberList = ({ navigation }) => {
                         renderItem={renderItem}
                     />
                 </View>
-                <View style={{ marginTop: scaleHeight(30) }}>
-                    <Text>2. Barber Details</Text>
-                    <InnerTexttInput placeholderText="Barber Name" />
-                    <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: scaleWidth(16), marginTop: scaleHeight(20) }}>
-                        <View style={{ width: '70%' }}>
-                            <Text>Phone Number*</Text>
-                            <InnerTexttInput placeholderText="" />
-                        </View>
-                        <TouchableOpacity style={style.sendButton}>
-                            <Text style={{ color: 'white', fontSize: normalize(14), fontFamily: FONTS.MontserratRegular }}>Send</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={{ marginLeft: scaleWidth(16), marginTop: scaleHeight(20) }}>
-                        <Text>OTP</Text>
-                        {/* <OTPInputView
-                            style={{ width: '70%', height: 100 }}
-                            pinCount={4}
-                            autoFocusOnLoad
-                            codeInputFieldStyle={style.underlineStyleBase}
-                            codeInputHighlightStyle={style.underlineStyleHighLighted}
-                            onCodeFilled={(code => {
-                                console.log(`Code is ${code}, you are good to go!`)
-                            })}
-                        /> */}
-                        <TouchableOpacity>
-                            <Text>Resend</Text>
-                            <Text>00:30</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <InnerTexttInput placeholderText="Barber Address" />
-                    <InnerTexttInput placeholderText="State*" />
-                    <View style={{ flexDirection: 'row' }}>
-                        <InnerTexttInput placeholderText="City*" />
-                        <InnerTexttInput placeholderText="Zip Code*" />
-                    </View>
-                    <View style={style.logoConatiner}>
-                        <Text>Salon Logo</Text>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: scaleHeight(20) }}>
-                            <TouchableOpacity style={style.selectConatiner}>
-                                <Text style={style.selectText}>Select</Text>
-                            </TouchableOpacity>
-                            <Text style={style.noSelectedtext}>No file selected</Text>
-                        </View>
-                    </View>
-                    <View style={style.serviceProvideConatiner}>
-                        <Text>Services Provided by Barber</Text>
-                        <FlatList />
-                        <TouchableOpacity style={{}} onPress={() => setShowModalVisible(!showModal)}>
-                            <Text>Add Services + </Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={style.flatListDesgn}>
-                        <FlatList
-                            data={servicesList}
-                            renderItem={renderItem}
-                        />
-                    </View>
-                </View>
                 <View style={style.buttonStyle}>
                     <ButtonBlue buttonText="List Barber & Services" onClick={onClick} />
                 </View>

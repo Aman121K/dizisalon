@@ -8,15 +8,16 @@ const style = StyleSheet.create({
     mainCOatiner: {
         borderWidth: 1,
         flexDirection: 'row',
-        padding: Platform.OS === 'ios' ? scaleHeight(8.5) : scaleHeight(2),
+        padding: Platform.OS === 'ios' ? scaleHeight(8.5) : scaleHeight(1),
         marginHorizontal: scaleWidth(16),
         borderColor: '#FFFFFF',
         borderRadius: scaleHeight(5),
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        alignItems: 'center'
     },
     location: {
-        marginLeft: scaleWidth(19.5),
-        marginRight: scaleWidth(8.2),
+        // marginLeft: scaleWidth(19.5),
+        // marginRight: scaleWidth(8.2),
         alignSelf: 'center'
     },
     textInput: {
@@ -27,13 +28,13 @@ const style = StyleSheet.create({
         width: '100%'
     }
 })
-const LocationConatiner = ({ locationClick }) => {
+const LocationConatiner = ({ locationClick,location }) => {
     return (
         <View style={style.mainCOatiner}>
             <TouchableOpacity onPress={locationClick}>
                 <Image style={style.location} source={Images.LOCATION} />
             </TouchableOpacity>
-            <TextInput style={style.textInput} placeholder={TextConstant.LOCATION} />
+            <TextInput value={location} style={style.textInput} placeholder={TextConstant.LOCATION} />
         </View>
     )
 }
