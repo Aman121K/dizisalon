@@ -122,7 +122,10 @@ const AddSaloonkycDetails = ({ navigation }) => {
     const [seat, setSeatCount] = React.useState();
     const [barberCounts, setBarberCounts] = React.useState();
     const [locations, setLocation] = React.useState();
-    const [accesoryInfo, setaccesoryInfo] = React.useState({ "AC": false, "Sofa": true, "TV": true, "Newspaper": true, "wifi": true, "magazine": true })
+    const [accesoryInfo, setaccesoryInfo] = React.useState({
+        "AC": false, "Sofa": true, "TV": true,
+        "Newspaper": true, "wifi": true, "magazine": true
+    })
     const [token, setToken] = React.useState();
     React.useLayoutEffect(() => {
         getToken()
@@ -152,7 +155,7 @@ const AddSaloonkycDetails = ({ navigation }) => {
             setData(image?.path)
         });
     }
-    const onClick = async() => {
+    const onClick = async () => {
         console.log("data>>")
         const formData = new FormData();
         formData.append('salonName', saloonName);
@@ -184,20 +187,20 @@ const AddSaloonkycDetails = ({ navigation }) => {
             type: 'image/jpeg',
             name: 'addressProof.jpg',
         });
-        console.log("form data>>",formData)
-        const response = await fetch(BASE_URL + Apis.SALOON_UPDATE, {
+        console.log("form data>>", formData)
+        await fetch(BASE_URL + Apis.SALOON_UPDATE, {
             method: 'PUT',
             headers: {
-              'Content-Type': 'multipart/form-data',
-              'Authorization': token
+                'Content-Type': 'multipart/form-data',
+                'Authorization': token
             },
             body: formData,
-          });
-      
-          const data = await response.json();
-          console.log("respone >>",data)
-      
-
+        }).then((res) => res.json()).then((data) => {
+            console.log(data)
+        }).catch((e) => {
+            console.log(e)
+        })
+        navigation.navigate(Routes.AddBarberList)
     }
     const onChangeText = (e, name) => {
         console.log("e,name", e, name);

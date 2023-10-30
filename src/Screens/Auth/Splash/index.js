@@ -15,7 +15,8 @@ const styles = StyleSheet.create({
     },
     splashText: {
         marginHorizontal: scaleWidth(75),
-        marginTop: scaleHeight(32)
+        marginTop: scaleHeight(32),
+        color:'#868686'
     }
 })
 const Splash = ({ navigation }) => {
@@ -25,26 +26,16 @@ const Splash = ({ navigation }) => {
     }, [])
     const getLoginData = async () => {
         let data = await AsyncStorage.getItem('loginData');
-        if (data) {
-            setLoginData(JSON.parse(data))
-        }
-    }
-    React.useEffect(() => {
+        setLoginData(data)
+        console.log("splash data>>", data)
         const timer = setTimeout(() => {
-            console.log("userData>>",loginData)
-            if (loginData?.role === 2) {
+            if (data) {
                 navigation.navigate('BarberBottoNavigation')
-            }
-            else if (loginData?.role === 1) {
-                navigation.navigate('UserBottomNavigtion')
             } else {
                 navigation.navigate('Welcome')
             }
-
-        }, 3000);
-        return () => clearTimeout(timer);
-    }, [])
-
+        }, 3000);  
+    }
     return (
         <SafeAreaView>
             <StatusBar backgroundColor='#E7EEFA' barStyle="light-content" />

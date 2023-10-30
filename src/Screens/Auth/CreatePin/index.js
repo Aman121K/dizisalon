@@ -39,28 +39,29 @@ const CreatePin = ({ navigation }) => {
         let body = {
             pin: confirmPin
         }
-        console.log("body is>", body)
-        try {
-            const response = await fetch(BASE_URL + Apis.CREATE_MPIN, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': token
-                },
-                body: JSON.stringify(body), 
-            });
-            const data = await response.json();
-            console.log("Create pin data>>", data)
-            if (data?.message) {
+        // console.log("body is>", body)
+        // try {
+        await fetch(BASE_URL + Apis.CREATE_MPIN, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token
+            },
+            body: JSON.stringify(body),
+        }).then((res) => res.json()).then((data) => {
+            if (data?.status === 200) {
                 navigation.navigate(Routes.Signin)
                 Toast.show(data?.message);
             } else {
-                clearAllState()
-                Toast.show(data?.error)
+                console.log("create mppin eror")
             }
-        } catch (error) {
-            Toast.show(error);
-        }
+        }).catch((err) => {
+            console.log(err)
+        })
+
+        // } catch (error) {
+        //     Toast.show(error);
+        // }
     }
     const onChnageText = (e, name) => {
         console.log("name,e>", name)
@@ -80,6 +81,7 @@ const CreatePin = ({ navigation }) => {
                 </View>
                 <View>
                     <InputBoxComponent
+                        limit={4}
                         label={TextConstant.create_pin_label_one}
                         name="createPin"
                         value={createPin}
@@ -90,6 +92,7 @@ const CreatePin = ({ navigation }) => {
                     />
                     <InputBoxComponent
                         name="confirmPin"
+                        limit={4}
                         value={confirmPin}
                         keyboardType="numeric"
                         onChnageText={onChnageText}
@@ -101,11 +104,12 @@ const CreatePin = ({ navigation }) => {
                 <ButtonBlue
                     onClick={onButtonClick}
                     buttonText="Continue"
-                    btnStyle={{ 
-                    backgroundColor: "#022A6D", 
-                    height: 48, 
-                    borderRadius: 12, 
-                    alignItems: "center" }}
+                    btnStyle={{
+                        backgroundColor: "#022A6D",
+                        height: 48,
+                        borderRadius: 12,
+                        alignItems: "center"
+                    }}
                 />
             </View>
             <View>

@@ -44,7 +44,7 @@ const UserProfile = ({ navigation }) => {
 
     ])
     const gotoPage = (item) => {
-    console.log(item)
+    console.log("logout click",item)
         switch (item) {
             case 'My Booking':
                 navigation.navigate('UserBottomNavigtion')

@@ -7,6 +7,7 @@ import { FONTS } from '../../../Constant/fonts';
 import { makeMutable } from 'react-native-reanimated';
 import ButtonBlue from '../../../Components/Button_Blue';
 import { Routes } from '../../../Constant/Routes';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const style = StyleSheet.create({
     mainConatiner: {
         backgroundColor: '#022A6D',
@@ -127,7 +128,9 @@ const data = [
     }
 ]
 const ProfileDetials = ({ navigation }) => {
-    const onClick = () => {
+    const onClick = async () => {
+        await AsyncStorage.setItem('loginData', '')
+        await AsyncStorage.setItem('token', '')
         navigation.navigate(Routes.Signin)
     }
     const buttonClick = (value) => {

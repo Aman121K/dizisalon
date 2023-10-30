@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text, Image, SafeAreaView, ScrollView, Alert } from 'react-native';
+import { StyleSheet, View, Text, Image, SafeAreaView, ScrollView, Alert, ActivityIndicator } from 'react-native';
 import InputBoxComponent from "../../../Components/InputBoxComponent";
 import AuthHeader from "../../../Components/AuthHeader";
 import { TextConstant } from "../../../Constant/TextConstant";
@@ -16,6 +16,7 @@ import { Apis, BASE_URL } from "../../../Constant/APisUrl";
 import { LOGIN_API } from "../../../redux/Constant";
 import Toast from 'react-native-simple-toast';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import CustomLoader from "../../../Components/CustomLoader";
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
@@ -55,6 +56,7 @@ const styles = StyleSheet.create({
     }
 })
 const Signin = ({ navigation, route }) => {
+    // const isFocused = useIsFocused();
     const dispatch = useDispatch();
     const data = useSelector((state) => state.reducer)
     console.log("on sgnin redux>>", data)
@@ -62,6 +64,10 @@ const Signin = ({ navigation, route }) => {
     const [loginData, setlogindata] = React.useState({})
     const [mobile, setMobile] = React.useState();
     const [pin, setPin] = React.useState();
+    const [loader,setLoader]=React.useState(false);
+
+
+
     const goToSignup = () => {
         navigation.navigate(Routes.Signup)
     }
@@ -84,47 +90,46 @@ const Signin = ({ navigation, route }) => {
     }
     const TabTypesValues = React.useContext(TabContext);
     const onSigninClick = async () => {
+       
         if (!mobile && !pin) {
             Alert.alert('Please Fill all the column')
         }
         else {
+            setLoader(true)
             let body = {
                 phone: mobile,
                 pin: pin
             }
-            console.log("body>>", body)
-            try {
-                const response = await fetch(BASE_URL + Apis.LOGIN_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(body),
-                });
-                const data = await response.json();
-                console.log("login data>>", data)
-                if (data?.message) {
-                    await AsyncStorage.setItem('token', data?.token);
-                    await AsyncStorage.setItem('loginData', JSON.stringify(data?.data));
-                    Toast.show(data?.message);
-                    if (data?.data?.role === 2) {
-                        navigation.navigate('BarberBottoNavigation')
-                    } else {
-                        navigation.navigate('UserBottomNavigtion')
-                    }
+            await fetch(BASE_URL + Apis.LOGIN_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(body),
+            }).then((res) => res.json()).then(async(data) => {
+                setLoader(false)
+                console.log("Data", data)
+                if (data?.status === 200) {
+                    console.log("login ")
+                    await AsyncStorage.setItem('loginData',JSON.stringify(data?.data))
+                    // await AsyncStorage.setItem('loginD',)
+                    navigation.navigate('BarberBottoNavigation')
                 } else {
-                    Toast.show(data?.error)
+                    Toast.show(data?.message)
                 }
-            } catch (error) {
-                console.error('Error:', error);
-                Toast.show(error);
-            }
+            }).catch((err) => {
+                setLoader(false)
+                console.log("error", err)
+            })
         }
     }
     return (
         <SafeAreaView>
             <ScrollView>
                 <AuthHeader backbutton={true} navigation={navigation} />
+                {loader?
+                <CustomLoader size={50} color="Blue"/>
+                :
                 <View style={styles.mainContainer}>
                     <Image style={styles.location_img} source={Images.SIGN_IN_LOCATION} />
                     <View>
@@ -163,7 +168,7 @@ const Signin = ({ navigation, route }) => {
                             </Text>
                         </View>
                     </View>
-                </View>
+                </View>}
             </ScrollView>
         </SafeAreaView>
     )

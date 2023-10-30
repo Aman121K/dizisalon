@@ -28,22 +28,23 @@ const style = StyleSheet.create({
     titleStyle: {
         marginLeft: scaleWidth(10),
         fontSize: normalize(13),
-        fontFamily: FONTS.MontserratRegular
+        fontFamily: FONTS.MontserratRegular,
+        color:'black'
     }
 })
 const BarberProfile = ({ navigation }) => {
     const [loginUserData,setLoginUserData]=React.useState();
     const [loginData, setLoginData] = React.useState([
-        { title: 'My Salon', Image: Images.BOTTOM_BOOKING },
-        { title: 'Customer Lists', Image: Images.BOTTOM_BOOKING },
-        { title: 'My Barber', Image: Images.BOTTOM_BOOKING },
-        { title: 'Contact Us', Image: Images.BOTTOM_BOOKING },
-        { title: 'My Services', Image: Images.BOTTOM_BOOKING },
-        { title: 'Refer & Earn', Image: Images.BOTTOM_BOOKING },
-        { title: 'FeedBack', Image: Images.BOTTOM_BOOKING },
-        { title: 'App Version', Image: Images.BOTTOM_BOOKING },
-        { title: 'Privacy Policy', Image: Images.BOTTOM_BOOKING },
-        { title: 'Log out', Image: Images.BOTTOM_BOOKING },
+        { title: 'My Salon', Image: Images.SaloonIcon },
+        { title: 'Customer Lists', Image: Images.CustomerLists },
+        { title: 'My Barber', Image: Images.BarberIcon },
+        { title: 'Contact Us', Image: Images. Contactes},
+        { title: 'My Services', Image: Images.Services },
+        { title: 'Refer & Earn', Image: Images.Refers },
+        { title: 'FeedBack', Image: Images.FeedBack },
+        { title: 'App Version', Image: Images.Versions },
+        { title: 'Privacy Policy', Image: Images.PrivacyPolicy },
+        { title: 'Logout', Image: Images.Logout },
 
     ])
     React.useLayoutEffect(()=>{
@@ -56,7 +57,7 @@ const BarberProfile = ({ navigation }) => {
         }
     }
     const gotoPage = (item) => {
-        console.log(item)
+        console.log("...",item)
         switch (item) {
             case 'My Salon':
                 navigation.navigate(Routes.SaloonMySaloonPage)
@@ -86,7 +87,7 @@ const BarberProfile = ({ navigation }) => {
                 navigation.navigate(Routes.BarberPrivacyPolicy)
                 break;
             case 'Logout':
-                navigation.navigate(Routes.Signin, { type: 'saloon' })
+                navigation.navigate(Routes.Signin)
                 break;
             default:
                 break;
@@ -95,7 +96,7 @@ const BarberProfile = ({ navigation }) => {
     const renderItems = (item) => {
         return (
             <TouchableOpacity style={style.dataContainer} onPress={() => gotoPage(item?.item?.title)}>
-                <Image source={item?.item?.Image} />
+                <Image source={item?.item?.Image} style={{tintColor:'black'}} />
                 <Text style={style.titleStyle}>{item.item.title}</Text>
             </TouchableOpacity>
         )

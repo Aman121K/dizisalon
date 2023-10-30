@@ -90,5 +90,13 @@ export const Images = {
     saloonPending:require('../Assets/Images/saloonPending/saloonPending.png'),
     TodaySales:require('../Assets/Images/todaySales/todaySales.png'),
     SalesIcons:require('../Assets/Images/salesIcons/salesIcons.png'),
+    Logout:require('../Assets/Images/logOut/logOut.png'),
+    PrivacyPolicy:require('../Assets/Images/privacyPolicy/privacyPolicy.png'),
+    Versions:require('../Assets/Images/versions/versions.png'),
+    FeedBack:require('../Assets/Images/feedBack/feedBack.png'),
+    Refers:require('../Assets/Images/refers/refers.png'),
+    Services:require('../Assets/Images/services/services.png'),
+    Contactes:require('../Assets/Images/contactIcons/contactIcons.png'),
+    CustomerLists:require('../Assets/Images/customerLists/customerLists.png')
 
 }

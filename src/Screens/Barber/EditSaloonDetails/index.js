@@ -178,49 +178,51 @@ const EditSaloonDetails = ({ navigation }) => {
         });
     }
     const onClick = async() => {
-        console.log("data>>")
-        const formData = new FormData();
-        formData.append('salonName', saloonName);
-        formData.append('accessoryInfo', accesoryInfo);
-        formData.append('salonType', "");
-        formData.append('address', address);
-        formData.append('state', state);
-        formData.append('country', city);
-        formData.append('zipcode', zipcode);
-        formData.append('openTime', "10.00 AM");
-        formData.append('closeTime', "10.00 PM");
-        formData.append('lunchTime', "2");
-        formData.append('seats', seat);
-        formData.append('barbers', barberCounts);
-        formData.append('location', "");
-        formData.append('availableDays', avialabledays);
-        formData.append('images', {
-            uri: salonImage,
-            type: 'image/jpeg',
-            name: 'images.jpg',
-        });
-        formData.append('salonLogo', {
-            uri: salonLogo,
-            type: 'image/jpeg',
-            name: 'saloonLogo.jpg',
-        });
-        formData.append('addressProof', {
-            uri: addressProof,
-            type: 'image/jpeg',
-            name: 'addressProof.jpg',
-        });
-        console.log("form data>>",formData)
-        const response = await fetch(BASE_URL + Apis.SALOON_UPDATE, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'multipart/form-data',
-              'Authorization': token
-            },
-            body: formData,
-          });
+        console.log("Vikas>>")
+        navigation.navigate('')
+        // console.log("data>>")
+        // const formData = new FormData();
+        // formData.append('salonName', saloonName);
+        // formData.append('accessoryInfo', accesoryInfo);
+        // formData.append('salonType', "");
+        // formData.append('address', address);
+        // formData.append('state', state);
+        // formData.append('country', city);
+        // formData.append('zipcode', zipcode);
+        // formData.append('openTime', "10.00 AM");
+        // formData.append('closeTime', "10.00 PM");
+        // formData.append('lunchTime', "2");
+        // formData.append('seats', seat);
+        // formData.append('barbers', barberCounts);
+        // formData.append('location', "");
+        // formData.append('availableDays', avialabledays);
+        // formData.append('images', {
+        //     uri: salonImage,
+        //     type: 'image/jpeg',
+        //     name: 'images.jpg',
+        // });
+        // formData.append('salonLogo', {
+        //     uri: salonLogo,
+        //     type: 'image/jpeg',
+        //     name: 'saloonLogo.jpg',
+        // });
+        // formData.append('addressProof', {
+        //     uri: addressProof,
+        //     type: 'image/jpeg',
+        //     name: 'addressProof.jpg',
+        // });
+        // console.log("form data>>",formData)
+        // const response = await fetch(BASE_URL + Apis.SALOON_UPDATE, {
+        //     method: 'PUT',
+        //     headers: {
+        //       'Content-Type': 'multipart/form-data',
+        //       'Authorization': token
+        //     },
+        //     body: formData,
+        //   });
       
-          const data = await response.json();
-          console.log("respone >>",data)
+        //   const data = await response.json();
+        //   console.log("respone >>",data)
       
 
     }

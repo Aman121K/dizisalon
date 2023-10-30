@@ -7,6 +7,7 @@ import { FONTS } from "../../../../Constant/fonts";
 // import OTPInputView from "@twotalltotems/react-native-otp-input";
 import ServiceModal from "../../../../Components/ModalComponent/serviceModal";
 import ButtonBlue from "../../../../Components/Button_Blue";
+import { TabContext } from "../../../../Context/TabProvider";
 const style = StyleSheet.create({
     sendButton: {
         backgroundColor: '#022A6D',
@@ -81,9 +82,23 @@ const style = StyleSheet.create({
     },
     flatListDesgn: {
         height: scaleHeight(100)
+    },
+    barberListing: {
+        color: '#000',
+        fontFamily: FONTS.MontserratRegular,
+        fontWeight: '700',
+        fontSize: normalize(15),
+        marginHorizontal: scaleWidth(16)
+    },
+    otherHeadlines: {
+        color: '#3A3A3A',
+        fontSize: normalize(16),
+        fontFamily: FONTS.MontserratRegular,
     }
 })
 const AddBarberList = ({ navigation }) => {
+    const TabBottomValues = React.useContext(TabContext);
+    console.log("All context data>>", TabBottomValues)
     const [showModal, setShowModalVisible] = React.useState(false)
     const [servicesList, setServicesList] = React.useState([
         {
@@ -109,6 +124,7 @@ const AddBarberList = ({ navigation }) => {
         setShowModalVisible(false)
     }
     const onClick = () => {
+        TabBottomValues.setHomeStackValue('fromBarber')
         navigation.navigate('BarberBottoNavigation')
     }
     const renderItem = ({ item }) => {
@@ -127,25 +143,29 @@ const AddBarberList = ({ navigation }) => {
         )
 
     }
+    const onChange = (e, name) => {
+        console.log("click is>>", e, name)
+
+    }
 
     return (
         <SafeAreaView>
             <UserSubComponent navigation={navigation} />
             <ScrollView style={style.scrollstyle}>
-                <Text>Barbers Listing</Text>
-                <Text>1. Barber</Text>
-                <InnerTexttInput placeholderText="Barber Name" />
+                <Text style={style.barberListing}>Barbers Listing</Text>
+                <Text style={style.barberListing}>1. Barber</Text>
+                <InnerTexttInput placeholderText="Barber Name" name="barberName" onChange={onChange} />
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: scaleWidth(16), marginTop: scaleHeight(20) }}>
                     <View style={{ width: '70%' }}>
-                        <Text>Phone Number*</Text>
-                        <InnerTexttInput placeholderText="" />
+                        <Text style={style.otherHeadlines}>Phone Number*</Text>
+                        <InnerTexttInput placeholderText="Phone number" name="phoneNumber" onChange={onChange} />
                     </View>
                     <TouchableOpacity style={style.sendButton}>
                         <Text style={{ color: 'white', fontSize: normalize(14), fontFamily: FONTS.MontserratRegular }}>Send</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={{ marginLeft: scaleWidth(16), marginTop: scaleHeight(20) }}>
-                    <Text>OTP</Text>
+                    <Text style={style.otherHeadlines}>OTP</Text>
                     {/* <OTPInputView
                         style={{ width: '70%', height: 100 }}
                         pinCount={4}
@@ -161,14 +181,14 @@ const AddBarberList = ({ navigation }) => {
                         <Text>00:30</Text>
                     </TouchableOpacity>
                 </View>
-                <InnerTexttInput placeholderText="Barber Address" />
-                <InnerTexttInput placeholderText="State*" />
+                <InnerTexttInput placeholderText="Barber Address" name="barberAddress" onChange={onChange} />
+                <InnerTexttInput placeholderText="State*" name="state" onChange={onChange} />
                 <View style={{ flexDirection: 'row' }}>
-                    <InnerTexttInput width={100} placeholderText="City*" />
-                    <InnerTexttInput width={100} placeholderText="Zip Code*" />
+                    <InnerTexttInput width={100} placeholderText="City*" name="city" onChange={onChange} />
+                    <InnerTexttInput width={100} placeholderText="Zip Code*" name="zipCode" onChange={onChange} />
                 </View>
                 <View style={style.logoConatiner}>
-                    <Text>Salon Logo</Text>
+                    <Text style={style.otherHeadlines}>Salon Logo</Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: scaleHeight(20) }}>
                         <TouchableOpacity style={style.selectConatiner}>
                             <Text style={style.selectText}>Select</Text>
@@ -177,10 +197,10 @@ const AddBarberList = ({ navigation }) => {
                     </View>
                 </View>
                 <View style={style.serviceProvideConatiner}>
-                    <Text>Services Provided by Barber</Text>
+                    <Text style={style.otherHeadlines}>Services Provided by Barber</Text>
                     <FlatList />
                     <TouchableOpacity style={{}} onPress={() => setShowModalVisible(!showModal)}>
-                        <Text>Add Services + </Text>
+                        <Text style={style.otherHeadlines}>Add Services + </Text>
                     </TouchableOpacity>
                 </View>
                 <View style={style.flatListDesgn}>

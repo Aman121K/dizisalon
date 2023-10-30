@@ -1,5 +1,5 @@
 import React from "react";
-import { View, SafeAreaView, Text, StyleSheet, Image, FlatList, ScrollView } from 'react-native';
+import { View, SafeAreaView, Text, StyleSheet, Image, FlatList, ScrollView, BackHandler, Alert } from 'react-native';
 import BarberHeader from "../../../Components/BarberHeader";
 import { normalize, scaleHeight, scaleWidth } from "../../../Constant/DynamicSize";
 import { Images } from "../../../Constant/Images";
@@ -10,6 +10,8 @@ import KycDetailsHome from "../../../Components/KycDetailsHome";
 import { Routes } from "../../../Constant/Routes";
 import SaloonDetailsHome from "../../../Components/SaloonDetailsHome";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useIsFocused } from "@react-navigation/native";
+import { TabContext } from "../../../Context/TabProvider";
 const styles = StyleSheet.create({
     homeConatiner: {
         // flex: 1
@@ -56,9 +58,13 @@ const styles = StyleSheet.create({
 
 })
 const BarberHome = ({ navigation }) => {
+    const TabBottomValues = React.useContext(TabContext);
+    console.log("TabBottomValues >>>>",TabBottomValues?.getHomeStackValue)
+
+    const isFocused = useIsFocused();
     const [loginData, setLoginData] = React.useState();
-    const [stylesLits,setStylesList]=React.useState([]);
-    const [articalsList,setArticals]=React.useState([])
+    const [stylesLits, setStylesList] = React.useState([]);
+    const [articalsList, setArticals] = React.useState([])
     const [crausalData, setCrasualData] = React.useState([
         {
             title: 'First'
@@ -77,24 +83,52 @@ const BarberHome = ({ navigation }) => {
         }
     ])
     const [showDashboard, setShowDashboard] = React.useState(false);
+    React.useEffect(() => {
+        const backAction = () => {
+            if (isFocused) {
+                Alert.alert(
+                    "Confirm Exit",
+                    "Are you sure you want to exit the app?",
+                    [
+                        {
+                            text: "Cancel",
+                            onPress: () => null,
+                            style: "cancel"
+                        },
+                        { text: "OK", onPress: () => BackHandler.exitApp() }
+                    ]
+                );
+                return true;
+            }
+            return false;
+        };
+
+        const backHandler = BackHandler.addEventListener(
+            'hardwareBackPress',
+            backAction
+        );
+
+        return () => backHandler.remove();
+    }, [isFocused]);
     React.useLayoutEffect(() => {
         // getLoginData()
     }, [])
-    React.useEffect(()=>{
+    React.useEffect(() => {
         getLoginData();
         getStylesList();
         getArticlesList();
-    },[])
-    const getStylesList=()=>{
+    }, [])
+    const getStylesList = () => {
 
     }
-    const getArticlesList=()=>{
-        
+    const getArticlesList = () => {
+
     }
     const getLoginData = async () => {
         let data = await AsyncStorage.getItem('loginData');
+        console.log("data on home page", data)
         if (data) {
-           setLoginData(JSON.parse(data))
+            setLoginData(JSON.parse(data))
         }
     }
     const gotoListPage = () => {
@@ -113,12 +147,12 @@ const BarberHome = ({ navigation }) => {
                 <BarberHeader />
                 <View style={styles.homDesign}>
                     <Text style={{ fontSize: normalize(20), fontFamily: FONTS.MontserratBold }}>Hi,
-                        <Text>{loginData?.salonOwnerName}</Text>
+                        <Text>{loginData?.salonOwnerName ? loginData?.salonOwnerName : 'Saloon'}</Text>
                     </Text>
                     <View style={styles.crausalConatiner}>
                         <Crasual entries={crausalData} />
                     </View>
-                    {showDashboard ?
+                    {TabBottomValues?.getHomeStackValue ?
                         <SaloonDetailsHome navigation={navigation} /> :
                         <View>
                             <View style={{ marginTop: scaleHeight(16) }}>

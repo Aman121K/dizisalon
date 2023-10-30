@@ -135,7 +135,7 @@ const BarberProfileDetails = ({ navigation }) => {
     }, [])
     const getLoginData = async () => {
         let data = await AsyncStorage.getItem('loginData');
-        console.log("data>>",data)
+        console.log("data>>", data)
         if (data) {
             setLoginData(JSON.parse(data))
         }
@@ -167,7 +167,10 @@ const BarberProfileDetails = ({ navigation }) => {
     const onCancelClick = () => {
         setShowModalVisisble(false)
     }
-    const onSubmitClick = () => {
+    const onSubmitClick = async () => {
+        await AsyncStorage.setItem('loginData', '')
+        await AsyncStorage.setItem('token', '')
+        navigation.navigate(Routes.Signin)
         setShowModalVisisble(false)
     }
     return (

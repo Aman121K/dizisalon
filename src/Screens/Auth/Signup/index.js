@@ -9,6 +9,7 @@ import {
     ScrollView,
     TouchableOpacity,
     Alert,
+    ActivityIndicator,
 } from 'react-native';
 import AuthHeader from "../../../Components/AuthHeader";
 import InputBoxComponent from "../../../Components/InputBoxComponent";
@@ -102,7 +103,8 @@ const Signup = ({ navigation }) => {
     const [mobile, setMobile] = React.useState();
     const [otp, setOtp] = React.useState();
     const [email, setEmail] = React.useState();
-    const clearAllState=()=>{
+    const [loader, setLoader] = React.useState(false);
+    const clearAllState = () => {
         setSaloonName('');
         setMobile('');
         setOtp('');
@@ -110,40 +112,57 @@ const Signup = ({ navigation }) => {
         setOwnerName('')
     }
     const onSignupClick = async () => {
-        if(!ownerName && !saloonName && !mobile && !otp && !email){
+        
+        if (!ownerName && !saloonName && !mobile && !otp && !email) {
             Toast.show('Please fill all the filed')
-            navigation.navigate(Routes.CreatePin)
-        }else{
-        let body = {
-            signupFor: "salon", // user and salon
-            salonName: saloonName, // for salon
-            salonOwnerName: ownerName, // for salon
-            countryCode: "+91", // for salon
-            phone: mobile, // for salon
-            email: email, // for both
-            fcmToken: "", // for both
-            otp: otp, // for both
-            longitude: "31.1048",
-            latitude: "77.1734"
-        }
-        const response = await fetch(BASE_URL + Apis.SINUP_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(body), // Replace with your data
-        });
-        const data = await response.json();
-        if (data?.message) {
-            await AsyncStorage.setItem('token', data?.token);
-            clearAllState()
-            navigation.navigate(Routes.CreatePin)
-            Toast.show(data?.message);
+            // navigation.navigate(Routes.CreatePin)
         } else {
-            // clearAllState()
-            Toast.show(data?.error)
+            setLoader(true)
+            let body = {
+                // "salonName":"Max unisex salon", 
+                // "salonOwnerName":"Vikas singh choudhary", 
+                // "salonPhoneNumber":"7973070604",
+                // "countryCode":"+91", 
+                // "phone":"7973070604",
+                // "gender":"male",
+                // "email":"newSalon@unisoll.com",
+                // "otp":"123456"
+                signupFor: "salon", // user and salon
+                salonName: saloonName ? saloonName : '', // for salon
+                salonOwnerName: ownerName ? ownerName : '', // for salon
+                countryCode: "+91", // for salon
+                salonPhoneNumber: mobile ? mobile : '', // for salon
+                phone:mobile ? mobile : '',
+                email: email ? email : '', // for both
+                gender:'',
+                fcmToken: "", // for both
+                otp: otp ? otp : '', // for both
+                longitude: "31.1048",
+                latitude: "77.1734"
+            }
+            await fetch(BASE_URL + Apis.SINUP_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(body), // Replace with your data
+            }).then((res) => res.json()).then(async (data) => {
+                if (data.status === 200) {
+                    await AsyncStorage.setItem('token', data?.token);
+                    setLoader(false)
+                    clearAllState();
+                    Toast.show(data?.message);
+                    navigation.navigate(Routes.CreatePin)
+                } else {
+                    setLoader(false)
+                    console.log("salon singup fail",data)
+                    // Toast.show(data?.message);
+                }
+            }).catch((err) => {
+                setLoader(false)
+                console.log(err)
+            })
         }
-    }
     }
     const onChangeText = (e, name) => {
         console.log("e, name", e, name)
@@ -167,60 +186,81 @@ const Signup = ({ navigation }) => {
                 break;
         }
     }
-    const sendOtps=()=>{
-        Toast.show("OTP is send to your Number")
+    const sendOtps = () => {
+        const body = {
+            countryCode: "+91",
+            phone: mobile
+        }
+        console.log("body >>", body)
+        fetch(BASE_URL + Apis.SEND_OTP, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body), // Replace with your data
+        }).then((res) => res.json()).then((data) => {
+            console.log("OTP data", data)
+            if (data?.status === 200) {
+                Toast.show(data?.message)
+            } else {
+                Toast.show(data?.message)
+            }
+        }).catch((err) => {
+            console.log("OTP erro", err)
+        })
     }
     return (
         <SafeAreaView>
             <ScrollView showsVerticalScrollIndicator={false} style={{ marginHorizontal: scaleWidth(10) }}>
                 <AuthHeader navigation={navigation} backbutton={true} />
-                <View style={styles.mainContainer}>
-                    <Image style={styles.location_img} source={Images.SIGN_IN_LOCATION} />
-                    <Text style={StylesContants.auth_screen_heading}>{TextConstant.SignUp_heading}</Text>
-                    <Text style={StylesContants.auth_screen_subHeading}>{TextConstant.SignUp_subHeading}</Text>
-                    <InputBoxComponent
-                        name="salonOwnerName"
-                        value={ownerName}
-                        onChnageText={onChangeText}
-                        label={TextConstant.SignUp_label_one}
-                        placeholder={TextConstant.SignUp_placeholder_one}
-                    />
-                    <InputBoxComponent
-                        name="saloonName"
-                        value={saloonName}
-                        onChnageText={onChangeText}
-                        label={TextConstant.SignUp_label_two}
-                        placeholder={TextConstant.SignUp_placeholder_two}
-                    />
-                    <View style={styles.phoneConatiner}>
+                {loader ? <ActivityIndicator size={50} color="#022A6D" /> :
+                    <View style={styles.mainContainer}>
+                        <Image style={styles.location_img} source={Images.SIGN_IN_LOCATION} />
+                        <Text style={StylesContants.auth_screen_heading}>{TextConstant.SignUp_heading}</Text>
+                        <Text style={StylesContants.auth_screen_subHeading}>{TextConstant.SignUp_subHeading}</Text>
                         <InputBoxComponent
-                            name="Mobile"
-                            limit={10}
-                            value={mobile}
-                            keyboardType="numeric"
+                            name="salonOwnerName"
+                            value={ownerName}
                             onChnageText={onChangeText}
-                            label={TextConstant.Phone_number}
-                            size={248} placeholder=
-                            {TextConstant.Phone_number}
+                            label={TextConstant.SignUp_label_one}
+                            placeholder={TextConstant.SignUp_placeholder_one}
                         />
-                        <TouchableOpacity onPress={()=>sendOtps()} style={styles.sendConatiner}>
-                            <Text style={styles.sendText}>Send</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View>
                         <InputBoxComponent
-                            name="OTP"
-                            limit={4}
-                            value={otp}
-                            keyboardType="numeric"
+                            name="saloonName"
+                            value={saloonName}
                             onChnageText={onChangeText}
-                            label={TextConstant.OTP_NUMBER}
-                            size={248}
-                            placeholder=
-                            {TextConstant.OTP_NUMBER}
+                            label={TextConstant.SignUp_label_two}
+                            placeholder={TextConstant.SignUp_placeholder_two}
                         />
-                        {/* <Text>{TextConstant.OTP_NUMBER}</Text> */}
-                        {/* <OTPInputView
+                        <View style={styles.phoneConatiner}>
+                            <InputBoxComponent
+                                name="Mobile"
+                                limit={10}
+                                value={mobile}
+                                keyboardType="numeric"
+                                onChnageText={onChangeText}
+                                label={TextConstant.Phone_number}
+                                size={248} placeholder=
+                                {TextConstant.Phone_number}
+                            />
+                            <TouchableOpacity onPress={() => sendOtps()} style={styles.sendConatiner}>
+                                <Text style={styles.sendText}>Send</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View>
+                            <InputBoxComponent
+                                name="OTP"
+                                limit={6}
+                                value={otp}
+                                keyboardType="numeric"
+                                onChnageText={onChangeText}
+                                label={TextConstant.OTP_NUMBER}
+                                size={248}
+                                placeholder=
+                                {TextConstant.OTP_NUMBER}
+                            />
+                            {/* <Text>{TextConstant.OTP_NUMBER}</Text> */}
+                            {/* <OTPInputView
                             style={{ width: '70%', height: 100 }}
                             pinCount={4}
                             autoFocusOnLoad
@@ -230,20 +270,20 @@ const Signup = ({ navigation }) => {
                                 console.log(`Code is ${code}, you are good to go!`)
                             })}
                         /> */}
-                    </View>
-                    <InputBoxComponent
-                        name="Email"
-                        value={email}
-                        onChnageText={onChangeText}
-                        label={TextConstant.signUp_label_five}
-                        placeholder={TextConstant.signUp_label_five}
-                    />
-                    <ButtonBlue
-                        onClick={onSignupClick}
-                        buttonText="Sign Up"
-                        btnStyle={{ backgroundColor: "#022A6D", height: 48, borderRadius: 12, alignItems: "center" }}
-                    />
-                </View>
+                        </View>
+                        <InputBoxComponent
+                            name="Email"
+                            value={email}
+                            onChnageText={onChangeText}
+                            label={TextConstant.signUp_label_five}
+                            placeholder={TextConstant.signUp_label_five}
+                        />
+                        <ButtonBlue
+                            onClick={onSignupClick}
+                            buttonText="Sign Up"
+                            btnStyle={{ backgroundColor: "#022A6D", height: 48, borderRadius: 12, alignItems: "center" }}
+                        />
+                    </View>}
                 <View>
                 </View>
             </ScrollView>
