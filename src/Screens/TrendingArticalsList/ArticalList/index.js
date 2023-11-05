@@ -26,14 +26,13 @@ const styles = StyleSheet.create({
         marginVertical: scaleHeight(30)
     }
 })
-const TrendingList = ({ navigation }) => {
+const ArticalList = ({ navigation }) => {
     const [articalData, setArticalData] = React.useState([])
-    const [searchQuery, setSearchQuery] = React.useState('');
     React.useEffect(() => {
         getArticalsList()
     }, [])
     const getArticalsList = async () => {
-        const response = await fetch(BASE_URL + Apis.GET_STYLES, {
+        const response = await fetch(BASE_URL + Apis.GET_ARTICALS, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -41,17 +40,22 @@ const TrendingList = ({ navigation }) => {
         });
         const data = await response.json();
         console.log("Articals data>", data)
-        setArticalData(data.data)
+        setArticalData(data?.data)
     }
     const onClick = (data) => {
         console.log("click style", data)
         navigation.navigate(Routes.TrendingDetails, { data: data?.item })
     }
-    const renderItem = (item, index) => {
+    const renderItems = (item) => {
         return (
             <TrendingLists data={item} onClick={onClick} />
         )
     }
+    const renderEmptyComponent = () => (
+        <NoDataFound text="No Artical's Found" />
+    );
+    const [searchQuery, setSearchQuery] = React.useState('');
+
     const filteredData = articalData.filter(item =>
         item.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
@@ -60,25 +64,22 @@ const TrendingList = ({ navigation }) => {
         setSearchQuery(e)
 
     }
-    const renderEmptyComponent = () => (
-        <NoDataFound text="No Style's Found" />
-    );
     return (
         <SafeAreaView>
             <AuthHeader navigation={navigation} backbutton={true} />
             <View style={styles.trendingConatiner}>
                 <View style={styles.serachConatiner}>
-                    <SearchConatiner
-                        value={searchQuery}
-                        onChangeText={onChangeText}
-                    />
+                    <SearchConatiner 
+                    placeholdertext="Search for Artical's" 
+                    value={searchQuery} 
+                    onChangeText={onChangeText}
+                     />
                 </View>
-                <Text style={styles.trendingText}>{TextConstant.TRENDING_STYLE}
-                </Text>
-
+                <Text style={styles.trendingText}>Trending Artical's</Text>
                 <FlatList
                     data={searchQuery ? filteredData : articalData}
-                    renderItem={renderItem}
+                    // data={articalData}
+                    renderItem={renderItems}
                     ListEmptyComponent={renderEmptyComponent}
                     keyExtractor={(item, index) => index.toString()}
                 />
@@ -86,4 +87,4 @@ const TrendingList = ({ navigation }) => {
         </SafeAreaView>
     )
 }
-export default TrendingList;
+export default ArticalList;

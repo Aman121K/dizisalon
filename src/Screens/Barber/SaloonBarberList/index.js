@@ -1,5 +1,5 @@
-import React from 'react';
-import { Text, View, TouchableOpacity, SafeAreaView, FlatList, Image, StyleSheet } from 'react-native';
+import React, { useCallback } from 'react';
+import { Text, View, TouchableOpacity, SafeAreaView, FlatList, Image, StyleSheet, ActivityIndicator } from 'react-native';
 import UserCartHeader from '../../../Components/UserCartHeader';
 import SearchConatiner from '../../../Components/SearchConatiner';
 import { Images } from '../../../Constant/Images';
@@ -7,6 +7,9 @@ import BarberList from '../../../Components/FlatListData/barberList';
 import { normalize, scaleHeight, scaleWidth } from '../../../Constant/DynamicSize';
 import { FONTS } from '../../../Constant/fonts';
 import { Routes } from '../../../Constant/Routes';
+import { useFocusEffect } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Apis, BASE_URL } from '../../../Constant/APisUrl';
 const style = StyleSheet.create({
     barberSort: {
         flexDirection: 'row',
@@ -44,6 +47,7 @@ const style = StyleSheet.create({
     }
 })
 const SaloonBarberList = ({ navigation }) => {
+    const [loader, setLoader] = React.useState(true);
     const [barberList, setBarberList] = React.useState([
         {
             name: 'vikas',
@@ -52,17 +56,30 @@ const SaloonBarberList = ({ navigation }) => {
             time: '05:00 Pm',
             image: Images.BarberIcon
         },
-        {
-            name: 'vikas',
-            mobile: '7970000000',
-            attendenaceStatus: 'Present',
-            time: '05:00 Pm',
-            image: Images.BarberIcon
-        },
-
-
     ])
-
+    const [saloonDetails, setSaloonDetials] = React.useState();
+    useFocusEffect(
+        useCallback(() => {
+            getLoginData()
+            return () => {
+            };
+        }, [])
+    );
+    const getLoginData = async () => {
+        let data = await AsyncStorage.getItem('loginData');
+        console.log("Saloon Details>>", data)
+        const newData = JSON.parse(data)
+        console.log("url is>>", BASE_URL + Apis.SALOON_DETAILS + `/${newData?._id}`)
+        fetch(BASE_URL + Apis.SALOON_DETAILS + '/6537857e024948fd560d4f34', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }).then((res) => res.json()).then((data) => {
+            setLoader(false)
+            setSaloonDetials(data)
+        })
+    }
     const renderItem = ({ item }) => {
         return (
             <BarberList item={item} navigation={navigation} />
@@ -86,10 +103,24 @@ const SaloonBarberList = ({ navigation }) => {
                 </View>
             </View>
             <View>
+                {loader && (
+                    <View style={{
+                        ...StyleSheet.absoluteFill,
+                        backgroundColor: 'rgba(255, 255, 255, 0.7)',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}>
+                        <ActivityIndicator size="large" color="#022A6D" />
+                    </View>
+                )}
+
+                {/* {loader ?
+                    <ActivityIndicator color="#022A6D" /> : */}
                 <FlatList
-                    data={barberList}
+                    data={saloonDetails?.barberList}
                     renderItem={renderItem}
                 />
+                {/* } */}
             </View>
         </SafeAreaView>
     )

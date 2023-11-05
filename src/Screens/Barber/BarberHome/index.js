@@ -12,6 +12,7 @@ import SaloonDetailsHome from "../../../Components/SaloonDetailsHome";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useIsFocused } from "@react-navigation/native";
 import { TabContext } from "../../../Context/TabProvider";
+import { Apis, BASE_URL } from "../../../Constant/APisUrl";
 const styles = StyleSheet.create({
     homeConatiner: {
         // flex: 1
@@ -37,6 +38,7 @@ const styles = StyleSheet.create({
     trendingText: {
         fontSize: normalize(15),
         fontFamily: FONTS.MontserratBold,
+        color: '#000'
         // marginTop:scaleHeight
     },
     ImageConatiner: {
@@ -49,22 +51,30 @@ const styles = StyleSheet.create({
     },
     adsText: {
         fontSize: normalize(16),
-        fontFamily: FONTS.MontserratBold
+        fontFamily: FONTS.MontserratBold,
+        color: '#000',
+        marginBottom: scaleHeight(10)
     },
     showMoreText: {
         fontFamily: FONTS.MontserratMedium,
         color: '#022A6D'
+    },
+    itemText: {
+        color: '#000',
+        alignSelf: 'center',
     }
 
 })
 const BarberHome = ({ navigation }) => {
     const TabBottomValues = React.useContext(TabContext);
-    console.log("TabBottomValues >>>>",TabBottomValues?.getHomeStackValue)
-
+    const [stylesData, setStylesData] = React.useState([]);
+    const [ArticalsData, setArticalsData] = React.useState([])
     const isFocused = useIsFocused();
     const [loginData, setLoginData] = React.useState();
     const [stylesLits, setStylesList] = React.useState([]);
     const [articalsList, setArticals] = React.useState([])
+    const [saloonData, setSaloonData] = React.useState();
+
     const [crausalData, setCrasualData] = React.useState([
         {
             title: 'First'
@@ -113,20 +123,60 @@ const BarberHome = ({ navigation }) => {
     React.useLayoutEffect(() => {
         // getLoginData()
     }, [])
+
+    React.useLayoutEffect(() => {
+        getToken()
+    }, [])
+    const getToken = async () => {
+        let token = await AsyncStorage.getItem('token');
+        console.log("Token is>>", token)
+        if (token) {
+            fetch(BASE_URL + Apis.HOME_PAGE_SALOON_DETAILS, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: token
+                },
+            }).then((res) => res.json()).then((data) => {
+                // console.log("Saloon data is>>",data)
+                setSaloonData(data?.data)
+                console.log("data is>>",data?.data?.isKyc)
+                // console.log("iskyc>", saloonData?.isKyc)
+            })
+        }
+    }
+
     React.useEffect(() => {
+        // getSaloonDetailsOnHome()
         getLoginData();
         getStylesList();
         getArticlesList();
     }, [])
-    const getStylesList = () => {
+    // const getSaloonDetailsOnHome=()=>{
 
+    // }
+    const getStylesList = async () => {
+        const response = await fetch(BASE_URL + Apis.GET_STYLES, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        const data = await response.json();
+        setStylesData(data?.data)
     }
-    const getArticlesList = () => {
-
+    const getArticlesList = async () => {
+        const response = await fetch(BASE_URL + Apis.GET_ARTICALS, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        const data = await response.json();
+        setArticalsData(data?.data)
     }
     const getLoginData = async () => {
         let data = await AsyncStorage.getItem('loginData');
-        console.log("data on home page", data)
         if (data) {
             setLoginData(JSON.parse(data))
         }
@@ -134,10 +184,11 @@ const BarberHome = ({ navigation }) => {
     const gotoListPage = () => {
         navigation.navigate(Routes.TrendingList)
     }
-    const renderItem = () => {
+    const renderItem = ({ item }) => {
         return (
             <View style={styles.ImageConatiner}>
-                <Image style={styles.imageStyle} source={Images.CHOTI_DESIGN} />
+                <Image style={styles.imageStyle} source={{ uri: item?.coverImage }} />
+                <Text style={styles.itemText}>{item?.title}</Text>
             </View>
         )
     }
@@ -147,13 +198,17 @@ const BarberHome = ({ navigation }) => {
                 <BarberHeader />
                 <View style={styles.homDesign}>
                     <Text style={{ fontSize: normalize(20), fontFamily: FONTS.MontserratBold }}>Hi,
-                        <Text>{loginData?.salonOwnerName ? loginData?.salonOwnerName : 'Saloon'}</Text>
+                        <Text>{saloonData?.salonName}</Text>
                     </Text>
                     <View style={styles.crausalConatiner}>
                         <Crasual entries={crausalData} />
                     </View>
-                    {TabBottomValues?.getHomeStackValue ?
-                        <SaloonDetailsHome navigation={navigation} /> :
+                    {saloonData?.isKyc ?
+                        <>
+                            <SaloonDetailsHome navigation={navigation} />
+                           
+                        </>
+                        :
                         <View>
                             <View style={{ marginTop: scaleHeight(16) }}>
                                 <Text style={styles.kycMainstyle}>{TextConstant.KYC_MAIN_TEXT}</Text>
@@ -168,7 +223,7 @@ const BarberHome = ({ navigation }) => {
                         <Text style={styles.showMoreText} onPress={() => gotoListPage()}>{TextConstant.SHOW_MORE} </Text>
                     </View>
                     <FlatList
-                        data={crausalData}
+                        data={stylesData}
                         renderItem={renderItem}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
@@ -180,7 +235,7 @@ const BarberHome = ({ navigation }) => {
                         <Text style={styles.showMoreText} onPress={() => gotoListPage()}>{TextConstant.SHOW_MORE} </Text>
                     </View>
                     <FlatList
-                        data={crausalData}
+                        data={ArticalsData}
                         renderItem={renderItem}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}

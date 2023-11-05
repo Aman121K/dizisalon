@@ -143,8 +143,8 @@ const EditSaloonDetails = ({ navigation }) => {
             setToken(token)
         }
         let data = await AsyncStorage.getItem('loginData');
-        console.log("login data>>",data);
-        const newData=JSON.parse(data);
+        console.log("login data>>", data);
+        const newData = JSON.parse(data);
         setOwnerName(newData?.salonOwnerName)
         setSaloonName(newData?.salonName)
         setAddress(newData?.address)
@@ -177,7 +177,7 @@ const EditSaloonDetails = ({ navigation }) => {
             setData(image?.path)
         });
     }
-    const onClick = async() => {
+    const onClick = async () => {
         console.log("Vikas>>")
         navigation.navigate('')
         // console.log("data>>")
@@ -220,51 +220,51 @@ const EditSaloonDetails = ({ navigation }) => {
         //     },
         //     body: formData,
         //   });
-      
+
         //   const data = await response.json();
         //   console.log("respone >>",data)
-      
+
 
     }
     const onChangeText = (e, name) => {
         console.log("e,name", e, name);
-        switch (name) {
-            case 'name':
-                setOwnerName(e)
-                break;
-            case 'salonName':
-                setSaloonName(e)
-                break;
-            case 'address':
-                setAddress(e)
-                break;
-            case 'state':
-                setState(e)
-                break;
-            case 'city':
-                setCity(e)
-                break;
-            case 'zipCode':
-                setZipcode(e)
-                break;
-            case 'seatCount':
-                setSeatCount(e)
-                break;
-            case 'barberCount':
-                setBarberCounts(e)
-                break;
+        // switch (name) {
+        //     case 'name':
+        //         setOwnerName(e)
+        //         break;
+        //     case 'salonName':
+        //         setSaloonName(e)
+        //         break;
+        //     case 'address':
+        //         setAddress(e)
+        //         break;
+        //     case 'state':
+        //         setState(e)
+        //         break;
+        //     case 'city':
+        //         setCity(e)
+        //         break;
+        //     case 'zipCode':
+        //         setZipcode(e)
+        //         break;
+        //     case 'seatCount':
+        //         setSeatCount(e)
+        //         break;
+        //     case 'barberCount':
+        //         setBarberCounts(e)
+        //         break;
 
-            default:
-                break;
-        }
+        //     default:
+        //         break;
+        // }
 
     }
     const toggleDaySelection = (day) => {
-        if (avialabledays.includes(day)) {
-            setAvailableDays(avialabledays.filter(item => item !== day));
-        } else {
-            setAvailableDays([...avialabledays, day]);
-        }
+        // if (avialabledays?.includes(day)) {
+        //     setAvailableDays(avialabledays?.filter(item => item !== day));
+        // } else {
+        //     setAvailableDays([...avialabledays, day]);
+        // }
     };
     console.log("all times>>", openTime, closeTime, lunchTime)
     return (
@@ -385,10 +385,10 @@ const EditSaloonDetails = ({ navigation }) => {
                     <Text>Available Days</Text>
                     <View style={{ flexDirection: 'row' }}>
                         {daysOfWeek.map((day, index) => {
-                            let selected = avialabledays.includes(day)
+                            // let selected = avialabledays.includes(day)
                             return (
-                                <TouchableOpacity
-                                    style={[style.dayButton, { backgroundColor: selected ? 'blue' : 'gray' }]}
+                                <TouchableOpacity key={index}
+                                    style={[style.dayButton, { backgroundColor: 'gray' }]}
                                     onPress={() => toggleDaySelection(day)}
                                 >
                                     <Text style={style.dayText}>{day}</Text>

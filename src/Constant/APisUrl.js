@@ -8,7 +8,12 @@ export const Apis = {
     CREATE_BARBER: `barber`,
     UPDATE_BARBER: ``,
     GET_BARBER_DETAILS: `barber`,
-    SALOON_UPDATE:'salon',
-    SEND_OTP:'sendOtp'
+    SALOON_UPDATE: 'salon',
+    SEND_OTP: 'sendOtp',
+    GET_ARTICALS: 'get-articles',
+    GET_STYLES: 'get-styles',
+    HOME_PAGE_SALOON_DETAILS:'salon',
+    SALOON_DETAILS:'salon/getsalonbysalonId',
+    BARBER_DETAILS:'barber/getSalonBarbersDetails/'
 }
 export const BASE_URL = `http://api.dizisalon.in/api/v1/`

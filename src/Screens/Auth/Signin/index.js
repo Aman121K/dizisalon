@@ -110,7 +110,7 @@ const Signin = ({ navigation, route }) => {
                 setLoader(false)
                 console.log("Data", data)
                 if (data?.status === 200) {
-                    console.log("login ")
+                    console.log("login",data?.token)
                     await AsyncStorage.setItem('loginData',JSON.stringify(data?.data))
                     // await AsyncStorage.setItem('loginD',)
                     navigation.navigate('BarberBottoNavigation')

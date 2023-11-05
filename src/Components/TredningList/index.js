@@ -4,6 +4,7 @@ import { Images } from "../../Constant/Images";
 import { TextConstant } from "../../Constant/TextConstant";
 import { normalize, scaleHeight, scaleWidth } from "../../Constant/DynamicSize";
 import { FONTS } from "../../Constant/fonts";
+import moment from "moment";
 const style = StyleSheet.create({
     mainConatiner: {
         // marginHorizontal: scaleWidth(16),
@@ -26,14 +27,15 @@ const style = StyleSheet.create({
     }
 
 })
-const TrendingLists = ({onClick}) => {
+const TrendingLists = ({ onClick, data }) => {
+    console.log("data on style>>", data)
     return (
         <TouchableOpacity style={style.mainConatiner} onPress={onClick}>
-            <Image source={Images.CHOTI_DESIGN} />
+            <Image source={{ uri: data?.item?.coverImage }} style={{ height: 70, width: 70 }} />
             <View style={style.titleConatiner}>
-                <Text style={style.titleText}>{TextConstant.CHOTI_Title}</Text>
-                <Text style={style.subtitleText}>{TextConstant.CHOTI_Title} {TextConstant.CHOTI_Title} {TextConstant.CHOTI_Title} </Text>
-                <Text>{Date()}</Text>
+                <Text style={style.titleText}>{data?.item?.title}</Text>
+                <Text style={style.subtitleText}>{data?.item?.description} </Text>
+                <Text>{moment(data?.item?.createdAt).format(('D,MMM, YYYY | ddd | h:mm A'))}</Text>
             </View>
         </TouchableOpacity>
     )

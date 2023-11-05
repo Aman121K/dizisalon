@@ -1,5 +1,5 @@
-import React from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Image, Linking } from 'react-native';
+import React, { useCallback } from 'react';
+import { Text, View, TouchableOpacity, StyleSheet, Image, Linking, ActivityIndicator } from 'react-native';
 import UserCartHeader from '../../../Components/UserCartHeader';
 import { normalize, scaleHeight, scaleWidth } from '../../../Constant/DynamicSize';
 import { FONTS } from '../../../Constant/fonts';
@@ -7,6 +7,9 @@ import QRCode from 'react-native-qrcode-svg';
 import ButtonBlue from '../../../Components/Button_Blue';
 import { Images } from '../../../Constant/Images';
 import { Routes } from '../../../Constant/Routes';
+import { useFocusEffect } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Apis, BASE_URL } from '../../../Constant/APisUrl';
 const style = StyleSheet.create({
     mainConatiner: {
         backgroundColor: 'white',
@@ -24,10 +27,6 @@ const style = StyleSheet.create({
         flex: 1
     },
     lastConatiner: {
-        // flexDirection: 'row',
-        // marginLeft: scaleHeight(100),
-        // justifyContent: 'space-evenly',
-        // marginBottom: scaleHeight(10)
         alignItems: 'center'
     },
     removeCon: {
@@ -97,11 +96,38 @@ const style = StyleSheet.create({
         borderRadius: scaleHeight(10),
         marginTop: scaleHeight(10),
         marginBottom: scaleHeight(20)
+    },
+    imageStyle: {
+        height: scaleHeight(60),
+        width: scaleWidth(60)
     }
 })
 const SaloonBarberDetialPage = ({ navigation, route }) => {
     const item = route?.params?.data;
+    const [barberDetails, setBarberDetails] = React.useState();
+    const [loader, setLoader] = React.useState(true)
     console.log(item)
+    useFocusEffect(
+        useCallback(() => {
+            getLoginData()
+            return () => {
+            };
+        }, [])
+    );
+    const getLoginData = async () => {
+        let token = await AsyncStorage.getItem('token');
+        fetch(BASE_URL + Apis.BARBER_DETAILS + `/${item?._id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: token,
+            },
+        }).then((res) => res.json()).then((data) => {
+            console.log("Barbers details>>", data)
+            setLoader(false)
+            setBarberDetails(data?.data)
+        })
+    }
     const onClickPhone = () => {
         let phoneNumber = '9592704535';
         Linking.openURL(`tel:${phoneNumber}`)
@@ -115,11 +141,11 @@ const SaloonBarberDetialPage = ({ navigation, route }) => {
             <View style={{ backgroundColor: 'white', borderRadius: 10, width: '95%', alignSelf: 'center' }}>
                 <View style={style.mainConatiner}>
                     <View style={style.oneConatiner}>
-                        <Image source={item?.image} />
+                        <Image source={{ uri: barberDetails?.passPortImage }} style={style.imageStyle} />
                     </View>
                     <View style={style.secondConatiner}>
-                        <Text>{item?.name}</Text>
-                        <Text>{item?.mobile}</Text>
+                        <Text>{barberDetails?.barberName}</Text>
+                        <Text>+91{barberDetails?.phone}</Text>
                         <Text>Hair Cutting</Text>
                     </View>
                     <View style={style.lastConatiner}>
@@ -148,9 +174,9 @@ const SaloonBarberDetialPage = ({ navigation, route }) => {
 
                     </View>
                     <View style={style.values}>
-                        <Text>:- {item?.name}</Text>
-                        <Text>:- {item?.mobile}</Text>
-                        <Text>:- XYZ rest house morinda</Text>
+                        <Text>:- {barberDetails?.barberName}</Text>
+                        <Text>:- {barberDetails?.phone}</Text>
+                        <Text>:- {barberDetails?.address} {barberDetails?.city}</Text>
                         <Text>09:00 AM To 09:00PM</Text>
                     </View>
                 </View>
@@ -179,6 +205,16 @@ const SaloonBarberDetialPage = ({ navigation, route }) => {
                     <Text style={{ color: 'white', fontFamily: FONTS.MontserratMedium, fontSize: normalize(20) }}>{item?.attendenaceStatus}</Text>
                 </TouchableOpacity>
             </View>
+            {loader && (
+                <View style={{
+                    ...StyleSheet.absoluteFill,
+                    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <ActivityIndicator size="large" color="#022A6D" />
+                </View>
+            )}
         </View>
     )
 }

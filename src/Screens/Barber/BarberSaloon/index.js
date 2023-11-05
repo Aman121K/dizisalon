@@ -11,6 +11,8 @@ import moment from "moment";
 import CircularProgress from "react-native-circular-progress-indicator";
 import { Routes } from "../../../Constant/Routes";
 import LineChartDesign from "../../../Components/LineChartDesign.js";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Apis, BASE_URL } from "../../../Constant/APisUrl";
 const style = StyleSheet.create({
     conatiner: {
         // marginTop: scaleHeight(40),
@@ -27,12 +29,16 @@ const style = StyleSheet.create({
     },
     dateFormat: {
         fontFamily: FONTS.MontserratMedium,
-        fontSize: normalize(14),
-        marginLeft: scaleWidth(10)
+        fontSize: normalize(15),
+        marginLeft: scaleWidth(10),
+        color: '#022A6D',
+        fontWeight: '400',
     },
     saloonName: {
-        fontFamily: FONTS.MontserratExtraBold,
-        fontSize: normalize(20)
+        fontFamily: FONTS.MontserratRegular,
+        fontSize: normalize(30),
+        color: '#022A6D',
+        fontWeight: '600'
     },
     orderDetailConatiner: {
         backgroundColor: 'white',
@@ -48,8 +54,10 @@ const style = StyleSheet.create({
         fontSize: normalize(12)
     },
     rntCustomer: {
-        fontFamily: FONTS.MontserratMedium,
+        fontFamily: FONTS.MontserratRegular,
         fontSize: normalize(15),
+        color:'#000',
+        fontWeight:'700'
     },
     addCustConatiner: {
         backgroundColor: '#022A6D',
@@ -74,52 +82,61 @@ const style = StyleSheet.create({
         fontFamily: FONTS.MontserratMedium,
         fontSize: normalize(14),
         color: 'white'
+    },
+    imagesStyle: {
+        height: scaleHeight(55),
+        width: scaleWidth(55)
     }
-
-
 })
 const BarberSaloon = ({ navigation }) => {
-    const currentDate = moment();
-
-    // Format the date and time as desired
-    const formattedDate = currentDate.format('D,MMM, YYYY | ddd | h:mm A');
+    const [saloonData, setSaloonData] = React.useState();
+    React.useLayoutEffect(() => {
+        getToken()
+    }, [])
+    const getToken = async () => {
+        let token = await AsyncStorage.getItem('token');
+        if (token) {
+            fetch(BASE_URL + Apis.HOME_PAGE_SALOON_DETAILS, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: token
+                },
+            }).then((res) => res.json()).then((data) => {
+                // console.log("Saloon details>>",data?.data)
+                setSaloonData(data?.data)
+            })
+        }
+    }
     return (
         <SafeAreaView>
             <BarberHeader />
-
             <View style={{ marginTop: scaleHeight(40), marginLeft: scaleHeight(20) }}>
                 <Image source={Images.BackBuuton} />
             </View>
             <ScrollView style={style.conatiner}>
                 <View style={style.nameConatiner}>
                     <View style={{ flex: 1 }}>
-                        <Text style={style.saloonName}>Saloon Name</Text>
+                        <Text style={style.saloonName}>{saloonData?.salonName}</Text>
                         <View style={style.clockContainer}>
-                            <Image source={Images.clock} />
-                            <Text style={style.dateFormat}>{formattedDate}</Text>
+                            <Image source={Images.clock} resizeMode="contain" />
+                            <Text style={style.dateFormat}>{moment(saloonData?.createdAt).format('D,MMM, YYYY | ddd | h:mm A')}</Text>
                         </View>
                     </View>
                     <View style={{ height: 50, width: 50 }}>
-                        {/* <CircularProgress size={100}
-                            width={10}
-                            fill={50}
-                            tintColor="#00e0ff"
-                            backgroundColor="#3d5875"
-                        /> */}
                     </View>
-
                 </View>
                 <View style={style.orderDetailConatiner}>
                     <View style={style.salonDs}>
                         <View style={style.nameConatiner}>
-                            <Image source={Images.SloonOrder} />
+                            <Image source={Images.SloonOrder} resizeMode="contain" style={style.imagesStyle} />
                             <View>
                                 <Text style={style.saloonName}>50</Text>
                                 <Text style={style.textUnderLine}>Total Order</Text>
                             </View>
                         </View>
                         <View style={style.nameConatiner}>
-                            <Image source={Images.saloonPending} />
+                            <Image source={Images.saloonPending} resizeMode="contain"  style={style.imagesStyle}/>
                             <View>
                                 <Text style={style.saloonName}>20</Text>
                                 <Text style={style.textUnderLine}>Orders Pending</Text>
@@ -128,14 +145,14 @@ const BarberSaloon = ({ navigation }) => {
                     </View>
                     <View style={style.salonDs}>
                         <View style={style.nameConatiner}>
-                            <Image source={Images.SaloonComplete} />
+                            <Image source={Images.SaloonComplete} resizeMode="contain"  style={style.imagesStyle} />
                             <View>
                                 <Text style={style.saloonName}>10</Text>
                                 <Text style={style.textUnderLine}>Orders complete</Text>
                             </View>
                         </View>
                         <View style={style.nameConatiner}>
-                            <Image source={Images.SaloonCancel} />
+                            <Image source={Images.SaloonCancel} resizeMode="contain"  style={style.imagesStyle} />
                             <View>
                                 <Text style={style.saloonName}>20</Text>
                                 <Text style={style.textUnderLine}>Orders Cancel</Text>
