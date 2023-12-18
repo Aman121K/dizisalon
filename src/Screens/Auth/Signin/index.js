@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text, Image, SafeAreaView, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, Image, SafeAreaView, ScrollView, Alert, ActivityIndicator } from 'react-native';
 import InputBoxComponent from "../../../Components/InputBoxComponent";
 import AuthHeader from "../../../Components/AuthHeader";
 import { TextConstant } from "../../../Constant/TextConstant";
@@ -8,9 +8,15 @@ import { Images } from "../../../Constant/Images";
 import ButtonBlue from "../../../Components/Button_Blue";
 import { Routes } from "../../../Constant/Routes";
 import { FONTS } from "../../../Constant/fonts";
+import { useDispatch, useSelector } from "react-redux";
 import { TabContext } from "../../../Context/TabProvider";
 import { normalize, scaleHeight, scaleWidth } from "../../../Constant/DynamicSize";
-
+import { loginApi } from "../../../redux/action";
+import { Apis, BASE_URL } from "../../../Constant/APisUrl";
+import { LOGIN_API } from "../../../redux/Constant";
+import Toast from 'react-native-simple-toast';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import CustomLoader from "../../../Components/CustomLoader";
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
@@ -23,7 +29,7 @@ const styles = StyleSheet.create({
     bottom_info_text: {
         flexDirection: "row",
         justifyContent: "space-between",
-        marginTop: 8
+        marginTop: scaleHeight(20)
     },
     left_side: {
         flexDirection: "row",
@@ -50,35 +56,80 @@ const styles = StyleSheet.create({
     }
 })
 const Signin = ({ navigation, route }) => {
-    const { type } = route?.params;
-    console.log("Type>>", type)
+    // const isFocused = useIsFocused();
+    const dispatch = useDispatch();
+    const data = useSelector((state) => state.reducer)
+    console.log("on sgnin redux>>", data)
+    const type = route?.params?.type;
+    const [loginData, setlogindata] = React.useState({})
     const [mobile, setMobile] = React.useState();
-    const [mpin, setMpin] = React.useState();
+    const [pin, setPin] = React.useState();
+    const [loader,setLoader]=React.useState(false);
+
+
+
     const goToSignup = () => {
         navigation.navigate(Routes.Signup)
     }
     const goToforgotScreen = () => {
         navigation.navigate(Routes.CreatePin)
     }
-    const onChnageText = (Items) => {
-        console.log("Items>>", Items)
+    const onChnageText = (name, e) => {
+        switch (e) {
+            case 'phone':
+                setMobile(name);
+                console.log('phone')
+                break;
+            case 'pin':
+                setPin(name);
+                console.log('pin')
+                break;
+            default:
+                break;
+        }
     }
-const TabTypesValues = React.useContext(TabContext);
-
-    const onSigninClick = () => {
-        console.log("vika", type)
-        if (type === 'For Salon') {
-            TabTypesValues.setBottomType(type)
-            navigation.navigate('BarberBottoNavigation', { type: type })
-        } else {
-            TabTypesValues.setBottomType(type)
-            navigation.navigate('UserBottomNavigtion', { type: type })
+    const TabTypesValues = React.useContext(TabContext);
+    const onSigninClick = async () => {
+       
+        if (!mobile && !pin) {
+            Alert.alert('Please Fill all the column')
+        }
+        else {
+            setLoader(true)
+            let body = {
+                phone: mobile,
+                pin: pin
+            }
+            await fetch(BASE_URL + Apis.LOGIN_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(body),
+            }).then((res) => res.json()).then(async(data) => {
+                setLoader(false)
+                console.log("Data", data)
+                if (data?.status === 200) {
+                    console.log("login",data?.token)
+                    await AsyncStorage.setItem('loginData',JSON.stringify(data?.data))
+                    // await AsyncStorage.setItem('loginD',)
+                    navigation.navigate('BarberBottoNavigation')
+                } else {
+                    Toast.show(data?.message)
+                }
+            }).catch((err) => {
+                setLoader(false)
+                console.log("error", err)
+            })
         }
     }
     return (
         <SafeAreaView>
             <ScrollView>
                 <AuthHeader backbutton={true} navigation={navigation} />
+                {loader?
+                <CustomLoader size={50} color="Blue"/>
+                :
                 <View style={styles.mainContainer}>
                     <Image style={styles.location_img} source={Images.SIGN_IN_LOCATION} />
                     <View>
@@ -86,8 +137,20 @@ const TabTypesValues = React.useContext(TabContext);
                         <Text style={StylesContants.auth_screen_subHeading}>{TextConstant.SignIn_subHeading}</Text>
                     </View>
                     <View>
-                        <InputBoxComponent value={mobile} onChnageText={onChnageText} label={TextConstant.SignIn_label_one} placeholder={TextConstant.SignIn_placeholder_one} keyboardType="numeric" />
-                        <InputBoxComponent value={mpin} onChnageText={onChnageText} label={TextConstant.SignIn_label_two} placeholder={TextConstant.SignIn_placeholder_two} />
+                        <InputBoxComponent limit={10}
+                            name="phone"
+                            onChnageText={onChnageText}
+                            value={loginData?.mobile} label={TextConstant.SignIn_label_one}
+                            placeholder={TextConstant.SignIn_placeholder_one}
+                            keyboardType="numeric" />
+                        <InputBoxComponent
+                            limit={4}
+                            name="pin"
+                            onChnageText={onChnageText}
+                            value={loginData?.mpin}
+                            label={TextConstant.SignIn_label_two}
+                            placeholder={TextConstant.SignIn_placeholder_two}
+                            keyboardType="numeric" />
                     </View>
                     <ButtonBlue buttonText="Sign In" onClick={onSigninClick} />
                     <View style={styles.bottom_info_text}>
@@ -105,7 +168,7 @@ const TabTypesValues = React.useContext(TabContext);
                             </Text>
                         </View>
                     </View>
-                </View>
+                </View>}
             </ScrollView>
         </SafeAreaView>
     )

@@ -27,8 +27,8 @@ const BarberHeader = ({ backbutton, navigation }) => {
     return (
         <View style={styles.mainConatiner}>
             <View style={styles.profileSection}>
-                    <Image source={Images.NotificationUser} />
-                    <Image source={Images.Notification} style={styles.noticationImage} />
+                <Image source={Images.NotificationUser} />
+                <Image source={Images.Notification} style={styles.noticationImage} />
             </View>
             <View>
                 <Image style={styles.ImageStyle} source={Images.LOGO_Image} />

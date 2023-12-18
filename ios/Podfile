@@ -1,6 +1,7 @@
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
-
+permissions_path = '../node_modules/react-native-permissions/ios'
+pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
 platform :ios, min_ios_version_supported
 prepare_react_native_project!
 
@@ -42,6 +43,8 @@ target 'diziSalon' do
     # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
+  pod 'GoogleMaps'
+  pod 'Google-Maps-iOS-Utils'
 
   target 'diziSalonTests' do
     inherit! :complete

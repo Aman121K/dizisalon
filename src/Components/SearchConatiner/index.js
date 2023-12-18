@@ -1,31 +1,32 @@
 import React from 'react';
-import { Image, StyleSheet, TextInput, View } from 'react-native';
+import { Image, Platform, StyleSheet, Text, TextInput, View } from 'react-native';
 import { TextConstant } from '../../Constant/TextConstant';
 import { Images } from '../../Constant/Images';
 import { normalize, scaleHeight, scaleWidth } from '../../Constant/DynamicSize';
 import { FONTS } from '../../Constant/fonts';
 const styles = StyleSheet.create({
     mainContainer: {
-        // flex:1
         flexDirection: 'row',
-        marginTop: scaleHeight(50),
         borderWidth: .5,
-        padding: scaleHeight(16),
+        padding: scaleHeight(Platform.OS === 'ios' ? 16 : 2),
         marginHorizontal: scaleWidth(12),
         borderColor: '#CECECE',
-        borderRadius:scaleWidth(5)
+        borderRadius: scaleWidth(5),
+        alignItems: 'center'
     },
     inputStyle: {
         marginLeft: scaleWidth(20),
         fontSize: normalize(14),
-        fontFamily: FONTS.MontserratRegular
+        fontFamily: FONTS.MontserratRegular,
+        width: "90%"
     }
 })
-const SearchConatiner = () => {
+const SearchConatiner = ({placeholdertext}) => {
     return (
         <View style={styles.mainContainer}>
             <Image source={Images.SEARCH_ICON} />
-            <TextInput style={styles.inputStyle} placeholder={TextConstant.SEARCH_TEXT} />
+            <TextInput style={styles.inputStyle} placeholder={placeholdertext?placeholdertext:TextConstant.SEARCH_TEXT} />
+            
         </View>
     )
 }

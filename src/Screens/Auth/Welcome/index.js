@@ -5,7 +5,7 @@ import AppIntroSlider from "react-native-app-intro-slider";
 import { Images } from "../../../Constant/Images";
 import AuthHeader from "../../../Components/AuthHeader";
 import { Routes } from "../../../Constant/Routes";
-import { scaleWidth } from "../../../Constant/DynamicSize";
+import { scaleHeight, scaleWidth } from "../../../Constant/DynamicSize";
 
 const slides = [
     {
@@ -69,7 +69,7 @@ export default class App extends React.Component {
         );
     };
     onDone = () => {
-        this.props.navigation.navigate(Routes.ChooseType)
+        this.props.navigation.navigate(Routes.Signin)
     }
     render() {
         return (
@@ -78,11 +78,9 @@ export default class App extends React.Component {
                 <View>
                     <AuthHeader />
                 </View>
-                {/* <AuthHeader/> */}
                 <AppIntroSlider
-                    style={{ marginTop: 200, marginHorizontal: scaleWidth(50) }}
+                    style={{ marginTop: scaleHeight(200), marginHorizontal: scaleWidth(50) }}
                     doneLabel="Done"
-                    
                     renderItem={this._renderItem}
                     data={slides}
                     activeDotStyle={{
@@ -95,7 +93,6 @@ export default class App extends React.Component {
         );
     }
 }
-
 const styles = StyleSheet.create({
     // container: {
     //     flex: 1,

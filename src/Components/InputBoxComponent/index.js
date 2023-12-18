@@ -21,11 +21,11 @@ const styles = StyleSheet.create({
   }
 })
 
-const InputBoxComponent = ({ label, keyboardType, placeholder, secure, value, onChnageText, size }) => {
+const InputBoxComponent = ({ label, keyboardType, placeholder, secure, value, onChnageText, size, name, limit }) => {
   return (
     <View style={styles.inputContainer}>
       <Text style={StylesContants.auth_screen_label}>{label}</Text>
-      <TextInput style={[styles.inputField, { width: size ? size : scaleWidth(330) }]} placeholder={placeholder} value={value} onChangeText={onChnageText} keyboardType={keyboardType} secureTextEntry={secure} />
+      <TextInput maxLength={limit} style={[styles.inputField, { width: size ? size : scaleWidth(330) }]} placeholder={placeholder} value={value} onChangeText={(e) => onChnageText(e, name)} keyboardType={keyboardType} secureTextEntry={secure} />
     </View>
 
   )

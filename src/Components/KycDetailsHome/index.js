@@ -6,11 +6,13 @@ import { normalize, scaleHeight, scaleWidth } from "../../Constant/DynamicSize";
 import { FONTS } from "../../Constant/fonts";
 import ButtonBlue from "../Button_Blue";
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
+import { Routes } from "../../Constant/Routes";
+import KycStepper from "../KycStepper.js";
 const styles = StyleSheet.create({
     mainConatiner: {
         backgroundColor: '#FFFFFF',
-        padding:10,
-        borderRadius:scaleHeight(10)
+        padding: 10,
+        borderRadius: scaleHeight(10)
     },
     formSubConatiner: {
         flexDirection: 'row',
@@ -34,18 +36,24 @@ const styles = StyleSheet.create({
     }
 }
 )
-const KycDetailsHome = () => {
+const KycDetailsHome = ({ navigation }) => {
+    const onClick = () => {
+        navigation.navigate(Routes.AddSaloonkycDetails)
+    }
     return (
         <View style={styles.mainConatiner}>
             <View style={styles.formSubConatiner}>
                 <View>
                     <Image source={Images.kycForm} />
                 </View>
-                <TouchableOpacity style={styles.knowConatiner}>
+                <TouchableOpacity style={styles.knowConatiner} onPress={() => navigation.navigate(Routes.SaloonKycDetails)}>
                     <Text style={styles.knowText}>{TextConstant.KNOW_MORE}</Text>
                 </TouchableOpacity>
             </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: scaleHeight(15) }}>
+            <View style={{marginVertical:20}}>
+                <KycStepper />
+            </View>
+            {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: scaleHeight(15) }}>
                 <View>
                     <Text style={styles.kyctest}>Fill KYC</Text>
                     <View style={{ backgroundColor: '#022A6D', borderWidth: 5, borderRadius: 99, width: 10, margin: 10 }}></View>
@@ -62,7 +70,7 @@ const KycDetailsHome = () => {
                     <Text style={styles.kyctest}>Take Orders</Text>
                     <View style={{ backgroundColor: '#022A6D', borderWidth: 5, borderRadius: 99, width: 10, margin: 15 }}></View>
                 </View>
-            </View>
+            </View> */}
             {/* <ProgressSteps>
                 <ProgressStep label="First Step">
                     <View style={{ alignItems: 'center' }}>
@@ -80,7 +88,7 @@ const KycDetailsHome = () => {
                     </View>
                 </ProgressStep>
                 </ProgressSteps> */}
-            <ButtonBlue buttonText={TextConstant.LIST_NOW} />
+            <ButtonBlue buttonText={TextConstant.LIST_NOW} onClick={onClick} />
 
         </View>
     )

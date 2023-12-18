@@ -15,7 +15,7 @@ const UserBottoNavigation = () => {
         >
             <Tab.Screen name={Routes.UserHome} component={UserHome} options={{ headerShown: false }} />
             <Tab.Screen name={Routes.UserSearch} component={UserSearch} options={{ headerShown: false }} />
-            <Tab.Screen name={Routes.UserBooking} component={UserBooking} options={{ headerShown: false }} />
+            <Tab.Screen name={Routes.UserBookings} component={UserBooking} options={{ headerShown: false }} />
             <Tab.Screen name={Routes.UserCart} component={UserCart} options={{ headerShown: false }} />
             <Tab.Screen name={Routes.UserProfile} component={UserProfile} options={{ headerShown: false }} />
         </Tab.Navigator>
