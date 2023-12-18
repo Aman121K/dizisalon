@@ -1,5 +1,5 @@
 import React from "react";
-import { View, SafeAreaView, Text, StyleSheet, Image, FlatList, ScrollView, BackHandler, Alert } from 'react-native';
+import { View, SafeAreaView, Text, StyleSheet, Image, FlatList, ScrollView, BackHandler, Alert, TouchableOpacity } from 'react-native';
 import BarberHeader from "../../../Components/BarberHeader";
 import { normalize, scaleHeight, scaleWidth } from "../../../Constant/DynamicSize";
 import { Images } from "../../../Constant/Images";
@@ -42,12 +42,12 @@ const styles = StyleSheet.create({
         // marginTop:scaleHeight
     },
     ImageConatiner: {
-        marginHorizontal: scaleWidth(18),
+        // marginHorizontal: scaleWidth(18),
         marginTop: scaleHeight(8)
     },
     imageStyle: {
-        height: 100,
-        width: 100
+        height: scaleHeight(80),
+        width: scaleWidth(70)
     },
     adsText: {
         fontSize: normalize(16),
@@ -140,7 +140,7 @@ const BarberHome = ({ navigation }) => {
             }).then((res) => res.json()).then((data) => {
                 // console.log("Saloon data is>>",data)
                 setSaloonData(data?.data)
-                console.log("data is>>",data?.data?.isKyc)
+                console.log("data is>>", data?.data?.isKyc)
                 // console.log("iskyc>", saloonData?.isKyc)
             })
         }
@@ -184,12 +184,26 @@ const BarberHome = ({ navigation }) => {
     const gotoListPage = () => {
         navigation.navigate(Routes.TrendingList)
     }
+    const onStyleClick = () => {
+
+    }
+    const onArticalClick = () => {
+
+    }
     const renderItem = ({ item }) => {
         return (
-            <View style={styles.ImageConatiner}>
+            <TouchableOpacity onPress={onStyleClick} style={styles.ImageConatiner}>
                 <Image style={styles.imageStyle} source={{ uri: item?.coverImage }} />
                 <Text style={styles.itemText}>{item?.title}</Text>
-            </View>
+            </TouchableOpacity>
+        )
+    }
+    const renderItemA = ({ item }) => {
+        return (
+            <TouchableOpacity onPress={onArticalClick} style={styles.ImageConatiner}>
+                <Image style={styles.imageStyle} source={{ uri: item?.coverImage }} />
+                <Text style={styles.itemText}>{item?.title}</Text>
+            </TouchableOpacity>
         )
     }
     return (
@@ -206,7 +220,7 @@ const BarberHome = ({ navigation }) => {
                     {saloonData?.isKyc ?
                         <>
                             <SaloonDetailsHome navigation={navigation} />
-                           
+
                         </>
                         :
                         <View>
@@ -236,7 +250,7 @@ const BarberHome = ({ navigation }) => {
                     </View>
                     <FlatList
                         data={ArticalsData}
-                        renderItem={renderItem}
+                        renderItem={renderItemA}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                     />

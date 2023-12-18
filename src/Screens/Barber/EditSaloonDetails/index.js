@@ -143,7 +143,6 @@ const EditSaloonDetails = ({ navigation }) => {
             setToken(token)
         }
         let data = await AsyncStorage.getItem('loginData');
-        console.log("login data>>", data);
         const newData = JSON.parse(data);
         setOwnerName(newData?.salonOwnerName)
         setSaloonName(newData?.salonName)

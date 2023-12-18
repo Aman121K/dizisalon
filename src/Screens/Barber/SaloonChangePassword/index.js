@@ -5,6 +5,7 @@ import InputBoxComponent from '../../../Components/InputBoxComponent';
 import ButtonBlue from '../../../Components/Button_Blue';
 import { normalize, scaleHeight, scaleWidth } from '../../../Constant/DynamicSize';
 import { FONTS } from '../../../Constant/fonts';
+import { Apis, BASE_URL } from '../../../Constant/APisUrl';
 const style = StyleSheet.create({
     mainConatiner: {
 
@@ -76,13 +77,13 @@ const SaloonChangePassword = ({ navigation }) => {
                     label="Password"
                     name="password"
                     placeholder="*********"
-                    value={userDetails.password}
+                    // value={userDetails?.password}
                     onChnageText={onChnageText} />
                 <InputBoxComponent
                     label="Confirm Password"
                     name="confirmPassword"
                     placeholder="************"
-                    value={userDetails.confirmPassword}
+                    // value={userDetails?.confirmPassword}
                     onChnageText={onChnageText} />
                 <Text style={style.BothText}>Both password must match.</Text>
                 <View style={style.buttonConatiner}>
